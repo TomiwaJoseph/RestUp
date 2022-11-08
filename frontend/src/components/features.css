@@ -1,0 +1,31 @@
+.features-container {
+  padding: 2rem 0 6rem 0;
+}
+.features-container .icon i::before {
+  font-size: 40px !important;
+  color: #1a6692;
+}
+.features-container .icon-container:hover .icon {
+  background: #f51167;
+  border-color: #f51167;
+}
+.features-container .icon-container:hover {
+  cursor: pointer;
+}
+/* .features-container .icon-container:hover i::before {
+  color: #f51167;
+} */
+.features-container .icon-container:hover i::before,
+.features-container .icon-container:hover p {
+  color: #fff;
+}
+.features-container .icon {
+  border: 1px solid #1a6692;
+  border-radius: 3px;
+  padding-top: 10px;
+}
+.features-container .icon p {
+  color: #6f6f6f;
+  text-transform: uppercase;
+  margin-top: 15px;
+}

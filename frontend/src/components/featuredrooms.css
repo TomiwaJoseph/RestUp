@@ -1,0 +1,61 @@
+/* .featured-rooms h2::after,
+.heading-section h2::before {
+  width: 100px;
+  height: 2px;
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: #f51167;
+  content: "";
+}
+.featured-rooms h2::before {
+  width: 80px;
+  height: 2px;
+  bottom: -19px;
+} */
+.featured-rooms-container {
+  margin-bottom: 5rem;
+}
+.featured-rooms-container .card {
+  box-shadow: 1px 4px 5px 2px #6f6f6f;
+}
+.featured-rooms-container .card h4 {
+  color: #454545;
+  font-weight: 600;
+}
+.featured-rooms-container .card p {
+  color: #f51167;
+  font-size: 24px;
+  display: inline;
+}
+.featured-rooms-container .card span {
+  color: #6f6f6f;
+  margin-left: 5px;
+}
+.featured-rooms-container .card-footer button {
+  padding: 5px 25px;
+  background: transparent;
+  color: #1a6692;
+  border: 1px solid #1a6692;
+  width: 100%;
+  font-weight: 700;
+  -webkit-transition: all 150ms ease-in 120ms;
+  -o-transition: all 150ms ease-in 120ms;
+  transition: all 150ms ease-in 120ms;
+}
+.featured-rooms-container .card-footer button span {
+  color: #1a6692;
+  background: transparent;
+  -webkit-transition: all 150ms ease-in 120ms;
+  -o-transition: all 150ms ease-in 120ms;
+  transition: all 150ms ease-in 120ms;
+}
+.featured-rooms-container .card-footer button:hover span {
+  color: white;
+}
+.featured-rooms-container .card-footer button:hover {
+  background: #1a6692;
+  color: white;
+}

@@ -1,0 +1,25 @@
+.hero-wrap {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+.hero-wrap .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  opacity: 0.2;
+  background: #000000;
+}
+.hero-wrap .slider-text {
+  color: #fff;
+  height: 300px;
+}
+.hero-wrap .slider-text .bread {
+  font-weight: 400;
+  color: #fff;
+  font-size: 60px;
+}

@@ -1,4 +1,4 @@
-import restaurantImage from "./statics/slider-02.jpg";
+import restaurantImage from "./statics/qt-bg.jpg";
 import roomImage from "./statics/room-2.jpg";
 
 import img1 from "./statics/img-01.jpg";

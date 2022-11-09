@@ -7,7 +7,7 @@ import { hero } from "../data";
 const Restaurant = () => {
   return (
     <>
-      <Hero section={"Restaurant"} orient="right" img={hero.restaurant} />
+      <Hero section={"Restaurant"} orient="top" img={hero.restaurant} />
       <RestaurantIntro />
       <RestaurantMenu />
     </>

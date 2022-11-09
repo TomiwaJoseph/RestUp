@@ -5,7 +5,11 @@ const RestaurantIntro = () => {
     <div className="container restaurant-intro-container">
       <div className="row">
         <div className="col-md-6">
-          <img src={restaurantIntroImg} alt="" className="img-fluid" />
+          <img
+            src={restaurantIntroImg}
+            alt=""
+            className="img-fluid flip-image"
+          />
         </div>
         <div className="col-md-6 my-auto the-text">
           <h1>We are Food Lovers</h1>

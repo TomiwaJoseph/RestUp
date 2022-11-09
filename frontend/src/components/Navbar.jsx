@@ -164,17 +164,6 @@ const Navbar = () => {
             ) : null}
           </div>
         </div>
-        <div className="navBrands">
-          <NavLink to="/rooms" className="search__icon navLink">
-            <i className="fas fa-search"></i>
-          </NavLink>
-          {/* <NavLink to="/cart" className="cartIcon navLink">
-            <div className="cart__wrapper">
-              <i className="fas fa-shopping-cart"></i>
-              <span>{cartCount}</span>
-            </div>
-          </NavLink> */}
-        </div>
       </nav>
     </>
   );

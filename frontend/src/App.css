@@ -70,3 +70,6 @@ html {
   color: #6f6f6f;
   letter-spacing: 1px;
 }
+.flip-image {
+  transform: scaleX(-1);
+}

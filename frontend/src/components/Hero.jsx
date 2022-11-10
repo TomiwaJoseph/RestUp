@@ -9,6 +9,7 @@ const Hero = (params) => {
   };
   return (
     <div className="hero-wrap" style={sectionStyle}>
+      <div className="nav-hero"></div>
       <div className="overlay"></div>
       <div className="container">
         <div className="row no-gutters slider-text d-flex align-itemd-end justify-content-center">

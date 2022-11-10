@@ -73,3 +73,11 @@ html {
 .flip-image {
   transform: scaleX(-1);
 }
+.nav-hero {
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.823);
+  text-align: center;
+  width: 100%;
+  height: 10vh;
+}

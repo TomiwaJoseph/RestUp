@@ -36,12 +36,20 @@ const AllRooms = () => {
                     className="img-fluid"
                   />
                   <div className="card-body text-center">
-                    <h4 className="card-title">Deluxe Room</h4>
+                    <h5 className="card-title">Deluxe Room</h5>
                     <p className="card-text">$120</p>
-                    <span>per night</span>
+                    <span>/ night</span>
+                    <ul class="list">
+                      <li>
+                        <span>Max:</span> 6 Persons
+                      </li>
+                      <li>
+                        <span>Bed:</span> 3
+                      </li>
+                    </ul>
                   </div>
                   <div className="card-footer text-center">
-                    <NavLink to={"/rooms"}>
+                    <NavLink to={`/room-detail/${"single-economy"}`}>
                       <button className="btn">
                         Details <span className="fa fa-arrow-right"></span>
                       </button>

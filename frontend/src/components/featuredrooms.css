@@ -1,38 +1,33 @@
-/* .featured-rooms h2::after,
-.heading-section h2::before {
-  width: 100px;
-  height: 2px;
-  position: absolute;
-  bottom: -15px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  background: #f51167;
-  content: "";
-}
-.featured-rooms h2::before {
-  width: 80px;
-  height: 2px;
-  bottom: -19px;
-} */
 .featured-rooms-container {
   margin-bottom: 5rem;
 }
 .featured-rooms-container .card {
   box-shadow: 1px 4px 5px 2px #6f6f6f;
 }
-.featured-rooms-container .card h4 {
+.featured-rooms-container .card .card-body h5 {
   color: #454545;
   font-weight: 600;
 }
-.featured-rooms-container .card p {
+.featured-rooms-container .card .card-body p {
   color: #f51167;
   font-size: 24px;
   display: inline;
+  /* border-bottom: 2px solid #f51167; */
 }
-.featured-rooms-container .card span {
-  color: #6f6f6f;
+.featured-rooms-container .card .card-body p ~ span {
+  color: #949494;
   margin-left: 5px;
+  letter-spacing: 1px;
+}
+.featured-rooms-container .card .card-body .list {
+  padding-inline-start: 0 !important;
+  color: #6f6f6f;
+}
+.featured-rooms-container .card .card-body .list li {
+  list-style: none;
+}
+.featured-rooms-container .card .card-body .list li span {
+  color: #f51167;
 }
 .featured-rooms-container .card-footer button {
   padding: 5px 25px;
@@ -45,9 +40,13 @@
   -o-transition: all 150ms ease-in 120ms;
   transition: all 150ms ease-in 120ms;
 }
+.featured-rooms-container .card-footer button {
+  box-shadow: none;
+}
 .featured-rooms-container .card-footer button span {
   color: #1a6692;
   background: transparent;
+  margin-left: 10px;
   -webkit-transition: all 150ms ease-in 120ms;
   -o-transition: all 150ms ease-in 120ms;
   transition: all 150ms ease-in 120ms;

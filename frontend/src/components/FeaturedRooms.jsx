@@ -8,7 +8,7 @@ const FeaturedRooms = () => {
   return (
     <>
       <div className="container">
-        <div className="row justify-content-center mb-5 pb-3">
+        <div className="row justify-content-center mb-2">
           <div className="heading-section featured-rooms">
             <h2 className="mb-4">Featured Rooms</h2>
           </div>
@@ -24,12 +24,12 @@ const FeaturedRooms = () => {
                 className="img-fluid"
               />
               <div className="card-body text-center">
-                <h4 className="card-title">Deluxe Room</h4>
+                <h5 className="card-title">Deluxe Room</h5>
                 <p className="card-text">$120</p>
-                <span>per night</span>
+                <span>/ night</span>
               </div>
               <div className="card-footer text-center">
-                <NavLink to={"/rooms"}>
+                <NavLink to={`/room-detail/${"single-economy"}`}>
                   <button className="btn">
                     Details <span className="fa fa-arrow-right"></span>
                   </button>

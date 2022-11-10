@@ -1,4 +1,3 @@
-// import React from "react";
 import FeaturedRooms from "../components/FeaturedRooms";
 import Features from "../components/Features";
 import LandingPageCarousel from "../components/LandingPageCarousel";

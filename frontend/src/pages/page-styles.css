@@ -1,0 +1,39 @@
+/* =========================================
+================= ABOUT =================
+========================================= */
+
+.branch-img-container {
+  width: 100%;
+}
+.branch-img-container img {
+  object-fit: cover;
+  height: 200px;
+}
+.branch p {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #6f6f6f;
+}
+.picture-text-container {
+  padding: 2rem 0 1rem 0;
+}
+.picture-text-container .icons i {
+  color: #454545;
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.picture-text-container .icons i:hover {
+  color: #f51167;
+}
+.picture-text-container .the-text h1 {
+  color: #454545;
+}
+.picture-text-container .the-text p {
+  color: #6f6f6f;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+================= CONTACT =================
+========================================= */

@@ -1,9 +1,7 @@
-/* import "owl.carousel/dist/assets/owl.carousel.css";*/
-// import "owl.carousel/dist/assets/owl.theme.default.css";
 import "./landingpagecarousel.css";
-import img1 from "../statics/pexels-donald-tong-189296.jpg";
-import img2 from "../statics/pexels-rene-asmussen-635126.jpg";
-import img3 from "../statics/pexels-pixabay-261101.jpg";
+import img1 from "../statics/pexels-rene-asmussen-635126.jpg";
+import img2 from "../statics/pexels-pixabay-261101.jpg";
+import img3 from "../statics/pexels-donald-tong-189296.jpg";
 import { NavLink } from "react-router-dom";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";

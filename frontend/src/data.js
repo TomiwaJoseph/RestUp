@@ -1,6 +1,7 @@
 import restaurantImage from "./statics/qt-bg.jpg";
 import roomImage from "./statics/room-4.jpg";
-// import roomImage from "./statics/room-2.jpg";
+import aboutImage from "./statics/about-us.jpg";
+import contactImage from "./statics/contact-us.jpg";
 
 import img1 from "./statics/img-01.jpg";
 import img2 from "./statics/item-6.jpeg";
@@ -22,6 +23,28 @@ import img16 from "./statics/menu-5.jpg";
 import roomImg1 from "./statics/room-1.jpg";
 import roomImg2 from "./statics/room-3.jpg";
 import roomImg3 from "./statics/room-5.jpg";
+
+import hotel1 from "./statics/pexels-pixabay-261101.jpg";
+import hotel2 from "./statics/bg_1.jpg";
+import hotel3 from "./statics/pexels-donald-tong-189296.jpg";
+
+export const hotelBranches = [
+  {
+    id: 1,
+    name: "Bhutan",
+    image: hotel1,
+  },
+  {
+    id: 2,
+    name: "Vanuatu",
+    image: hotel2,
+  },
+  {
+    id: 3,
+    name: "Kiribati",
+    image: hotel3,
+  },
+];
 
 export const roomDetails = [
   {
@@ -179,4 +202,6 @@ export const menuData = [
 export const hero = {
   restaurant: restaurantImage,
   room: roomImage,
+  about: aboutImage,
+  contact: contactImage,
 };

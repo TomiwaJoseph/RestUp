@@ -1,21 +1,17 @@
 import "./allrooms.css";
-import { NavLink } from "react-router-dom";
-import featured1 from "../statics/room-1.jpg";
+import RoomCards from "./RoomCards";
 
 const AllRooms = () => {
   const handleStarsClick = (star) => {
-    // console.log(star);
     let allStars = document.getElementsByClassName("fa-star");
-    // classList.add("starred")
-    // classList.remove("starred")
 
     for (var i = 0; i < allStars.length; i++) {
       // console.log(allStars[i]);
       allStars[i].classList.remove("starred");
     }
-    for (var i = 0; i < star; i++) {
-      // console.log(allStars[i]);
-      allStars[i].classList.add("starred");
+    for (var j = 0; j < star; j++) {
+      // console.log(allStars[j]);
+      allStars[j].classList.add("starred");
     }
   };
   const handleSearchSubmit = (e) => {
@@ -23,42 +19,10 @@ const AllRooms = () => {
     console.log("form submitted...");
   };
   return (
-    <div className="container featured-rooms-container">
+    <div className="container">
       <div className="row">
         <div className="col-lg-9">
-          <div className="row">
-            {[..."abcdef"].map((item) => (
-              <div key={item} className="col-lg-4 mb-4">
-                <div className="card">
-                  <img
-                    src={featured1}
-                    alt="featured-room-1"
-                    className="img-fluid"
-                  />
-                  <div className="card-body text-center">
-                    <h5 className="card-title">Deluxe Room</h5>
-                    <p className="card-text">$120</p>
-                    <span>/ night</span>
-                    <ul class="list">
-                      <li>
-                        <span>Max:</span> 6 Persons
-                      </li>
-                      <li>
-                        <span>Bed:</span> 3
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="card-footer text-center">
-                    <NavLink to={`/room-detail/${"single-economy"}`}>
-                      <button className="btn">
-                        Details <span className="fa fa-arrow-right"></span>
-                      </button>
-                    </NavLink>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <RoomCards data={[..."abcdef"]} />
         </div>
         <div className="col-lg-3">
           <div className="sidebar-wrapper">
@@ -83,9 +47,6 @@ const AllRooms = () => {
               </div>
               <div className="form-group">
                 <div className="select-wrap one-third">
-                  {/* <div class="icon">
-                    <span class="fa fa-arrow-down"></span>
-                  </div> */}
                   <select name="" id="" className="form-control">
                     <option value="">Adult Count</option>
                     <option value="">1 Adult</option>

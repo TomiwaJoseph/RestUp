@@ -1,11 +1,17 @@
 import videoUrl from "../statics/pexels-your-whiteboard-5305327.mp4";
+import posterImg from "../statics/bg_1.jpg";
 
 const VideoText = () => {
   return (
     <div className="container video-text-container">
       <div className="row">
         <div className="col-md-7">
-          <video controls className="img-fluid">
+          <video
+            preload="none"
+            poster={posterImg}
+            controls
+            className="img-fluid"
+          >
             <source src={videoUrl} type="video/mp4"></source>
           </video>
         </div>

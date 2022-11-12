@@ -8,6 +8,8 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 import SingleRoom from "./pages/SingleRoom";
+import ReserveRoom from "./pages/ReserveRoom";
+import Search from "./pages/Search";
 
 const App = () => {
   return (
@@ -17,9 +19,11 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/rooms" element={<Rooms />} />
         <Route path="/room-detail/:roomSlug" element={<SingleRoom />} />
+        <Route path="/reserve-room/:roomSlug" element={<ReserveRoom />} />
         <Route path="/restaurant" element={<Restaurant />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact-us" element={<Contact />} />
+        <Route path="/search-room" element={<Search />} />
       </Routes>
       <Footer />
     </Router>

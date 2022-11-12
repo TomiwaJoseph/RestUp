@@ -12,7 +12,7 @@
 }
 .name__hero {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.823);
@@ -24,7 +24,7 @@
 .name__hero h1 {
   color: white;
   text-transform: capitalize;
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 50px;
   font-weight: 600;
 }
@@ -32,7 +32,16 @@
   border: 1px solid #f51167;
   width: 150px;
   margin-top: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+.book-now {
+  text-transform: uppercase;
+  padding: 10px 0;
+  margin-bottom: 30px;
+  width: 30%;
+  /* border: 1px solid #f51167; */
+  background: #f51167;
+  color: #fff;
 }
 .room-images {
   display: flex;
@@ -87,7 +96,7 @@
   background: #1a6692;
   margin-bottom: 50px;
   color: #fff;
-  padding: 10px 0;
+  padding: 8px 0;
 }
 .reserve-btn:hover {
   background: transparent;

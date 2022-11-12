@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
-import Hero from "../components/Hero";
+import { NavLink, useParams } from "react-router-dom";
 import "./singleroom.css";
-import { roomDetails } from "../data";
-import SingleRoomHeader from "../components/SingleRoomHeader";
 import roomImg3 from "../statics/room-4.jpg";
 import roomImg1 from "../statics/room-1.jpg";
 import roomImg2 from "../statics/room-2.jpg";
 import roomImg4 from "../statics/room-3.jpg";
+import RoomCards from "../components/RoomCards";
+import HeaderSection from "../components/HeaderSection";
 
 const SingleRoom = () => {
   const { roomSlug } = useParams();
@@ -20,12 +18,6 @@ const SingleRoom = () => {
     Breakfast: false,
   };
   let infoKeys = Object.keys(info);
-
-  //   console.log(infoKeys);
-  //   infoKeys.forEach((key, index) => {
-  //     console.log(`${key}: ${info[key]}`);
-  //   });
-
   const roomExtras = [
     "Plush pillows and breathable bed linens",
     "Soft, oversized bath towels",
@@ -50,6 +42,9 @@ const SingleRoom = () => {
         <div className="name__hero">
           <h1>Single Economy</h1>
           <hr className="accent" />
+          <NavLink to={`/reserve-room/${"single-economy"}`}>
+            <button className="btn book-now">Book Now</button>
+          </NavLink>
         </div>
       </div>
       <div className="container">
@@ -95,9 +90,13 @@ const SingleRoom = () => {
             ))}
           </ul>
         </div>
-        <NavLink to="/">
+        <NavLink to={`/reserve-room/${"single-economy"}`}>
           <button className="btn reserve-btn">Reserve / Book Now!</button>
         </NavLink>
+        <HeaderSection title={"Related Rooms"} />
+        <div className="row">
+          <RoomCards data={[..."abc"]} />
+        </div>
       </div>
     </>
   );

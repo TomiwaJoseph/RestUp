@@ -1,0 +1,26 @@
+.header h2::after,
+.heading-section h2::before {
+  width: 100px;
+  height: 2px;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: #f51167;
+  content: "";
+}
+.header h2 {
+  font-size: 38px;
+  font-weight: 400;
+  position: relative;
+  color: #454545;
+}
+.header h2::before {
+  width: 80px;
+  height: 2px;
+  bottom: -16px;
+}
+.header {
+  margin-bottom: 15px;
+}

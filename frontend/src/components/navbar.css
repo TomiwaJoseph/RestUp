@@ -1,9 +1,7 @@
-/* #f51167 */
-
 nav {
-  background: transparent;
+  background: rgba(147, 147, 147, 0.105);
   height: 70px;
-  width: 100vw;
+  width: 100%;
   display: flex;
   position: absolute;
   top: 0;
@@ -68,6 +66,7 @@ nav h2 em {
   color: #fff;
   border-bottom: 2px solid #f51167;
 }
+.the_navbar.fix__navbar .navLink.active,
 .navLink.active {
   color: #f51167;
   font-weight: 600;

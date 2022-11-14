@@ -37,3 +37,246 @@
 /* =========================================
 ================= CONTACT =================
 ========================================= */
+
+.contact__info {
+  margin-bottom: 40px;
+}
+.contact__info .phone-div,
+.contact__info .email-div,
+.contact__info .website-div {
+  border: 1px solid #f51167;
+  -webkit-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
+  -moz-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
+  -ms-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
+  -o-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
+  box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
+  border-radius: 3px;
+}
+.contact__info .phone-div h5,
+.contact__info .email-div h5,
+.contact__info .website-div h5 {
+  margin-top: 15px;
+  font-weight: 600;
+  color: #4c4c4c;
+}
+.contact__info .phone-div p,
+.contact__info .email-div p,
+.contact__info .website-div p {
+  color: #6f6f6f;
+}
+.contact-form input {
+  border-radius: 3rem;
+  margin-bottom: 20px;
+  background: #e4e4e4 !;
+}
+.contact-form textarea {
+  margin-bottom: 20px;
+}
+.modalBody button:focus,
+.contact-form button:focus,
+.contact-form input:focus,
+.contact-form textarea:focus {
+  box-shadow: none;
+  border: 1px solid #f51167;
+}
+.contact-form button {
+  padding: 0.5rem 0;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 3rem;
+  border: 1px solid #f51167;
+  background: #f51167;
+  color: #fff;
+}
+.contact-form button:hover {
+  background: transparent;
+  color: #f51167;
+}
+
+/* Modal Styles */
+
+.contactModal {
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  z-index: 1000000;
+}
+.contactModal.hidden {
+  display: none;
+}
+.contactModal .modalContainer {
+  width: 80%;
+  padding: 20px;
+}
+.contactModal .modalContainer .modalBody {
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid none;
+  padding: 10px;
+  border-radius: 4px;
+}
+.modalBody .fa {
+  font-size: 40px;
+  padding: 20px 0;
+}
+.modalBody .fa-check-circle {
+  color: #f51167;
+}
+.modalBody .fa-times-circle {
+  color: #f00;
+}
+.modalBody #modalHTwo {
+  font-size: 24px;
+}
+.modalBody #modalP {
+  color: #4c4c4c;
+  font-size: 14px;
+  padding: 0 10px;
+  text-align: center;
+}
+.modalBody button {
+  border: 1px solid #f51167;
+  background-color: transparent;
+  color: #4c4c4c;
+  width: 50%;
+  margin-bottom: 20px;
+}
+
+/* =========================================
+  ================= SINGLE ROOM =================
+  ========================================= */
+.room__header {
+  position: relative;
+  margin-bottom: 30px;
+}
+.room__header .img-container {
+  width: 100%;
+}
+.room__header .img-container img {
+  object-fit: cover;
+  height: 70vh;
+  width: 100%;
+}
+.name__hero {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.635);
+  text-align: center;
+  width: 60%;
+  border-radius: 3px;
+  padding: 20px 0;
+}
+.name__hero h1 {
+  color: white;
+  text-transform: capitalize;
+  margin-top: 10px;
+  font-size: 50px;
+  font-weight: 600;
+}
+.accent {
+  border: 1px solid #f51167;
+  width: 150px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.book-now {
+  text-transform: uppercase;
+  padding: 10px 0;
+  margin-bottom: 30px;
+  width: 30%;
+  /* border: 1px solid #f51167; */
+  background: #f51167;
+  color: #fff;
+}
+.room-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.img-wrapper {
+  width: 33%;
+}
+.room-img {
+  width: 100%;
+  object-fit: cover;
+}
+.room-description h4,
+.room-info h4,
+.room-extras h4 {
+  margin-top: 30px;
+  font-weight: 600;
+  color: #1a6692;
+}
+.room-info .info-wrapper li,
+.room-extras li,
+.room-description p {
+  color: #525252;
+  letter-spacing: 1px;
+  text-align: justify;
+}
+.room-info .info-wrapper li span {
+  color: #f51167;
+}
+.info-wrapper,
+.extras-wrapper {
+  list-style-type: none;
+  display: grid;
+  padding-inline-start: 0px;
+}
+.info-wrapper {
+  /* grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); */
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+}
+.extras-wrapper {
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+}
+
+.reserve-btn {
+  border: 1px solid #1a6692;
+  width: 100%;
+  background: #1a6692;
+  margin-bottom: 50px;
+  color: #fff;
+  padding: 8px 0;
+}
+.reserve-btn:hover {
+  background: transparent;
+  color: #1a6692;
+}
+/* @media screen and (max-width: 1024px) {
+    .extras-wrapper {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  } */
+@media screen and (min-width: 776px) {
+  .info-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+@media screen and (max-width: 776px) {
+  .info-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+
+/* =========================================
+  ================= SINGLE ROOM =================
+  ========================================= */
+
+.reserve-container {
+  margin-top: 10vh;
+}

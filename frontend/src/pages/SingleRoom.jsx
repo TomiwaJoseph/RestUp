@@ -1,5 +1,5 @@
 import { NavLink, useParams } from "react-router-dom";
-import "./singleroom.css";
+import "./page-styles.css";
 import roomImg3 from "../statics/room-4.jpg";
 import roomImg1 from "../statics/room-1.jpg";
 import roomImg2 from "../statics/room-2.jpg";

@@ -29,7 +29,7 @@ const RoomCards = ({ data }) => {
                   </ul>
                 </div>
                 <div className="card-footer text-center">
-                  <NavLink to={`/room-detail/${"single-economy"}`}>
+                  <NavLink to={`/rooms/room-detail/${"single-economy"}`}>
                     <button className="btn">
                       Details <span className="fa fa-arrow-right"></span>
                     </button>

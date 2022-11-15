@@ -1,5 +1,4 @@
 import roomImg3 from "../statics/room-4.jpg";
-import "./singleroomheader.css";
 
 const SingleRoomHeader = () => {
   return (

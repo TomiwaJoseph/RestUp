@@ -162,7 +162,7 @@
 }
 .room__header .img-container img {
   object-fit: cover;
-  height: 70vh;
+  height: 45vh;
   width: 100%;
 }
 .name__hero {
@@ -272,11 +272,54 @@
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
 }
-
 /* =========================================
-  ================= SINGLE ROOM =================
-  ========================================= */
+    ================= RESERVE ROOM =================
+    ========================================= */
 
-.reserve-container {
-  margin-top: 10vh;
+.crumb {
+  border: 1px solid #f51167;
+  border-radius: 3px;
+  color: #4c4c4c;
+}
+.crumb.active {
+  color: #fff;
+  background: #f51167;
+}
+.crumb-demarcate {
+  background: #ececec;
+  height: 2px;
+  width: 50%;
+}
+.crumb:focus {
+  box-shadow: none;
+}
+.date-confirm {
+  background: #1a6692;
+  width: 80%;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.success-msg {
+  color: #20925d;
+  text-align: center;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+.success-msg svg {
+  font-size: 60px;
+  border: 1px solid #20925d;
+  border-radius: 30px;
+  padding: 10px;
+}
+.success-msg .title {
+  font-size: 25px;
+  margin-top: 10px;
+}
+.success-msg p {
+  color: #6f6f6f;
+  font-size: 18px;
 }

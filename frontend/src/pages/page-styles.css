@@ -325,6 +325,7 @@
 }
 .success-msg .call-to-action {
   display: flex;
+  margin-left: auto;
 }
 .success-msg .call-to-action .btn {
   border: 1px solid #f51167;

@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../components/CheckoutForm";
@@ -14,9 +14,16 @@ const stripePromise = loadStripe(PUBLISHABLE_KEY);
 
 const ReserveRoom = () => {
   const { roomSlug } = useParams();
-  // const [showPaymentCompleted, setShowPaymentCompleted] = useState(true);
-  const [paymentCompleted, setPaymentCompleted] = useState(false);
+  const navigate = useNavigate();
+  const [paymentCompleted, setPaymentCompleted] = useState(true);
   const [activeCrumb, setActiveCrumb] = useState(0);
+  const handleCTA = (destination) => {
+    document.body.style.overflow = "auto";
+    if (destination === "rooms") {
+      return navigate("/" + destination);
+    }
+    return navigate("/");
+  };
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -42,6 +49,14 @@ const ReserveRoom = () => {
         </svg>
         <div className="title">Payment Successful!</div>
         <p>Enjoy your stay with us.</p>
+        <div className="call-to-action">
+          <button onClick={() => handleCTA("home")} className="btn">
+            Home
+          </button>
+          <button onClick={() => handleCTA("rooms")} className="btn">
+            Rooms
+          </button>
+        </div>
       </div>
     );
   };
@@ -59,6 +74,7 @@ const ReserveRoom = () => {
 
   const checkDateSelection = () => {
     setActiveCrumb(1);
+    console.log(date[0]);
   };
 
   return (

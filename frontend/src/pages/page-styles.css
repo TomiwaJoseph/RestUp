@@ -323,3 +323,21 @@
   color: #6f6f6f;
   font-size: 18px;
 }
+.success-msg .call-to-action {
+  display: flex;
+}
+.success-msg .call-to-action .btn {
+  border: 1px solid #f51167;
+  padding: 5px 20px;
+  margin: 0 10px;
+  border-radius: 3px;
+  color: #6f6f6f;
+  background: transparent;
+}
+.success-msg .call-to-action .btn:hover {
+  background: #f51167;
+  color: #fff;
+}
+.success-msg .call-to-action .btn:focus {
+  box-shadow: none;
+}

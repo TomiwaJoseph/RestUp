@@ -27,7 +27,7 @@
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 600;
-  color: #f51167;
+  color: var(--main-color);
 }
 .each-fade-effect .carousel__captions h1 {
   text-transform: uppercase;
@@ -39,7 +39,7 @@
   border: 1px solid #fff;
   border-radius: 5rem;
   background: #fff;
-  color: #f51167;
+  color: var(--main-color);
   font-weight: 600;
 }
 .each-fade-effect .carousel__captions a:hover {

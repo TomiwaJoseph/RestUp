@@ -15,7 +15,7 @@ footer h2 {
 }
 footer h2 em {
   font-style: normal;
-  color: #f51167;
+  color: var(--main-color);
 }
 footer .footer__cta {
   text-transform: uppercase;
@@ -31,7 +31,7 @@ footer .footer__cta a {
   padding: 30px 20px 0 20px;
 }
 footer .footer__cta a:hover {
-  color: #f51167;
+  color: var(--main-color);
 }
 footer .footer__social-media .fab {
   margin: 20px 20px 20px 0;
@@ -41,7 +41,7 @@ footer .footer__social-media .fab {
   transition: all 220ms ease-in;
 }
 footer .footer__social-media .fab:hover {
-  color: #f51167;
+  color: var(--main-color);
 }
 .last_hr {
   background: #fff;

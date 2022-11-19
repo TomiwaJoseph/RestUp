@@ -8,5 +8,5 @@
 }
 .stripe-form input:focus {
   box-shadow: none;
-  border: 1px solid #f51167;
+  border: 1px solid var(--main-color);
 }

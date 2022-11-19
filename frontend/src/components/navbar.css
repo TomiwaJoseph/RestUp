@@ -36,7 +36,7 @@ nav h2 {
 }
 nav h2 em {
   font-style: normal;
-  color: #f51167;
+  color: var(--main-color);
 }
 .navMenu {
   display: flex;
@@ -59,16 +59,16 @@ nav h2 em {
   color: #454545;
 }
 .the_navbar.fix__navbar .navLink:hover {
-  color: #f51167;
-  border-bottom: 2px solid #f51167;
+  color: var(--main-color);
+  border-bottom: 2px solid var(--main-color);
 }
 .navLink:hover {
   color: #fff;
-  border-bottom: 2px solid #f51167;
+  border-bottom: 2px solid var(--main-color);
 }
 .the_navbar.fix__navbar .navLink.active,
 .navLink.active {
-  color: #f51167;
+  color: var(--main-color);
   font-weight: 600;
 }
 nav .fa {
@@ -126,7 +126,7 @@ nav .fa {
     height: 17%;
   }
   .navMenu.active .navLink.active {
-    color: #f51167;
+    color: var(--main-color);
   }
   .nav-brands-mobile .fab {
     padding: 30px 20px;
@@ -136,7 +136,7 @@ nav .fa {
     transition: all 0.3s ease-out;
   }
   .nav-brands-mobile .fab:hover {
-    color: #f51167;
+    color: var(--main-color);
   }
   .navBrands {
     display: none;

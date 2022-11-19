@@ -24,7 +24,7 @@
   margin-right: 10px;
 }
 .picture-text-container .icons i:hover {
-  color: #f51167;
+  color: var(--main-color);
 }
 .picture-text-container .the-text h1 {
   color: #454545;
@@ -44,7 +44,7 @@
 .contact__info .phone-div,
 .contact__info .email-div,
 .contact__info .website-div {
-  border: 1px solid #f51167;
+  border: 1px solid var(--main-color);
   -webkit-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
   -moz-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
   -ms-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
@@ -77,20 +77,20 @@
 .contact-form input:focus,
 .contact-form textarea:focus {
   box-shadow: none;
-  border: 1px solid #f51167;
+  border: 1px solid var(--main-color);
 }
 .contact-form button {
   padding: 0.5rem 0;
   cursor: pointer;
   width: 100%;
   border-radius: 3rem;
-  border: 1px solid #f51167;
-  background: #f51167;
+  border: 1px solid var(--main-color);
+  background: var(--main-color);
   color: #fff;
 }
 .contact-form button:hover {
   background: transparent;
-  color: #f51167;
+  color: var(--main-color);
 }
 
 /* Modal Styles */
@@ -128,7 +128,7 @@
   padding: 20px 0;
 }
 .modalBody .fa-check-circle {
-  color: #f51167;
+  color: var(--main-color);
 }
 .modalBody .fa-times-circle {
   color: #f00;
@@ -143,7 +143,7 @@
   text-align: center;
 }
 .modalBody button {
-  border: 1px solid #f51167;
+  border: 1px solid var(--main-color);
   background-color: transparent;
   color: #4c4c4c;
   width: 50%;
@@ -184,7 +184,7 @@
   font-weight: 600;
 }
 .accent {
-  border: 1px solid #f51167;
+  border: 1px solid var(--main-color);
   width: 150px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -194,8 +194,8 @@
   padding: 10px 0;
   margin-bottom: 30px;
   width: 30%;
-  /* border: 1px solid #f51167; */
-  background: #f51167;
+  /* border: 1px solid var(--main-color); */
+  background: var(--main-color);
   color: #fff;
 }
 .room-images {
@@ -226,7 +226,7 @@
   text-align: justify;
 }
 .room-info .info-wrapper li span {
-  color: #f51167;
+  color: var(--main-color);
 }
 .info-wrapper,
 .extras-wrapper {
@@ -277,13 +277,13 @@
     ========================================= */
 
 .crumb {
-  border: 1px solid #f51167;
+  border: 1px solid var(--main-color);
   border-radius: 3px;
   color: #4c4c4c;
 }
 .crumb.active {
   color: #fff;
-  background: #f51167;
+  background: var(--main-color);
 }
 .crumb-demarcate {
   background: #ececec;
@@ -328,7 +328,7 @@
   margin-left: auto;
 }
 .success-msg .call-to-action .btn {
-  border: 1px solid #f51167;
+  border: 1px solid var(--main-color);
   padding: 5px 20px;
   margin: 0 10px;
   border-radius: 3px;
@@ -336,9 +336,122 @@
   background: transparent;
 }
 .success-msg .call-to-action .btn:hover {
-  background: #f51167;
+  background: var(--main-color);
   color: #fff;
 }
 .success-msg .call-to-action .btn:focus {
   box-shadow: none;
+}
+
+/* =========================================
+      ================= SEARCH =================
+      ========================================= */
+.sidebar-wrapper {
+  padding: 20px;
+  border: 1px solid #e6e6e6;
+  margin-bottom: 30px;
+}
+.select-wrap select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.select-wrap .form-control:focus {
+  border: 1px solid #1a6692;
+  box-shadow: none;
+}
+.sidebar-wrapper .stars-rating {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.sidebar-wrapper .stars-rating .starred {
+  color: var(--main-color);
+}
+.sidebar-wrapper .search-btn {
+  width: 100%;
+  border: 1px solid var(--main-color);
+  margin-top: 20px;
+  background: transparent;
+  color: #6f6f6f;
+}
+.sidebar-wrapper .search-btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+.sidebar-wrapper .search-btn:hover {
+  /* border: 1px solid var(--main-color); */
+  background: var(--main-color);
+  color: #fff;
+}
+
+/* =========================================
+      ================= CARD STYLES =================
+      ========================================= */
+
+/* .room-card {
+  margin-bottom: 5rem;
+} */
+.room-card .card {
+  /* box-shadow: 1px 4px 5px 2px #6f6f6f; */
+  -webkit-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
+  -moz-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
+  -ms-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
+  -o-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
+  box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
+}
+.room-card .card .card-body h5 {
+  color: #454545;
+  font-weight: 600;
+}
+.room-card .card .card-body p {
+  color: var(--main-color);
+  font-size: 24px;
+  display: inline;
+  /* border-bottom: 2px solid var(--main-color); */
+}
+.room-card .card .card-body p ~ span {
+  color: #949494;
+  margin-left: 5px;
+  letter-spacing: 1px;
+}
+/* .room-card .card .card-body .list {
+  padding-inline-start: 0 !important;
+  color: #6f6f6f;
+  margin-bottom: 0 !important;
+}
+.room-card .card .card-body .list li {
+  list-style: none;
+}
+.room-card .card .card-body .list li span {
+  color: var(--main-color);
+} */
+.room-card .card-footer button {
+  padding: 5px 25px;
+  background: transparent;
+  color: #1a6692;
+  border: 1px solid #1a6692;
+  width: 100%;
+  font-weight: 700;
+  -webkit-transition: all 150ms ease-in 120ms;
+  -o-transition: all 150ms ease-in 120ms;
+  transition: all 150ms ease-in 120ms;
+}
+.room-card .card-footer button {
+  box-shadow: none;
+}
+.room-card .card-footer button span {
+  color: #1a6692;
+  background: transparent;
+  margin-left: 10px;
+  -webkit-transition: all 150ms ease-in 120ms;
+  -o-transition: all 150ms ease-in 120ms;
+  transition: all 150ms ease-in 120ms;
+}
+.room-card .card-footer button:hover span {
+  color: white;
+}
+.room-card .card-footer button:hover {
+  background: #1a6692;
+  color: white;
 }

@@ -1,53 +1,50 @@
 .testimonial-container {
-  /* background: #f51167; */
-  padding: 50px 0;
-}
-.testimonial-container .testimony {
-  margin-bottom: 20px;
+  /* background: var(--main-color); */
+  padding: 30px 0 70px 0;
+  margin-top: 3rem;
 }
 .testimonial-container .section-title h2 {
   color: #454545;
-  /* 454545
-  6f6f6f */
-  font-size: 26px;
-  font-weight: 300;
+  /* font-weight: 300; */
   letter-spacing: 3px;
   margin-bottom: 30px;
-  text-transform: uppercase;
 }
-.testimonial-container blockquote {
-  border-left: none;
-  padding: 20px;
-  font-size: 18px;
-  letter-spacing: 1px;
-  background: #fff;
-  color: #6f6f6f;
-  /* border: 1px solid #1a6692; */
-  -webkit-box-shadow: 1px 0px 2px 1px #1a6692;
-  -moz-box-shadow: 1px 0px 2px 1px #1a6692;
-  -ms-box-shadow: 1px 0px 2px 1px #1a6692;
-  -o-box-shadow: 1px 0px 2px 1px #1a6692;
-  box-shadow: 1px 0px 2px 1px #1a6692;
-  /* 1px 4px 5px 2px #6f6f6f; */
-  position: relative;
-  /* font-family: "Bradley Hand ITC Regular", sans-serif; */
-  font-family: "Gabriola Regular", sans-serif;
+.testimonial-container .each-fade-effect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30vh;
+  text-align: center;
+  /* border: 1px solid #c0c0c0; */
+  border: 1px solid var(--main-color);
+  border-radius: 3px;
+  padding: 10px 20px;
 }
-.testimonial-container blockquote:after {
-  content: "";
-  position: absolute;
-  border-style: solid;
-  border-width: 12px 12px 0 12px;
-  border-color: #f51168 transparent;
-  display: block;
-  width: 0;
-  z-index: 1;
-  bottom: -12px;
-  left: 10%;
-}
-.testimonial-container .author {
+.testimonial-container .each-fade-effect p {
   margin-bottom: 0;
-  margin-left: 10px;
-  color: #454545;
-  /* font-family: "Gabriola Regular", sans-serif; */
+  color: #6f6f6f;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-right: 20px;
+}
+.testimonial-container .each-fade-effect .testimonial-image-container {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+.testimonial-container .each-fade-effect .testimonial-image-container img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 80px;
+  height: 80px;
+}
+.react-slideshow-container + ul.indicators {
+  padding-inline-start: 0 !important;
+}
+.react-slideshow-container + ul.indicators li {
+  margin-right: 10px;
+}
+.react-slideshow-container + ul.indicators .each-slideshow-indicator:before {
+  height: 10px !important;
+  width: 10px !important;
+  background: var(--main-color) !important;
 }

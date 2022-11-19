@@ -1,14 +1,18 @@
 import { NavLink, useParams } from "react-router-dom";
-import "./page-styles.css";
+// import "./page-styles.css";
 import roomImg3 from "../statics/room-4.jpg";
 import roomImg1 from "../statics/room-1.jpg";
 import roomImg2 from "../statics/room-2.jpg";
 import roomImg4 from "../statics/room-3.jpg";
-import RoomCards from "../components/RoomCards";
+// import RoomCards from "../components/RoomCards";
 import HeaderSection from "../components/HeaderSection";
+import { useSelector } from "react-redux";
+import featured1 from "../statics/room-1.jpg";
 
 const SingleRoom = () => {
   const { roomSlug } = useParams();
+  const storeContext = useSelector((state) => state.store);
+  const { backendUrl, fetchingData, relatedRoomsData } = storeContext;
   const roomImages = [roomImg1, roomImg2, roomImg4];
   const info = {
     Price: 100,
@@ -94,9 +98,37 @@ const SingleRoom = () => {
           <button className="btn reserve-btn">Reserve / Book Now!</button>
         </NavLink>
         <HeaderSection title={"Related Rooms"} />
-        <div className="row">
+        {/* <div className="row">
           <RoomCards data={[..."abc"]} />
+        </div> */}
+        {/* <div className="container"> */}
+        <div className="row room-card">
+          {relatedRoomsData.map((room) => (
+            <div key={room} className="col-lg-4 mb-4">
+              <div className="card">
+                <img
+                  src={featured1}
+                  alt="featured-room-1"
+                  className="img-fluid"
+                />
+                <div className="card-body text-center">
+                  <h5 className="card-title">Deluxe Room</h5>
+                  <p className="card-text">$120</p>
+                  <span>/ night</span>
+                </div>
+                <div className="card-footer text-center">
+                  <NavLink to={`/rooms/room-detail/${"single-economy"}`}>
+                    <button className="btn">
+                      Details <span className="fa fa-arrow-right"></span>
+                    </button>
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
+        <hr />
+        {/* </div> */}
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import Hero from "../components/Hero";
 import { hotelBranches, hero } from "../data";
 import Features from "../components/Features";
-import "./page-styles.css";
+// import "./page-styles.css";
 import HeaderSection from "../components/HeaderSection";
 import aboutImg from "../statics/pexels-donald-tong-189296.jpg";
 

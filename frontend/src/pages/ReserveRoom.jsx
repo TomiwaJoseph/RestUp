@@ -2,15 +2,14 @@ import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../components/CheckoutForm";
-import "./page-styles.css";
 import roomImg2 from "../statics/room-2.jpg";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 import { useState, useEffect } from "react";
 
-const PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
-const stripePromise = loadStripe(PUBLISHABLE_KEY);
+// const PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
+// const stripePromise = loadStripe(PUBLISHABLE_KEY);
 
 const ReserveRoom = () => {
   const { roomSlug } = useParams();
@@ -64,6 +63,7 @@ const ReserveRoom = () => {
   // useEffect(() => {
   //   window.scrollTo(0, 0);
   // }, []);
+
   useEffect(() => {
     if (paymentCompleted) {
       document.body.style.overflow = "hidden";
@@ -89,7 +89,7 @@ const ReserveRoom = () => {
           <hr className="accent" />
         </div>
       </div>
-      <div className="container">
+      {/* <div className="container">
         {paymentCompleted ? (
           successMessage()
         ) : (
@@ -137,12 +137,10 @@ const ReserveRoom = () => {
               )}
               {activeCrumb === 1 && (
                 <div className="mx-auto col-md-5 mb-3">
-                  {/* <h3 className="checkout_title">Payment Details</h3> */}
                   <Elements stripe={stripePromise}>
                     <CheckoutForm
                       amount={"120"}
                       setPaymentCompleted={setPaymentCompleted}
-                      // orderInfo={orderInfo}
                     />
                   </Elements>
                 </div>
@@ -150,7 +148,7 @@ const ReserveRoom = () => {
             </div>
           </>
         )}
-      </div>
+      </div> */}
     </>
   );
 };

@@ -3,7 +3,9 @@ import { ActionTypes } from "../actions/action-types";
 const globalState = {
   singleRoomData: [],
   featuredRoomsData: [..."abc"],
+  relatedRoomsData: [..."abc"],
   allRoomsData: [..."abcdefghijk"],
+  currentFilterData: [..."ab"],
   testPageData: [],
   badRequest: false,
   noInternet: false,

@@ -165,7 +165,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navBrands">
-          <NavLink to="/search-dress" className="search__icon navLink">
+          <NavLink to="/search-room" className="search__icon navLink">
             <i className="fas fa-search"></i>
           </NavLink>
         </div>

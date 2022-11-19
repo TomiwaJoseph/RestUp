@@ -1,6 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import store from "./redux/store/store";
+import App from "./App";
+// import { ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
-import App from './App';
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
 
-ReactDOM.render(<App />, document.getElementById('root'))
+root.render(
+  <Provider store={store}>
+    {/* <ToastContainer/> */}
+    <App />
+  </Provider>
+);

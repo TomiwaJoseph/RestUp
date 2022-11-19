@@ -28,6 +28,34 @@ import hotel1 from "./statics/pexels-pixabay-261101.jpg";
 import hotel2 from "./statics/bg_1.jpg";
 import hotel3 from "./statics/pexels-donald-tong-189296.jpg";
 
+import testiImage1 from "./statics/person-1_rfzshl.jpg";
+import testiImage2 from "./statics/person-1_aufeoq.jpg";
+import testiImage3 from "./statics/person-3_rxtqvi.jpg";
+
+export const testimonials = [
+  {
+    id: 1,
+    name: "Stephanie Miller",
+    image: testiImage1,
+    review:
+      "If you’re looking for a top quality hotel look no further. We were upgraded free of charge to the Premium Suite.",
+  },
+  {
+    id: 2,
+    name: "John Smith",
+    image: testiImage2,
+    review:
+      "Me and my wife had a delightful weekend get away here, the staff were so friendly and attentive.",
+  },
+  {
+    id: 3,
+    name: "Jane Rosabel",
+    image: testiImage3,
+    review:
+      "The hotel's restaurant, swimming pool, gym and bar is top notch. Amazing room and customer service.",
+  },
+];
+
 export const hotelBranches = [
   {
     id: 1,

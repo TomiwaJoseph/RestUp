@@ -1,4 +1,4 @@
-import FeaturedRooms from "../components/FeaturedRooms";
+import FeaturedApartments from "../components/FeaturedApartments";
 import Features from "../components/Features";
 import LandingPageCarousel from "../components/LandingPageCarousel";
 import Testimonials from "../components/Testimonials";
@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
   const storeContext = useSelector((state) => state.store);
-  const { backendUrl, fetchingData, featuredRoomsData } = storeContext;
+  const { backendUrl, fetchingData, featuredApartmentData } = storeContext;
   // const carouselOptions = {
   //   margin: 30,
   //   responsiveClass: true,
@@ -43,7 +43,7 @@ const Home = () => {
       <LandingPageCarousel />
       <VideoText />
       <Features />
-      <FeaturedRooms data={featuredRoomsData} />
+      <FeaturedApartments data={featuredApartmentData} />
       <Testimonials />
     </>
   );

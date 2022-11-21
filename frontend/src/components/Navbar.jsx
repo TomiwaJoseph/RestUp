@@ -95,8 +95,12 @@ const Navbar = () => {
           >
             Home
           </NavLink>
-          <NavLink onClick={closeMobileMenu} className="navLink" to="/rooms">
-            Rooms
+          <NavLink
+            onClick={closeMobileMenu}
+            className="navLink"
+            to="/apartments"
+          >
+            Apartments
           </NavLink>
           <NavLink
             onClick={closeMobileMenu}

@@ -79,12 +79,12 @@ const ReserveRoom = () => {
 
   return (
     <>
-      <div className="room__header">
+      <div className="apartment-header">
         <div className="img-container">
           <img src={roomImg2} className="img-fluid" alt="heroku-promises" />
         </div>
         <div className="nav-hero"></div>
-        <div className="name__hero">
+        <div className="name-hero">
           <h1>Single Economy</h1>
           <hr className="accent" />
         </div>

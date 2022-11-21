@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import "./roomspluspagination.css";
+import "./apartmentspluspagination.css";
 import { NavLink } from "react-router-dom";
 import featured1 from "../statics/room-1.jpg";
 
-const RoomsPlusPagination = ({ data, backendUrl }) => {
+const ApartmentsPlusPagination = ({ data, backendUrl }) => {
   const dataToRender = data;
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -80,9 +80,9 @@ const RoomsPlusPagination = ({ data, backendUrl }) => {
                   <span>/ night</span>
                 </div>
                 <div className="card-footer text-center">
-                  <NavLink to={`/rooms/room-detail/${"single-economy"}`}>
+                  <NavLink to={`/apartments/room-detail/${"single-economy"}`}>
                     <button className="btn">
-                      Details <span className="fa fa-arrow-right"></span>
+                      Check Rooms <span className="fa fa-arrow-right"></span>
                     </button>
                   </NavLink>
                 </div>
@@ -121,4 +121,4 @@ const RoomsPlusPagination = ({ data, backendUrl }) => {
   );
 };
 
-export default RoomsPlusPagination;
+export default ApartmentsPlusPagination;

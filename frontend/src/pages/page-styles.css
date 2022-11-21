@@ -151,21 +151,21 @@
 }
 
 /* =========================================
-  ================= SINGLE ROOM =================
+  ================= SINGLE APARTMENT =================
   ========================================= */
-.room__header {
+.apartment-header {
   position: relative;
   margin-bottom: 30px;
 }
-.room__header .img-container {
+.apartment-header .img-container {
   width: 100%;
 }
-.room__header .img-container img {
+.apartment-header .img-container img {
   object-fit: cover;
-  height: 45vh;
+  height: 60vh;
   width: 100%;
 }
-.name__hero {
+.apartment-header .name-hero {
   position: absolute;
   top: 60%;
   left: 50%;
@@ -176,25 +176,24 @@
   border-radius: 3px;
   padding: 20px 0;
 }
-.name__hero h1 {
+.apartment-header .name-hero h1 {
   color: white;
   text-transform: capitalize;
   margin-top: 10px;
   font-size: 50px;
   font-weight: 600;
 }
-.accent {
+.apartment-header .name-hero .accent {
   border: 1px solid var(--main-color);
   width: 150px;
   margin-top: 10px;
   margin-bottom: 20px;
 }
-.book-now {
+.apartment-header .name-hero .book-now {
   text-transform: uppercase;
   padding: 10px 0;
   margin-bottom: 30px;
   width: 30%;
-  /* border: 1px solid var(--main-color); */
   background: var(--main-color);
   color: #fff;
 }
@@ -455,3 +454,65 @@
   background: #1a6692;
   color: white;
 }
+
+/* =========================================
+================= APARTMENTS =================
+========================================= */
+
+.search-box {
+  border: 1px solid #1a6692;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  padding: 20px 20px;
+}
+/* .search-form {
+  padding: 10px 20px;
+} */
+
+.the-date-range {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  margin-top: 60px;
+  margin-left: 18px;
+}
+.slider-div {
+  position: absolute;
+  top: 0;
+  z-index: 99999;
+  margin-top: 60px;
+  background: #1a6692;
+  padding-top: 20px;
+  border-radius: 5px;
+}
+.search-box .search-item i {
+  margin: 0 10px;
+  color: #1a6692;
+}
+.search-box .search-item {
+  cursor: pointer;
+}
+.room-search-btn {
+  background-color: #1a6692;
+  border: 1px solid #1a6692;
+  padding: 10px 30px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.room-search-btn:hover {
+  border: 1px solid #1a6692;
+  background-color: transparent;
+  color: #1a6692;
+}
+.room-search-btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+.search-form .search-item span {
+  color: #6f6f6f;
+}
+/* .rdrCalendarWrapper {
+  background: #000 !important;
+} */

@@ -3,12 +3,12 @@ import "./pages/page-styles.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import Rooms from "./pages/Rooms";
+import Apartments from "./pages/Apartments";
 import Restaurant from "./pages/Restaurant";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
-import SingleRoom from "./pages/SingleRoom";
+import SingleApartment from "./pages/SingleApartment";
 import ReserveRoom from "./pages/ReserveRoom";
 import Search from "./pages/Search";
 
@@ -18,13 +18,16 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/rooms" element={<Rooms />} />
-        <Route path="/rooms/room-detail/:roomSlug" element={<SingleRoom />} />
+        <Route path="/apartments" element={<Apartments />} />
+        <Route
+          path="/apartments/room-detail/:apartmentSlug"
+          element={<SingleApartment />}
+        />
         <Route path="/reserve-room/:roomSlug" element={<ReserveRoom />} />
         <Route path="/restaurant" element={<Restaurant />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact-us" element={<Contact />} />
-        <Route path="/search-room" element={<Search />} />
+        <Route path="/search-apartments" element={<Search />} />
       </Routes>
       <Footer />
     </Router>

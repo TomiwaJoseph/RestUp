@@ -10,9 +10,9 @@ import { useSelector } from "react-redux";
 import featured1 from "../statics/room-1.jpg";
 
 const SingleRoom = () => {
-  const { roomSlug } = useParams();
+  const { apartmentSlug } = useParams();
   const storeContext = useSelector((state) => state.store);
-  const { backendUrl, fetchingData, relatedRoomsData } = storeContext;
+  const { backendUrl, fetchingData, relatedApartmentsData } = storeContext;
   const roomImages = [roomImg1, roomImg2, roomImg4];
   const info = {
     Price: 100,
@@ -38,12 +38,12 @@ const SingleRoom = () => {
 
   return (
     <>
-      <div className="room__header">
+      <div className="apartment-header">
         <div className="img-container">
           <img src={roomImg3} className="img-fluid" alt="heroku-promises" />
         </div>
         <div className="nav-hero"></div>
-        <div className="name__hero">
+        <div className="name-hero">
           <h1>Single Economy</h1>
           <hr className="accent" />
           <NavLink to={`/reserve-room/${"single-economy"}`}>
@@ -97,13 +97,9 @@ const SingleRoom = () => {
         <NavLink to={`/reserve-room/${"single-economy"}`}>
           <button className="btn reserve-btn">Reserve / Book Now!</button>
         </NavLink>
-        <HeaderSection title={"Related Rooms"} />
-        {/* <div className="row">
-          <RoomCards data={[..."abc"]} />
-        </div> */}
-        {/* <div className="container"> */}
+        <HeaderSection title={"Related Apartments"} />
         <div className="row room-card">
-          {relatedRoomsData.map((room) => (
+          {relatedApartmentsData.map((room) => (
             <div key={room} className="col-lg-4 mb-4">
               <div className="card">
                 <img

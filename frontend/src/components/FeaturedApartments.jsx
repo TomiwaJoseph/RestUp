@@ -5,7 +5,7 @@ import featured1 from "../statics/room-1.jpg";
 const FeaturedRooms = ({ data }) => {
   return (
     <>
-      <HeaderSection title={"Featured Rooms"} />
+      <HeaderSection title={"Featured Apartments"} />
       <div className="container">
         <div className="row room-card">
           {data.map((room) => (
@@ -22,7 +22,7 @@ const FeaturedRooms = ({ data }) => {
                   <span>/ night</span>
                 </div>
                 <div className="card-footer text-center">
-                  <NavLink to={`/rooms/room-detail/${"single-economy"}`}>
+                  <NavLink to={`/apartments/room-detail/${"single-economy"}`}>
                     <button className="btn">
                       Details <span className="fa fa-arrow-right"></span>
                     </button>

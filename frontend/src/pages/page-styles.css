@@ -197,6 +197,10 @@
   background: var(--main-color);
   color: #fff;
 }
+.reserve-btn:focus,
+.apartment-header .name-hero .book-now:focus {
+  box-shadow: none;
+}
 .room-images {
   display: flex;
   flex-wrap: wrap;
@@ -236,25 +240,30 @@
 .info-wrapper {
   /* grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); */
   grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
+  grid-row-gap: 0.5rem;
 }
 .extras-wrapper {
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); */
   grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
+  grid-row-gap: 0.5rem;
 }
-
 .reserve-btn {
   border: 1px solid #1a6692;
   width: 100%;
   background: #1a6692;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   color: #fff;
   padding: 8px 0;
 }
 .reserve-btn:hover {
   background: transparent;
   color: #1a6692;
+}
+.apartment-room {
+  border: 1px solid #949494;
+  padding: 20px;
+  border-radius: 3px;
+  margin-bottom: 15px;
 }
 /* @media screen and (max-width: 1024px) {
     .extras-wrapper {

@@ -227,6 +227,36 @@ export const menuData = [
   },
 ];
 
+export const ApartmentRooms = [
+  {
+    id: 1,
+    name: "Double Room",
+    bedType: "1 full bed",
+    roomInfo: [
+      "26 m<sup>2</sup>",
+      "Air conditioning",
+      "Flat-screen TV",
+      "Soundproof",
+      "Free WiFi",
+    ],
+    roomExtras: [
+      "Free toileteries",
+      "Socket near the bed",
+      "Refrigerator",
+      "Ironing facilities",
+      "Tea/Coffee maker",
+      "Laptop safe",
+    ],
+  },
+  {
+    id: 2,
+    name: "Twin Room",
+    bedType: "2 full beds",
+    roomInfo: ["32 m<sup>2</sup>", "Air conditioning", "Free WiFi"],
+    roomExtras: ["Socket near the bed", "Refrigerator", "Tea/Coffee maker"],
+  },
+];
+
 export const hero = {
   restaurant: restaurantImage,
   room: roomImage,

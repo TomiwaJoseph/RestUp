@@ -3,7 +3,7 @@ import { ActionTypes } from "../actions/action-types";
 const globalState = {
   // singleRoomData: [],
   featuredApartmentData: [..."abc"],
-  relatedApartmentsData: [..."abc"],
+  // relatedApartmentsData: [..."abc"],
   allApartmentsData: [..."abcdefghijk"],
   currentFilterData: [..."ab"],
   testPageData: [],

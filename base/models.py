@@ -2,7 +2,10 @@ from django.db import models
 
 # VARIABLES
 BED_TYPES = [
+    ("1 full bed", "1 full bed"),
     ("2 queen beds", "2 queen beds"),
+    ("2 full beds", "2 full beds"),
+    ("1 small bed", "1 small bed"),
     ("King size bed", "King size bed"),
     ("2 small beds", "2 small beds"),
 ]

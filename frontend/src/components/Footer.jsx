@@ -10,7 +10,7 @@ const Footer = () => {
         </h2>
         <div className="footer__cta">
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/rooms">Rooms</NavLink>
+          <NavLink to="/apartments">Apartments</NavLink>
           <NavLink to="/restaurant">Restaurant</NavLink>
           <Link style={{ pointerEvents: "none" }} to="/">
             How It Works?

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import HeaderSection from "./HeaderSection";
-import featured1 from "../statics/room-1.jpg";
+import featured1 from "../statics/room-2.jpg";
 
 const FeaturedRooms = ({ data }) => {
   return (
@@ -18,13 +18,13 @@ const FeaturedRooms = ({ data }) => {
                 />
                 <div className="card-body text-center">
                   <h5 className="card-title">Deluxe Room</h5>
-                  <p className="card-text">$120</p>
-                  <span>/ night</span>
+                  {/* <p className="card-text">$120</p>
+                  <span>/ night</span> */}
                 </div>
                 <div className="card-footer text-center">
                   <NavLink to={`/apartments/room-detail/${"single-economy"}`}>
                     <button className="btn">
-                      Details <span className="fa fa-arrow-right"></span>
+                      View Details <span className="fa fa-arrow-right"></span>
                     </button>
                   </NavLink>
                 </div>

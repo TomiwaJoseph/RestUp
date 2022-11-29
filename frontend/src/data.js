@@ -231,9 +231,12 @@ export const ApartmentRooms = [
   {
     id: 1,
     name: "Double Room",
+    slug: "double-room",
+    price: 250,
+    refundable: true,
     bedType: "1 full bed",
     roomInfo: [
-      "26 m<sup>2</sup>",
+      "26 m",
       "Air conditioning",
       "Flat-screen TV",
       "Soundproof",
@@ -251,9 +254,12 @@ export const ApartmentRooms = [
   {
     id: 2,
     name: "Twin Room",
+    slug: "twin-room",
+    price: 350,
+    refundable: false,
     bedType: "2 full beds",
-    roomInfo: ["32 m<sup>2</sup>", "Air conditioning", "Free WiFi"],
-    roomExtras: ["Socket near the bed", "Refrigerator", "Tea/Coffee maker"],
+    roomInfo: ["32 m", "Air conditioning", "Free WiFi"],
+    roomExtras: ["Socket near the bed","Ironing facilities", "Refrigerator", "Tea/Coffee maker"],
   },
 ];
 

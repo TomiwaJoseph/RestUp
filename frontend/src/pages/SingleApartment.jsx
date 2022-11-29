@@ -6,22 +6,39 @@ import roomImg4 from "../statics/room-3.jpg";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { ApartmentRooms } from "../data";
+import { format } from "date-fns";
 
-const SingleRoom = () => {
+const SingleApartment = () => {
   const { apartmentSlug } = useParams();
   const roomsRef = useRef(null);
   const storeContext = useSelector((state) => state.store);
   const { backendUrl, fetchingData } = storeContext;
   const roomImages = [roomImg1, roomImg2, roomImg4];
-  const roomExtras = [
-    "Plush pillows and breathable bed linens",
-    "Soft, oversized bath towels",
-    "Full-sized, pH-balanced toiletries",
-    "Complimentary refreshments",
-    "Adequate safety/security",
-    "Internet",
-    "Comfortable beds",
+  // const roomExtras = [
+  //   "Plush pillows and breathable bed linens",
+  //   "Soft, oversized bath towels",
+  //   "Full-sized, pH-balanced toiletries",
+  //   "Complimentary refreshments",
+  //   "Adequate safety/security",
+  //   "Internet",
+  //   "Comfortable beds",
+  // ];
+  const roomIcons = {
+    "Air conditioning": "fa-snowflake",
+    "Flat-screen TV": "fa-tv",
+    Soundproof: "fa-volume-mute",
+    "Free WiFi": "fa-wifi",
+  };
+  const cancellationInfo = [
+    `Free cancellation until 11:59 PM on ${new Date().toLocaleString(
+      "default",
+      { month: "long" }
+    )} ${new Date().getDate()}, ${new Date().getFullYear()}`,
+    "Non-refundable",
   ];
+  // console.log(new Date());
+  // console.log(new Date().toLocaleString("default", { month: "long" }));
+  // console.log(`${format(new Date(), "dd/mm/yyy")}`);
 
   //   useEffect(() => {
   //     window.scrollTo(0, 0);
@@ -37,7 +54,6 @@ const SingleRoom = () => {
         <div className="name-hero">
           <h1>Single Economy</h1>
           <hr className="accent" />
-          {/* <NavLink to={`/reserve-room/${"single-economy"}`}> */}
           <button
             onClick={() =>
               roomsRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -46,7 +62,6 @@ const SingleRoom = () => {
           >
             Reserve Now
           </button>
-          {/* </NavLink> */}
         </div>
       </div>
       <div className="container">
@@ -74,20 +89,48 @@ const SingleRoom = () => {
           </p>
           <hr />
         </div>
-        <button
-          onClick={() =>
-            roomsRef.current?.scrollIntoView({ behavior: "smooth" })
-          }
-          className="btn reserve-btn"
-        >
-          Reserve Now!
-        </button>
-        <div ref={roomsRef} className="rooms-container text-center my-5">
-          <h1>Rooms Container</h1>
+        <div ref={roomsRef} style={{ height: "10vh" }}></div>
+        <div className="rooms-container text-center my-5">
           {ApartmentRooms.map((room) => (
-            <div className="row apartment-room">
-              <div className="col-8">five</div>
-              <div className="col-4">four</div>
+            <div key={room.slug} className="row apartment-room mx-auto">
+              <div className="col-md-8 single-room">
+                <h3>{room.name}</h3>
+                <p>{room.bedType}</p>
+                <div className="room-info">
+                  <small>
+                    <span className="fa fa-ruler-combined"></span>{" "}
+                    {room.roomInfo[0]}
+                    <sup>2</sup>
+                  </small>
+                  {room.roomInfo.slice(1).map((info) => (
+                    <small key={info}>
+                      <span className={`fa ${roomIcons[info]}`}></span> {info}
+                    </small>
+                  ))}
+                </div>
+                <hr />
+                <div className="room-extras">
+                  {room.roomExtras.map((extra) => (
+                    <small key={extra}>
+                      <span>✔</span> {extra}
+                    </small>
+                  ))}
+                </div>
+              </div>
+              <div className="col-md-4 apartment-cta my-auto">
+                <p className="duration">3 nights</p>
+                <p>Price ${room.price}</p>
+                <p
+                  className={
+                    !room.refundable * 1 ? "refundable" : "not-refundable"
+                  }
+                >
+                  {cancellationInfo[room.refundable * 1]}
+                </p>
+                <NavLink to={`/reserve-room/${room.slug}`}>
+                  <button className="btn reserve-now-btn">Reserve</button>
+                </NavLink>
+              </div>
             </div>
           ))}
         </div>
@@ -97,4 +140,4 @@ const SingleRoom = () => {
   );
 };
 
-export default SingleRoom;
+export default SingleApartment;

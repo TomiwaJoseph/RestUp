@@ -10,8 +10,9 @@ import { fetchTestPage } from "../redux/actions/fetchers";
 const Contact = () => {
   const formRef = useRef();
   const modalRef = useRef();
+  const containerRef = useRef();
   const storeContext = useSelector((state) => state.store);
-  const { backendUrl, fetchingData } = storeContext;
+  const { fetchingData } = storeContext;
   const [openModal, setOpenModal] = useState(false);
   const [sendButtonClicked, setSendButtonClicked] = useState(false);
 
@@ -30,7 +31,7 @@ const Contact = () => {
   }, [openModal]);
 
   const closeModal = (e) => {
-    if (modalRef.current === e.target) {
+    if (modalRef.current === e.target || containerRef.current === e.target) {
       setOpenModal(false);
     }
   };
@@ -110,11 +111,10 @@ const Contact = () => {
       <div className="container">
         <div
           onClick={closeModal}
-          ref={modalRef}
-          id="success_tic"
+          ref={containerRef}
           className={openModal ? "contactModal" : "contactModal hidden"}
         >
-          <div className="modalContainer">
+          <div ref={modalRef} className="modalContainer">
             <div className="modalBody">
               <i id="modalIcon" className="fa"></i>
               <h2 id="modalHTwo">Status</h2>

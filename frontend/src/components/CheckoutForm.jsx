@@ -37,11 +37,11 @@ const CheckoutForm = (props) => {
   const handlePaymentFormSubmit = async (event) => {
     event.preventDefault();
 
-    if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
-      return;
-    }
+    // if (!stripe || !elements) {
+    //   // Stripe.js has not yet loaded.
+    //   // Make sure to disable form submission until Stripe.js has loaded.
+    //   return;
+    // }
 
     setLoading(true);
     setErrorMsg("");
@@ -71,6 +71,7 @@ const CheckoutForm = (props) => {
   const handleResponse = (response) => {
     setLoading(false);
     if (response.error) {
+      console.log("some serious error occured...");
       setErrorMsg(
         typeof response.error === "string"
           ? response.error
@@ -84,38 +85,6 @@ const CheckoutForm = (props) => {
   return (
     <>
       <form onSubmit={handlePaymentFormSubmit} className="stripe-form">
-        <div className="row">
-          <div className="col-md-12 mb-3">
-            <label htmlFor="cc-name">Full Name</label>
-            <input
-              id="cc-name"
-              type="text"
-              className="form-control"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 mb-3">
-            <label htmlFor="cc-name">Name on card</label>
-            <input
-              id="cc-name"
-              type="text"
-              className="form-control"
-              value={nameOnCard}
-              onChange={(e) => setNameOnCard(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 mb-3">
-            <label htmlFor="cc-email">Email</label>
-            <input
-              id="cc-email"
-              type="text"
-              className="form-control"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-        </div>
         <div className="row">
           <div className="col-md-12 mb-3">
             <label htmlFor="cc-number">Card Number</label>
@@ -144,12 +113,11 @@ const CheckoutForm = (props) => {
             />
           </div>
         </div>
-
         <hr className="mb-4" />
         <button className="btn btn-dark w-100" type="submit" disabled={loading}>
           {loading ? (
             <div className="spinner-border text-light" role="status">
-              <span className="sr-only">Loading...</span>
+              {/* <span className="sr-only">Loading...</span> */}
             </div>
           ) : (
             `Pay $${props.amount}`

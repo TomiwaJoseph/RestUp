@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 # VARIABLES
 BED_TYPES = [
@@ -23,7 +24,6 @@ VIEW_TYPES = [
 class Apartment(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
-    price = models.IntegerField()
     size = models.IntegerField()
     capacity = models.IntegerField()
     pets = models.BooleanField(default=False)
@@ -35,16 +35,29 @@ class Apartment(models.Model):
     def __str__(self):
         return self.name
     
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Apartment, self).save(*args, **kwargs)
+    
     
 class Room(models.Model):
     apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, related_name="apartment_room")
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100)
+    price = models.IntegerField()
     availability = models.BooleanField(default=True)
+    refundable = models.BooleanField(default=True)
     bed_type = models.CharField(max_length=30, choices=BED_TYPES)
     bathroom = models.CharField(max_length=30, choices=BATHROOM_TYPES)
     view = models.CharField(max_length=30, choices=VIEW_TYPES)
     max_people = models.IntegerField()
     
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Room, self).save(*args, **kwargs)
+
     
 # class DoorNumber(models.Models):
 #     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="room_door")

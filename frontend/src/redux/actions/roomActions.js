@@ -6,9 +6,21 @@ export const setTestPage = (data) => {
     payload: data,
   };
 };
-export const setSingleRoom = (data) => {
+export const setFeaturedApartments = (data) => {
   return {
-    type: ActionTypes.GET_SINGLE_ROOM,
+    type: ActionTypes.SET_FEATURED_DATA,
+    payload: data,
+  };
+};
+export const setHighestPriceAndCapacity = (data) => {
+  return {
+    type: ActionTypes.SET_HIGHEST_PRICE_AND_CAPACITY_DATA,
+    payload: data,
+  };
+};
+export const setSingleApartment = (data) => {
+  return {
+    type: ActionTypes.GET_SINGLE_APARTMENT,
     payload: data,
   };
 };

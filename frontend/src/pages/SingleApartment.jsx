@@ -36,9 +36,6 @@ const SingleApartment = () => {
     )} ${new Date().getDate()}, ${new Date().getFullYear()}`,
     "Non-refundable",
   ];
-  // console.log(new Date());
-  // console.log(new Date().toLocaleString("default", { month: "long" }));
-  // console.log(`${format(new Date(), "dd/mm/yyy")}`);
 
   //   useEffect(() => {
   //     window.scrollTo(0, 0);
@@ -95,7 +92,12 @@ const SingleApartment = () => {
             <div key={room.slug} className="row apartment-room mx-auto">
               <div className="col-md-8 single-room">
                 <h3>{room.name}</h3>
-                <p>{room.bedType}</p>
+                <div className="bedtype-capacity">
+                  <p>{room.bedType}</p>
+                  <span>
+                    Max people: <b>{room.max_people}</b>
+                  </span>
+                </div>
                 <div className="room-info">
                   <small>
                     <span className="fa fa-ruler-combined"></span>{" "}

@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import HeaderSection from "./HeaderSection";
 import featured1 from "../statics/room-2.jpg";
 
-const FeaturedRooms = ({ data }) => {
+const FeaturedRooms = ({ data, imageUrl }) => {
   return (
     <>
       <HeaderSection title={"Featured Apartments"} />

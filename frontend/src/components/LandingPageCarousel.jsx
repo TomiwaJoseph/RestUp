@@ -1,5 +1,5 @@
 import "./landingpagecarousel.css";
-import img1 from "../statics/pexels-rene-asmussen-635126.jpg";
+import img1 from "../statics/pexels-rachel-claire-4825701.jpg";
 import img2 from "../statics/pexels-pixabay-261101.jpg";
 import img3 from "../statics/pexels-donald-tong-189296.jpg";
 import { NavLink } from "react-router-dom";

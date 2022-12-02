@@ -233,6 +233,7 @@ export const ApartmentRooms = [
     name: "Double Room",
     slug: "double-room",
     price: 250,
+    max_people: 2,
     refundable: true,
     bedType: "1 full bed",
     roomInfo: [
@@ -256,10 +257,16 @@ export const ApartmentRooms = [
     name: "Twin Room",
     slug: "twin-room",
     price: 350,
+    max_people: 4,
     refundable: false,
     bedType: "2 full beds",
     roomInfo: ["32 m", "Air conditioning", "Free WiFi"],
-    roomExtras: ["Socket near the bed","Ironing facilities", "Refrigerator", "Tea/Coffee maker"],
+    roomExtras: [
+      "Socket near the bed",
+      "Ironing facilities",
+      "Refrigerator",
+      "Tea/Coffee maker",
+    ],
   },
 ];
 

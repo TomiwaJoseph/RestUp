@@ -4,10 +4,16 @@ import LandingPageCarousel from "../components/LandingPageCarousel";
 import Testimonials from "../components/Testimonials";
 import VideoText from "../components/VideoText";
 import { useSelector } from "react-redux";
+import { setFeaturedApartments } from "../redux/actions/roomActions";
+import NoInternet from "../components/NoInternet";
+import Preloader from "../components/Preloader";
+import { useEffect } from "react";
+import { fetchFeaturedApartments } from "../redux/actions/fetchers";
 
 const Home = () => {
   const storeContext = useSelector((state) => state.store);
-  const { backendUrl, fetchingData, featuredApartmentData } = storeContext;
+  const { backendUrl, fetchingData, noInternet, featuredApartmentData } =
+    storeContext;
   // const carouselOptions = {
   //   margin: 30,
   //   responsiveClass: true,
@@ -38,12 +44,44 @@ const Home = () => {
   //   },
   // };
 
+  useEffect(() => {
+    fetchFeaturedApartments();
+  }, []);
+
+  // useEffect(() => {
+  //   effect
+  //   return () => {
+  //     cleanup
+  //   };
+  // }, [input]);
+
+  useEffect(() => {
+    const getBody = document.body;
+    if (noInternet) {
+      getBody.classList.add("no-internet");
+    }
+    // else {
+    //   getBody.classList.remove("no-internet");
+    // }
+    return () => {
+      getBody.classList.remove("no-internet");
+    };
+  }, [noInternet]);
+
+  if (fetchingData) {
+    return <Preloader />;
+  }
+
+  if (noInternet) {
+    return <NoInternet />;
+  }
+
   return (
     <>
       <LandingPageCarousel />
       <VideoText />
       <Features />
-      <FeaturedApartments data={featuredApartmentData} />
+      <FeaturedApartments data={featuredApartmentData} imageUrl={backendUrl} />
       <Testimonials />
     </>
   );

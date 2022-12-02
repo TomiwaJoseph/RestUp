@@ -10,27 +10,22 @@ BED_TYPES = [
     ("King size bed", "King size bed"),
     ("2 small beds", "2 small beds"),
 ]
-BATHROOM_TYPES = [
-    ("1 bathroom", "1 bathroom"),
-    ("2 bathrooms", "2 bathrooms"),
-]
-VIEW_TYPES = [
-    ("Terrace", "Terrace"),
-    ("Balcony", "Balcony"),
-]
+# BATHROOM_TYPES = [
+#     ("1 bathroom", "1 bathroom"),
+#     ("2 bathrooms", "2 bathrooms"),
+# ]
+# VIEW_TYPES = [
+#     ("Terrace", "Terrace"),
+#     ("Balcony", "Balcony"),
+# ]
 
 
 # Create your models here.
 class Apartment(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
-    size = models.IntegerField()
-    capacity = models.IntegerField()
-    pets = models.BooleanField(default=False)
-    breakfast = models.BooleanField(default=False)
     main_image = models.ImageField(upload_to='apartments')
-    other_images = models.ManyToManyField(
-        "ApartmentImages", blank=True)    
+    other_images = models.ManyToManyField("ApartmentImages", blank=True, related_name="other_apartment_images")    
         
     def __str__(self):
         return self.name
@@ -39,35 +34,37 @@ class Apartment(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Apartment, self).save(*args, **kwargs)
-    
+
     
 class Room(models.Model):
     apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, related_name="apartment_room")
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
-    price = models.IntegerField()
-    availability = models.BooleanField(default=True)
-    refundable = models.BooleanField(default=True)
-    bed_type = models.CharField(max_length=30, choices=BED_TYPES)
-    bathroom = models.CharField(max_length=30, choices=BATHROOM_TYPES)
-    view = models.CharField(max_length=30, choices=VIEW_TYPES)
     max_people = models.IntegerField()
+    price = models.IntegerField()
+    bed_type = models.CharField(max_length=30, choices=BED_TYPES)
+    size = models.IntegerField()
+    refundable = models.BooleanField(default=True)
+    room_info = models.ManyToManyField("RoomInfo", blank=True, related_name="info_list")
+    room_extras = models.ManyToManyField("RoomExtra", blank=True, related_name="extras_list")
+    availability = models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Room, self).save(*args, **kwargs)
+        
+class RoomInfo(models.Model):
+    info = models.CharField(max_length=100)
+    
+    
+class RoomExtra(models.Model):
+    extra = models.CharField(max_length=100)
 
-    
-# class DoorNumber(models.Models):
-#     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="room_door")
-#     number = models.IntegerField()
-#     availability = models.BooleanField(default=True)
-    
     
 class ApartmentImages(models.Model):
     apartment = models.ForeignKey(
-        "Apartment", on_delete=models.CASCADE, related_name='apartment_image')
+        "Apartment", on_delete=models.CASCADE, related_name='related_images')
     image = models.ImageField(upload_to='apartment_rooms')
 
     class Meta:

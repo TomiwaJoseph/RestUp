@@ -245,8 +245,19 @@
   color: #1a6692;
   font-weight: 700;
 }
-.apartment-room .single-room p {
+.apartment-room .single-room .bedtype-capacity {
+  display: flex;
+}
+.apartment-room .single-room .bedtype-capacity span {
   color: #4c4c4c;
+  margin-left: 20px;
+}
+.apartment-room .single-room .bedtype-capacity p {
+  color: #4c4c4c;
+}
+.apartment-room .single-room .bedtype-capacity span b {
+  color: #1a6692;
+  /* font-weight: 600; */
 }
 .apartment-room .single-room hr {
   border-color: #f51168a6;
@@ -617,3 +628,50 @@
 /* .rdrCalendarWrapper {
   background: #000 !important;
 } */
+
+/* =========================================
+================= ERROR STYLES =================
+========================================= */
+
+.error__div {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  text-align: center;
+}
+.error_image_wrapper {
+  width: 250px;
+  height: 260px;
+  margin-top: 10px;
+}
+.error__div h1 {
+  color: #f51167;
+  margin-top: 10px;
+}
+.error__div p {
+  color: #5c5c5c;
+  font-size: 18px;
+}
+.error__div .single__page-error {
+  color: #f51167;
+  padding: 5px 10px;
+  border: 1px solid #f51167;
+  border-radius: 3px;
+  -webkit-transition: all 150ms ease-in;
+  -o-transition: all 150ms ease-in;
+  transition: all 150ms ease-in;
+}
+.error__div .single__page-error:hover {
+  color: #fff;
+  background: #f51167;
+}
+/* .Toastify__toast-container--top-center {
+  z-index: 99999999 !important;
+} */
+
+body.no-internet nav {
+  background: #373737;
+}

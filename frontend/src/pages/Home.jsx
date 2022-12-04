@@ -4,7 +4,6 @@ import LandingPageCarousel from "../components/LandingPageCarousel";
 import Testimonials from "../components/Testimonials";
 import VideoText from "../components/VideoText";
 import { useSelector } from "react-redux";
-import { setFeaturedApartments } from "../redux/actions/roomActions";
 import NoInternet from "../components/NoInternet";
 import Preloader from "../components/Preloader";
 import { useEffect } from "react";
@@ -48,21 +47,13 @@ const Home = () => {
     fetchFeaturedApartments();
   }, []);
 
-  // useEffect(() => {
-  //   effect
-  //   return () => {
-  //     cleanup
-  //   };
-  // }, [input]);
-
   useEffect(() => {
     const getBody = document.body;
     if (noInternet) {
       getBody.classList.add("no-internet");
+    } else {
+      getBody.classList.remove("no-internet");
     }
-    // else {
-    //   getBody.classList.remove("no-internet");
-    // }
     return () => {
       getBody.classList.remove("no-internet");
     };

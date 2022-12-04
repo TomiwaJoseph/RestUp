@@ -4,12 +4,17 @@ import { hero } from "../data";
 import { useSelector } from "react-redux";
 import Preloader from "../components/Preloader";
 import MultiRangeSlider from "../components/MultiRangeSlider";
-// import MultiRangeSliderTwo from "../components/MultiRangeSlider";
 import { useState, useRef, useEffect } from "react";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
+import {
+  fetchAllApartments,
+  fetchFilteredApartments,
+  fetchHighestPriceAndCapacity,
+} from "../redux/actions/fetchers";
+import NoInternet from "../components/NoInternet";
 
 const Rooms = () => {
   const calendarRef = useRef();
@@ -30,18 +35,26 @@ const Rooms = () => {
       key: "selection",
     },
   ]);
+
   const storeContext = useSelector((state) => state.store);
   const {
     backendUrl,
-    allApartmentsData,
-    currentFilterData,
+    currentApartmentData,
     highestRoomPrice,
     highestCapacity,
+    fetchingData,
+    noInternet,
   } = storeContext;
+
+  useEffect(() => {
+    fetchHighestPriceAndCapacity();
+    fetchAllApartments();
+  }, []);
+
   const renderRooms = () => {
-    if (currentFilterData.length === 0 && !doneLoading) {
+    if (currentApartmentData.length === 0 && !doneLoading) {
       return <Preloader />;
-    } else if (currentFilterData.length === 0 && doneLoading) {
+    } else if (currentApartmentData.length === 0 && doneLoading) {
       return (
         <div className="col-12 text-center">
           <p className="no-room">No room match your filter parameters</p>
@@ -50,7 +63,7 @@ const Rooms = () => {
     } else {
       return (
         <ApartmentsPlusPagination
-          data={allApartmentsData}
+          data={currentApartmentData}
           backendUrl={backendUrl}
         />
       );
@@ -69,11 +82,19 @@ const Rooms = () => {
     e.preventDefault();
     let startDate = date[0].startDate;
     let endDate = date[0].endDate;
-    console.log(`start date is ${startDate} and the end date is ${endDate}`);
-    console.log(`price range is between ${priceMinValue} and ${priceMaxValue}`);
-    console.log(
-      `capacity is between ${capacityMinValue} and ${capacityMaxValue} persons`
-    );
+    // console.log(`start date is ${startDate} and the end date is ${endDate}`);
+    // console.log(`price range is between ${priceMinValue} and ${priceMaxValue}`);
+    // console.log(
+    //   `capacity is between ${capacityMinValue} and ${capacityMaxValue} persons`
+    // );
+    fetchFilteredApartments([
+      startDate,
+      endDate,
+      priceMinValue,
+      priceMaxValue,
+      capacityMinValue,
+      capacityMaxValue,
+    ]);
   };
   const handleOutsideClick = (e) => {
     if (calendarRef.current.contains(e.target)) {
@@ -91,6 +112,7 @@ const Rooms = () => {
       setOpenCapacity(false);
     }
   };
+
   useEffect(() => {
     document.addEventListener("click", handleOutsideClick, false);
     return () =>
@@ -99,15 +121,35 @@ const Rooms = () => {
 
   // Helps with not showing no room match your parameters because
   // of empty list before api promise is fulfilled
-  // useEffect(() => {
-  //   if (currentFilterData.length !== 0) {
-  //     setDoneLoading(true);
-  //   }
-  // }, [currentFilterData.length]);
+  useEffect(() => {
+    if (currentApartmentData.length !== 0) {
+      setDoneLoading(true);
+    }
+  }, [currentApartmentData.length]);
+
+  useEffect(() => {
+    const getBody = document.body;
+    if (noInternet) {
+      getBody.classList.add("no-internet");
+    } else {
+      getBody.classList.remove("no-internet");
+    }
+    return () => {
+      getBody.classList.remove("no-internet");
+    };
+  }, [noInternet]);
+
+  if (fetchingData) {
+    return <Preloader />;
+  }
+
+  if (noInternet) {
+    return <NoInternet />;
+  }
 
   return (
     <>
-      <Hero section={"Apartments"} orient={"left"} img={hero.room} />
+      <Hero section={"Apartments"} orient={"center"} img={hero.room} />
       <div className="container" onClick={handleOutsideClick}>
         <div className="row">
           <div className="col-md-12">

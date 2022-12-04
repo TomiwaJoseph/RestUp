@@ -1,13 +1,14 @@
 from django.contrib import admin
 from .models import Apartment, Room, ApartmentImages, RoomInfo, RoomExtra
 
+
 class ApartmentAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
 
 
 class RoomAdmin(admin.ModelAdmin):
-    list_display = ['name', 'max_people', 'price', 'bed_type',
+    list_display = ['apartment', 'name', 'max_people', 'price', 'bed_type',
                     'size', 'refundable', 'availability']
     prepopulated_fields = {'slug': ('name',)}
     # list_editable = ['discount_price', 'availability']

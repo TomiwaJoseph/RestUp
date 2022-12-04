@@ -3,8 +3,7 @@ import { ActionTypes } from "../actions/action-types";
 const globalState = {
   singleApartmentData: [],
   featuredApartmentData: [..."abc"],
-  allApartmentsData: [..."abcdefghijk"],
-  currentFilterData: [..."ab"],
+  currentApartmentData: [..."abcdefghijk"],
   testPageData: [],
   highestRoomPrice: 360,
   highestCapacity: 6,
@@ -26,6 +25,11 @@ export const roomReducer = (state = globalState, { type, payload }) => {
       return {
         ...state,
         featuredApartmentData: payload,
+      };
+    case ActionTypes.GET_ALL_APARTMENTS:
+      return {
+        ...state,
+        currentApartmentData: payload,
       };
     case ActionTypes.SET_HIGHEST_PRICE_AND_CAPACITY_DATA:
       return {

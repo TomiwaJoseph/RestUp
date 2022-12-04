@@ -1,6 +1,7 @@
 import axios from "axios";
 import store from "../store/store";
 import {
+  setCurrentApartments,
   setFeaturedApartments,
   setHighestPriceAndCapacity,
   setInternetError,
@@ -14,13 +15,63 @@ const testPageUrl = "http://localhost:8000/api/test-page/";
 const featuredApartmentsUrl = "http://localhost:8000/api/featured-apartments/";
 const highestRoomPriceAndCapacityUrl =
   "http://localhost:8000/api/highest-price-and-capacity/";
-// const highestRoomCapacityUrl = "http://localhost:8000/api/highest-capacity/";
+const allApartmentsUrl = "http://localhost:8000/api/apartments/";
+const filteredApartmentsUrl = "http://localhost:8000/api/filtered-apartments/";
 
 // Turn preloader on or off
 export const switchPreloader = (status) => {
   store.dispatch(setPreloaderStatus(status));
 };
-
+// Get apartments based on user filter from api
+export const fetchFilteredApartments = async (filter_values) => {
+  switchPreloader(true);
+  let startDate = filter_values[0];
+  let endDate = filter_values[1];
+  let priceMinValue = filter_values[2];
+  let priceMaxValue = filter_values[3];
+  let capacityMinValue = filter_values[4];
+  let capacityMaxValue = filter_values[5];
+  let body = JSON.stringify({
+    startDate: startDate,
+    endDate: endDate,
+    priceMinValue: priceMinValue,
+    priceMaxValue: priceMaxValue,
+    capacityMinValue: capacityMinValue,
+    capacityMaxValue: capacityMaxValue,
+  });
+  await axios
+    .post(filteredApartmentsUrl, body, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      console.log(response.data);
+      store.dispatch(setCurrentApartments(response.data));
+      switchPreloader(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      switchPreloader(false);
+    });
+};
+// Get all apartments + random hero image from api
+export const fetchAllApartments = async () => {
+  switchPreloader(true);
+  await axios
+    .get(allApartmentsUrl)
+    .then((response) => {
+      console.log(response.data);
+      store.dispatch(setInternetError(false));
+      store.dispatch(setCurrentApartments(response.data));
+      switchPreloader(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      store.dispatch(setInternetError(true));
+      switchPreloader(false);
+    });
+};
 export const fetchTestPage = async () => {
   switchPreloader(true);
   await axios
@@ -41,6 +92,7 @@ export const fetchFeaturedApartments = async () => {
     .get(featuredApartmentsUrl)
     .then((response) => {
       console.log(response.data);
+      store.dispatch(setInternetError(false));
       store.dispatch(setFeaturedApartments(response.data));
       switchPreloader(false);
     })
@@ -56,6 +108,7 @@ export const fetchHighestPriceAndCapacity = async () => {
   await axios
     .get(highestRoomPriceAndCapacityUrl)
     .then((response) => {
+      store.dispatch(setInternetError(false));
       store.dispatch(setHighestPriceAndCapacity(response.data));
       switchPreloader(false);
     })

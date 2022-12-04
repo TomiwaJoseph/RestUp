@@ -12,6 +12,12 @@ export const setFeaturedApartments = (data) => {
     payload: data,
   };
 };
+export const setCurrentApartments = (data) => {
+  return {
+    type: ActionTypes.GET_ALL_APARTMENTS,
+    payload: data,
+  };
+};
 export const setHighestPriceAndCapacity = (data) => {
   return {
     type: ActionTypes.SET_HIGHEST_PRICE_AND_CAPACITY_DATA,

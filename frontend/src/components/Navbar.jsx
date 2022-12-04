@@ -1,7 +1,6 @@
 import "./navbar.css";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
@@ -168,11 +167,11 @@ const Navbar = () => {
             ) : null}
           </div>
         </div>
-        <div className="navBrands">
+        {/* <div className="navBrands">
           <NavLink to="/search-room" className="search__icon navLink">
             <i className="fas fa-search"></i>
           </NavLink>
-        </div>
+        </div> */}
       </nav>
     </>
   );

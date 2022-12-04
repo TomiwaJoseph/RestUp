@@ -633,7 +633,7 @@
 ================= ERROR STYLES =================
 ========================================= */
 
-.error__div {
+.error-div {
   height: 90vh;
   display: flex;
   flex-direction: column;
@@ -642,31 +642,35 @@
   padding: 0 20px;
   text-align: center;
 }
-.error_image_wrapper {
-  width: 250px;
-  height: 260px;
+.error-image-wrapper {
+  width: 300px;
+  height: 300px;
   margin-top: 10px;
 }
-.error__div h1 {
+.error-div h1 {
   color: #f51167;
   margin-top: 10px;
 }
-.error__div p {
+.error-div p {
   color: #5c5c5c;
   font-size: 18px;
 }
-.error__div .single__page-error {
-  color: #f51167;
-  padding: 5px 10px;
-  border: 1px solid #f51167;
+.error-div .refresh-btn {
+  color: #1a6692;
+  padding: 7px 20px;
+  border: 1px solid #1a6692;
   border-radius: 3px;
   -webkit-transition: all 150ms ease-in;
   -o-transition: all 150ms ease-in;
   transition: all 150ms ease-in;
 }
-.error__div .single__page-error:hover {
+.error-div .refresh-btn:hover {
   color: #fff;
-  background: #f51167;
+  background: #1a6692;
+}
+.error-div .refresh-btn:focus {
+  box-shadow: none;
+  outline: none;
 }
 /* .Toastify__toast-container--top-center {
   z-index: 99999999 !important;

@@ -1,8 +1,14 @@
 import "./hero.css";
 
 const Hero = (params) => {
+  let backgroundImg = ``;
+  if (params.backendUrl === undefined) {
+    backgroundImg = `url(${params.img})`;
+  } else {
+    backgroundImg = `url(${params.backendUrl}${params.img})`;
+  }
   let sectionStyle = {
-    backgroundImage: `url(${params.img})`,
+    backgroundImage: backgroundImg,
     backgroundPosition: params.orient,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",

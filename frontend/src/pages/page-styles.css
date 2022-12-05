@@ -206,6 +206,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 .img-wrapper {
   width: 33%;
@@ -214,23 +215,13 @@
   width: 100%;
   object-fit: cover;
 }
+/* .room-description {
+} */
 .room-description p {
   color: #525252;
   letter-spacing: 1px;
   text-align: justify;
 }
-/* .reserve-btn {
-  border: 1px solid #1a6692;
-  width: 100%;
-  background: #1a6692;
-  margin-bottom: 30px;
-  color: #fff;
-  padding: 8px 0;
-}
-.reserve-btn:hover {
-  background: transparent;
-  color: #1a6692;
-} */
 .apartment-room {
   border: 1px solid #d0d0d0;
   padding: 20px;
@@ -453,49 +444,6 @@
 .success-msg .call-to-action .btn:focus {
   box-shadow: none;
 }
-
-/* =========================================
-      ================= SEARCH =================
-      ========================================= */
-.sidebar-wrapper {
-  padding: 20px;
-  border: 1px solid #e6e6e6;
-  margin-bottom: 30px;
-}
-.select-wrap select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-.select-wrap .form-control:focus {
-  border: 1px solid #1a6692;
-  box-shadow: none;
-}
-.sidebar-wrapper .stars-rating {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-.sidebar-wrapper .stars-rating .starred {
-  color: var(--main-color);
-}
-.sidebar-wrapper .search-btn {
-  width: 100%;
-  border: 1px solid var(--main-color);
-  margin-top: 20px;
-  background: transparent;
-  color: #6f6f6f;
-}
-.sidebar-wrapper .search-btn:focus {
-  box-shadow: none;
-  outline: none;
-}
-.sidebar-wrapper .search-btn:hover {
-  /* border: 1px solid var(--main-color); */
-  background: var(--main-color);
-  color: #fff;
-}
-
 /* =========================================
       ================= CARD STYLES =================
       ========================================= */
@@ -577,9 +525,10 @@
   margin-bottom: 30px;
   padding: 20px 20px;
 }
-/* .search-form {
-  padding: 10px 20px;
-} */
+.card img {
+  height: 40vh;
+  object-fit: cover;
+}
 
 .the-date-range {
   position: absolute;

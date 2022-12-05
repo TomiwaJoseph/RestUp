@@ -2,12 +2,13 @@ import { ActionTypes } from "../actions/action-types";
 
 const globalState = {
   singleApartmentData: [],
-  featuredApartmentData: [..."abc"],
-  currentApartmentData: [..."abcdefghijk"],
+  featuredApartmentData: [],
+  currentApartmentData: [],
+  randomApartmentImage: "",
   testPageData: [],
   highestRoomPrice: 360,
   highestCapacity: 6,
-  highestRoomPriceAndCapacity: [360, 6],
+  highestRoomPriceAndCapacity: {},
   badRequest: false,
   noInternet: false,
   fetchingData: false,
@@ -35,6 +36,11 @@ export const roomReducer = (state = globalState, { type, payload }) => {
       return {
         ...state,
         highestRoomPriceAndCapacity: payload,
+      };
+    case ActionTypes.SET_RANDOM_APARTMENT_IMAGE:
+      return {
+        ...state,
+        randomApartmentImage: payload,
       };
     case ActionTypes.SET_TEST_PAGE_DATA:
       return {

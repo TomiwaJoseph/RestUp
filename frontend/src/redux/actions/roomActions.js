@@ -18,6 +18,12 @@ export const setCurrentApartments = (data) => {
     payload: data,
   };
 };
+export const setRandomApartmentImage = (data) => {
+  return {
+    type: ActionTypes.SET_RANDOM_APARTMENT_IMAGE,
+    payload: data,
+  };
+};
 export const setHighestPriceAndCapacity = (data) => {
   return {
     type: ActionTypes.SET_HIGHEST_PRICE_AND_CAPACITY_DATA,

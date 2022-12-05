@@ -6,6 +6,8 @@ import {
   setHighestPriceAndCapacity,
   setInternetError,
   setPreloaderStatus,
+  setRandomApartmentImage,
+  setSingleApartment,
   // setSingleApartment,
   // setTestPage,
 } from "./roomActions";
@@ -16,6 +18,7 @@ const featuredApartmentsUrl = "http://localhost:8000/api/featured-apartments/";
 const highestRoomPriceAndCapacityUrl =
   "http://localhost:8000/api/highest-price-and-capacity/";
 const allApartmentsUrl = "http://localhost:8000/api/apartments/";
+const singleApartmentsUrl = "http://localhost:8000/api/apartment/";
 const filteredApartmentsUrl = "http://localhost:8000/api/filtered-apartments/";
 
 // Turn preloader on or off
@@ -61,9 +64,25 @@ export const fetchAllApartments = async () => {
   await axios
     .get(allApartmentsUrl)
     .then((response) => {
-      console.log(response.data);
       store.dispatch(setInternetError(false));
-      store.dispatch(setCurrentApartments(response.data));
+      store.dispatch(setCurrentApartments(response.data.slice(0, -1)));
+      store.dispatch(setRandomApartmentImage(response.data.slice(-1)));
+      switchPreloader(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      store.dispatch(setInternetError(true));
+      switchPreloader(false);
+    });
+};
+// Get all apartments + random hero image from api
+export const fetchSingleApartment = async (slug) => {
+  switchPreloader(true);
+  await axios
+    .get(singleApartmentsUrl + slug)
+    .then((response) => {
+      store.dispatch(setInternetError(false));
+      store.dispatch(setSingleApartment(response.data));
       switchPreloader(false);
     })
     .catch((err) => {

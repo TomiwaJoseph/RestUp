@@ -66,21 +66,21 @@ const ApartmentsPlusPagination = ({ data, backendUrl }) => {
     <>
       <div className="container">
         <div className="row room-card">
-          {currentItems.map((room) => (
-            <div key={room} className="col-lg-4 mb-4">
+          {currentItems.map((apartment) => (
+            <div key={apartment.id} className="col-lg-4 mb-4">
               <div className="card">
                 <img
-                  src={featured1}
-                  alt="featured-room-1"
+                  src={`${backendUrl}${apartment.main_image}`}
+                  alt={apartment.slug}
                   className="img-fluid"
                 />
                 <div className="card-body text-center">
-                  <h5 className="card-title">Deluxe Room</h5>
-                  {/* <p className="card-text">$120</p> */}
-                  {/* <span>/ night</span> */}
+                  <h5 className="card-title">{apartment.name}</h5>
                 </div>
                 <div className="card-footer text-center">
-                  <NavLink to={`/apartments/room-detail/${"single-economy"}`}>
+                  <NavLink
+                    to={`/apartments/apartment-detail/${apartment.slug}`}
+                  >
                     <button className="btn">
                       Check Rooms <span className="fa fa-arrow-right"></span>
                     </button>

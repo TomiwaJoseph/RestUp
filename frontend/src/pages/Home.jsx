@@ -72,7 +72,10 @@ const Home = () => {
       <LandingPageCarousel />
       <VideoText />
       <Features />
-      <FeaturedApartments data={featuredApartmentData} imageUrl={backendUrl} />
+      <FeaturedApartments
+        data={featuredApartmentData}
+        backendUrl={backendUrl}
+      />
       <Testimonials />
     </>
   );

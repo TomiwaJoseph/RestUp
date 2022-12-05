@@ -4,25 +4,37 @@ import roomImg1 from "../statics/room-1.jpg";
 import roomImg2 from "../statics/room-2.jpg";
 import roomImg4 from "../statics/room-3.jpg";
 import { useSelector } from "react-redux";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { ApartmentRooms } from "../data";
 import { format } from "date-fns";
+import NoInternet from "../components/NoInternet";
+import Preloader from "../components/Preloader";
+import ErrorPage from "../components/ErrorPage";
+import { fetchSingleApartment } from "../redux/actions/fetchers";
 
 const SingleApartment = () => {
   const { apartmentSlug } = useParams();
   const roomsRef = useRef(null);
   const storeContext = useSelector((state) => state.store);
-  const { backendUrl, fetchingData } = storeContext;
-  const roomImages = [roomImg1, roomImg2, roomImg4];
-  // const roomExtras = [
-  //   "Plush pillows and breathable bed linens",
-  //   "Soft, oversized bath towels",
-  //   "Full-sized, pH-balanced toiletries",
-  //   "Complimentary refreshments",
-  //   "Adequate safety/security",
-  //   "Internet",
-  //   "Comfortable beds",
-  // ];
+  const { backendUrl, fetchingData, noInternet, singleApartmentData } =
+    storeContext;
+    // console.log(singleApartmentData);
+    // console.log(" ");
+  const { all_apartment_images, room_details, apartment_name } =
+    singleApartmentData;
+  // console.log(all_apartment_images);
+  // console.log(room_details);
+  // console.log(apartment_name);
+  // console.log(" ");
+
+  // if (singleApartmentData === []) {
+  //   console.log("no objects loaded yet...");
+  //   return <ErrorPage />;
+  // }
+
+  // const heroImage = all_apartment_images[0];
+  // const roomImages = all_apartment_images.slice(1);
+  // const roomImages = [roomImg3, roomImg2, roomImg4];
   const roomIcons = {
     "Air conditioning": "fa-snowflake",
     "Flat-screen TV": "fa-tv",
@@ -37,19 +49,44 @@ const SingleApartment = () => {
     "Non-refundable",
   ];
 
-  //   useEffect(() => {
-  //     window.scrollTo(0, 0);
-  //   }, []);
+  useEffect(() => {
+    fetchSingleApartment(apartmentSlug);
+  }, [apartmentSlug]);
+
+  useEffect(() => {
+    const getBody = document.body;
+    if (noInternet) {
+      getBody.classList.add("no-internet");
+    } else {
+      getBody.classList.remove("no-internet");
+    }
+    return () => {
+      getBody.classList.remove("no-internet");
+    };
+  }, [noInternet]);
+
+  if (fetchingData) {
+    return <Preloader />;
+  }
+
+  if (noInternet) {
+    return <NoInternet />;
+  }
 
   return (
     <>
       <div className="apartment-header">
         <div className="img-container">
-          <img src={roomImg3} className="img-fluid" alt="heroku-promises" />
+          <img
+            src={`${backendUrl}${all_apartment_images[0]}`}
+            // src={roomImg1}
+            className="img-fluid"
+            alt="apartment-header-visual"
+          />
         </div>
         <div className="nav-hero"></div>
         <div className="name-hero">
-          <h1>Single Economy</h1>
+          <h1>{apartment_name}</h1>
           <hr className="accent" />
           <button
             onClick={() =>
@@ -63,9 +100,14 @@ const SingleApartment = () => {
       </div>
       <div className="container">
         <div className="room-images">
-          {roomImages.map((photo, index) => (
+          {all_apartment_images.slice(1).map((photo, index) => (
             <div key={index} className="img-wrapper">
-              <img src={photo} alt="room-visual" className="room-img" />
+              <img
+                src={`${backendUrl}${photo}`}
+                // src={photo}
+                alt="room-visual"
+                className="room-img"
+              />
             </div>
           ))}
         </div>
@@ -88,12 +130,12 @@ const SingleApartment = () => {
         </div>
         <div ref={roomsRef} style={{ height: "10vh" }}></div>
         <div className="rooms-container text-center my-5">
-          {ApartmentRooms.map((room) => (
-            <div key={room.slug} className="row apartment-room mx-auto">
+          {room_details.map((room) => (
+            <div key={room.id} className="row apartment-room mx-auto">
               <div className="col-md-8 single-room">
                 <h3>{room.name}</h3>
                 <div className="bedtype-capacity">
-                  <p>{room.bedType}</p>
+                  <p>{room.bed_type}</p>
                   <span>
                     Max people: <b>{room.max_people}</b>
                   </span>
@@ -101,10 +143,10 @@ const SingleApartment = () => {
                 <div className="room-info">
                   <small>
                     <span className="fa fa-ruler-combined"></span>{" "}
-                    {room.roomInfo[0]}
+                    {room.size}
                     <sup>2</sup>
                   </small>
-                  {room.roomInfo.slice(1).map((info) => (
+                  {room.room_info.map((info) => (
                     <small key={info}>
                       <span className={`fa ${roomIcons[info]}`}></span> {info}
                     </small>
@@ -112,7 +154,7 @@ const SingleApartment = () => {
                 </div>
                 <hr />
                 <div className="room-extras">
-                  {room.roomExtras.map((extra) => (
+                  {room.room_extras.map((extra) => (
                     <small key={extra}>
                       <span>✔</span> {extra}
                     </small>

@@ -53,6 +53,9 @@ class Room(models.Model):
         "RoomExtra", blank=True, related_name="extras_list")
     availability = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f"{self.apartment} - {self.name}"
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)

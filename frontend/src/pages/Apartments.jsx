@@ -40,9 +40,9 @@ const Rooms = () => {
   const {
     backendUrl,
     currentApartmentData,
-    highestRoomPrice,
-    highestCapacity,
+    highestRoomPriceAndCapacity,
     fetchingData,
+    randomApartmentImage,
     noInternet,
   } = storeContext;
 
@@ -82,11 +82,6 @@ const Rooms = () => {
     e.preventDefault();
     let startDate = date[0].startDate;
     let endDate = date[0].endDate;
-    // console.log(`start date is ${startDate} and the end date is ${endDate}`);
-    // console.log(`price range is between ${priceMinValue} and ${priceMaxValue}`);
-    // console.log(
-    //   `capacity is between ${capacityMinValue} and ${capacityMaxValue} persons`
-    // );
     fetchFilteredApartments([
       startDate,
       endDate,
@@ -149,7 +144,12 @@ const Rooms = () => {
 
   return (
     <>
-      <Hero section={"Apartments"} orient={"center"} img={hero.room} />
+      <Hero
+        section={"Apartments"}
+        orient={"center"}
+        img={randomApartmentImage}
+        backendUrl={backendUrl}
+      />
       <div className="container" onClick={handleOutsideClick}>
         <div className="row">
           <div className="col-md-12">
@@ -191,7 +191,7 @@ const Rooms = () => {
                         <div className="slider-div">
                           <MultiRangeSlider
                             min={1}
-                            max={highestRoomPrice}
+                            max={highestRoomPriceAndCapacity["highest_price"]}
                             onChange={({ min, max }) =>
                               handlePriceChange(min, max)
                             }
@@ -213,7 +213,9 @@ const Rooms = () => {
                         <div className="slider-div">
                           <MultiRangeSlider
                             min={1}
-                            max={highestCapacity}
+                            max={
+                              highestRoomPriceAndCapacity["highest_capacity"]
+                            }
                             onChange={({ min, max }) =>
                               handleCapacityChange(min, max)
                             }

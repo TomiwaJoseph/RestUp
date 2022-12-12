@@ -66,8 +66,8 @@ const ApartmentsPlusPagination = ({ data, backendUrl }) => {
     <>
       <div className="container">
         <div className="row room-card">
-          {currentItems.map((apartment) => (
-            <div key={apartment.id} className="col-lg-4 mb-4">
+          {currentItems.map((apartment, index) => (
+            <div key={index} className="col-lg-4 mb-4">
               <div className="card">
                 <img
                   src={`${backendUrl}${apartment.main_image}`}

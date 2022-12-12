@@ -11,7 +11,7 @@ class RoomAdmin(admin.ModelAdmin):
     list_display = ['apartment', 'name', 'max_people', 'price', 'bed_type',
                     'size', 'refundable', 'availability']
     prepopulated_fields = {'slug': ('name',)}
-    # list_editable = ['discount_price', 'availability']
+    list_editable = ['availability']
     # list_filter = ['category']
     # search_fields = ['name', 'price']
 

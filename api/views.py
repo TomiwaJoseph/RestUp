@@ -3,9 +3,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from base.models import Apartment, Room, RoomInfo, RoomExtra, ApartmentImages
-from random import shuffle, choice, choices
+from random import shuffle, choice, choices, seed, sample
+from django.db.models import Q
 from django.core.files import File
 from .serializers import ApartmentSerializer, RoomSerializer
+from django.utils import timezone
+from datetime import date, timedelta
 
 
 images_path = r'C:\Users\dretech\Documents\bluetooth\apartments'
@@ -77,7 +80,7 @@ def create_all():
             image_file = File(f)
             q.main_image.save(main_image, image_file, True)
 
-        random_images = choices(all_images, k=3)
+        random_images = sample(all_images, k=3)
         for i in random_images:
             apartment_image = ApartmentImages.objects.create(
                 apartment=q,
@@ -103,11 +106,13 @@ def create_all():
 
             room = Room(
                 apartment=q,
-                name="Room " + str(i+1),
+                name="Apartment Room " + str(i+1),
                 max_people=number_of_people,
                 price=price,
                 bed_type=bed_types[0],
                 size=size,
+                booked_start_date=timezone.now(),
+                booked_end_date=timezone.now() + timedelta(days=3),
                 refundable=refundable,
             )
             room.save()
@@ -137,7 +142,17 @@ def test_page(request):
 def get_apartments(request):
     data = list(Apartment.objects.all())
     random_image = choice(data)
-    serializer = ApartmentSerializer(data, many=True).data
+
+    # Get apartments with at least 1 free room
+    all_rooms = Room.objects.filter(
+        availability=True
+    )
+    apartment_with_available_rooms = list(
+        set([room.apartment for room in all_rooms]))
+    seed(18)
+    shuffle(apartment_with_available_rooms)
+    serializer = ApartmentSerializer(
+        apartment_with_available_rooms, many=True).data
     new_serializer = list(serializer)
     new_serializer.append(random_image.main_image.url)
     return Response(new_serializer, status=status.HTTP_200_OK)
@@ -152,15 +167,37 @@ def filtered_apartments(request):
     priceMaxValue = request.data.get('priceMaxValue')
     capacityMinValue = request.data.get('capacityMinValue')
     capacityMaxValue = request.data.get('capacityMaxValue')
-    print(startDate)
-    print(endDate)
-    print(priceMinValue)
-    print(priceMaxValue)
-    print(capacityMinValue)
-    print(capacityMaxValue)
 
-    data = [str(i) for i in range(1, 4)]
-    return Response(data)
+    splitted_start_date = [int(i) for i in startDate.split('/')]
+    splitted_end_date = [int(i) for i in endDate.split('/')]
+    start_date = date(
+        splitted_start_date[2], splitted_start_date[1], splitted_start_date[0])
+    # print()
+    # print()
+    # test_date = Room.objects.first().booked_start_date
+    # print(start_date)
+    # print(test_date)
+    # print(start_date >= test_date)
+    # print()
+    # print()
+
+    room_query = Room.objects.filter(
+        # booked_end_date=endDate,
+        price__gte=priceMinValue,
+        price__lte=priceMaxValue,
+        max_people__gte=capacityMinValue,
+        max_people__lte=capacityMaxValue,
+        availability=True,
+    )
+    search_results = [room.apartment for room in room_query]
+    # print()
+    # print(search_results)
+    # print(len(search_results))
+    # print()
+
+    data = list(Apartment.objects.all())
+    serializer = ApartmentSerializer(choices(data, k=3), many=True).data
+    return Response(serializer)
 
 
 @api_view(['GET'])
@@ -191,9 +228,14 @@ def get_single_apartment(request, slug):
     except Apartment.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    # Apartment Room Details
+    # Available Rooms
+    available_rooms = Room.objects.filter(
+        apartment=single_apartment,
+        booked_end_date__lte=timezone.now(),
+        availability=True
+    )
     room_serializer = RoomSerializer(
-        list(single_apartment.apartment_room.all()), many=True).data
+        list(available_rooms), many=True).data
 
     # serializer = ApartmentSerializer(single_apartment).data
     new_serializer = {
@@ -203,11 +245,6 @@ def get_single_apartment(request, slug):
     }
     # new_serializer.update(serializer)
     return Response(new_serializer, status=status.HTTP_200_OK)
-
-# @api_view(['POST'])
-# def filter_apartments(request):
-#     data = [str(i) for i in "320 6".split(" ")]
-#     return Response(data)
 
 
 @api_view(['POST'])

@@ -82,9 +82,11 @@ const Rooms = () => {
     e.preventDefault();
     let startDate = date[0].startDate;
     let endDate = date[0].endDate;
+    let formattedStartDate = format(startDate, "dd/MM/yyy");
+    let formattedEndDate = format(endDate, "dd/MM/yyy");
     fetchFilteredApartments([
-      startDate,
-      endDate,
+      formattedStartDate,
+      formattedEndDate,
       priceMinValue,
       priceMaxValue,
       capacityMinValue,

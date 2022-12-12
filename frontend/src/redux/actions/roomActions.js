@@ -36,6 +36,11 @@ export const setSingleApartment = (data) => {
     payload: data,
   };
 };
+export const removeSelectedApartment = (data) => {
+  return {
+    type: ActionTypes.REMOVE_SELECTED_PRODUCT,
+  };
+};
 export const setPreloaderStatus = (status) => {
   return {
     type: ActionTypes.IS_FETCHING_DATA,
@@ -46,5 +51,11 @@ export const setInternetError = (status) => {
   return {
     type: ActionTypes.NO_INTERNET,
     payload: status,
+  };
+};
+export const setBadRequest = (value) => {
+  return {
+    type: ActionTypes.SET_BAD_REQUEST,
+    payload: value,
   };
 };

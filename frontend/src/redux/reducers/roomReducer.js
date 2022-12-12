@@ -22,6 +22,11 @@ export const roomReducer = (state = globalState, { type, payload }) => {
         ...state,
         singleApartmentData: payload,
       };
+    // case ActionTypes.REMOVE_SELECTED_PRODUCT:
+    //   return {
+    //     ...state,
+    //     singleApartmentData: [],
+    //   };
     case ActionTypes.SET_FEATURED_DATA:
       return {
         ...state,
@@ -51,6 +56,11 @@ export const roomReducer = (state = globalState, { type, payload }) => {
       return {
         ...state,
         fetchingData: payload,
+      };
+    case ActionTypes.SET_BAD_REQUEST:
+      return {
+        ...state,
+        badRequest: payload,
       };
     case ActionTypes.NO_INTERNET:
       return {

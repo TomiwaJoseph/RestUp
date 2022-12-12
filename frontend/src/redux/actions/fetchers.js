@@ -1,6 +1,7 @@
 import axios from "axios";
 import store from "../store/store";
 import {
+  setBadRequest,
   setCurrentApartments,
   setFeaturedApartments,
   setHighestPriceAndCapacity,
@@ -49,7 +50,7 @@ export const fetchFilteredApartments = async (filter_values) => {
       },
     })
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       store.dispatch(setCurrentApartments(response.data));
       switchPreloader(false);
     })
@@ -77,18 +78,24 @@ export const fetchAllApartments = async () => {
 };
 // Get all apartments + random hero image from api
 export const fetchSingleApartment = async (slug) => {
-  switchPreloader(true);
+  // switchPreloader(true);
   await axios
     .get(singleApartmentsUrl + slug)
     .then((response) => {
       store.dispatch(setInternetError(false));
       store.dispatch(setSingleApartment(response.data));
-      switchPreloader(false);
+      // switchPreloader(false);
     })
     .catch((err) => {
       console.log(err);
-      store.dispatch(setInternetError(true));
-      switchPreloader(false);
+      // console.log(err.message);
+      if (err.message === "Network Error") {
+        store.dispatch(setInternetError(true));
+      } else {
+        console.log("bad request set...");
+        store.dispatch(setBadRequest(true));
+      }
+      // switchPreloader(false);
     });
 };
 export const fetchTestPage = async () => {

@@ -604,6 +604,7 @@
   color: #5c5c5c;
   font-size: 18px;
 }
+.link-not-found,
 .error-div .refresh-btn {
   color: #1a6692;
   padding: 7px 20px;
@@ -613,14 +614,17 @@
   -o-transition: all 150ms ease-in;
   transition: all 150ms ease-in;
 }
+.link-not-found:hover,
 .error-div .refresh-btn:hover {
   color: #fff;
   background: #1a6692;
 }
+.link-not-found:focus,
 .error-div .refresh-btn:focus {
   box-shadow: none;
   outline: none;
 }
+
 /* .Toastify__toast-container--top-center {
   z-index: 99999999 !important;
 } */

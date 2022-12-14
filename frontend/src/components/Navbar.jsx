@@ -1,6 +1,7 @@
 import "./navbar.css";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
@@ -17,8 +18,8 @@ const Navbar = () => {
     document.body.style["overflow"] = "auto";
   };
   const [scrollDown, setScrollDown] = useState(false);
-  //   const storeContext = useSelector((state) => state.dress);
-  //   const { isAuthenticated, cartCount } = storeContext;
+  const storeContext = useSelector((state) => state.store);
+  const { isAuthenticated } = storeContext;
 
   useEffect(() => {
     const onScroll = (e) => {
@@ -167,11 +168,29 @@ const Navbar = () => {
             ) : null}
           </div>
         </div>
-        {/* <div className="navBrands">
-          <NavLink to="/search-room" className="search__icon navLink">
+        <div className="navBrands">
+          {/* <NavLink to="/search-room" className="search__icon navLink">
             <i className="fas fa-search"></i>
-          </NavLink>
-        </div> */}
+          </NavLink> */}
+          {isAuthenticated ? (
+            <NavLink
+              onClick={closeMobileMenu}
+              className="navLink"
+              to="/user/dashboard"
+            >
+              Dashboard
+            </NavLink>
+          ) : (
+            <NavLink
+              onClick={closeMobileMenu}
+              id="login"
+              className="navLink"
+              to="/login"
+            >
+              Login
+            </NavLink>
+          )}
+        </div>
       </nav>
     </>
   );

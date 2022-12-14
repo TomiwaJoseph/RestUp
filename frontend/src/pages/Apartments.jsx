@@ -12,52 +12,56 @@ import { format } from "date-fns";
 import {
   fetchAllApartments,
   fetchFilteredApartments,
-  fetchHighestPriceAndCapacity,
+  fetchHighestPriceSizeAndCapacity,
 } from "../redux/actions/fetchers";
 import NoInternet from "../components/NoInternet";
 
 const Rooms = () => {
-  const calendarRef = useRef();
+  const sizeRef = useRef();
   const priceRef = useRef();
   const capacityRef = useRef();
-  const [openCalendar, setOpenCalendar] = useState(false);
-  const [openSlider, setOpenSlider] = useState(false);
+  const [openSize, setOpenSize] = useState(false);
+  const [openPrice, setOpenPrice] = useState(false);
   const [openCapacity, setOpenCapacity] = useState(false);
   const [doneLoading, setDoneLoading] = useState(false);
+  const [sizeMinValue, setSizeMinValue] = useState(0);
+  const [sizeMaxValue, setSizeMaxValue] = useState(0);
   const [priceMinValue, setPriceMinValue] = useState(1);
   const [priceMaxValue, setPriceMaxValue] = useState(0);
   const [capacityMinValue, setCapacityMinValue] = useState(1);
   const [capacityMaxValue, setCapacityMaxValue] = useState(0);
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
 
   const storeContext = useSelector((state) => state.store);
   const {
     backendUrl,
     currentApartmentData,
-    highestRoomPriceAndCapacity,
+    highestRoomPriceSizeAndCapacity,
     fetchingData,
     randomApartmentImage,
     noInternet,
   } = storeContext;
 
   useEffect(() => {
-    fetchHighestPriceAndCapacity();
+    fetchHighestPriceSizeAndCapacity();
     fetchAllApartments();
   }, []);
+
+  useEffect(() => {
+    const { highest_capacity, highest_price, min_size, max_size } =
+      highestRoomPriceSizeAndCapacity;
+    setSizeMinValue(min_size);
+    setSizeMaxValue(max_size);
+    setPriceMaxValue(highest_price);
+    setCapacityMaxValue(highest_capacity);
+  }, [highestRoomPriceSizeAndCapacity]);
 
   const renderRooms = () => {
     if (currentApartmentData.length === 0 && !doneLoading) {
       return <Preloader />;
     } else if (currentApartmentData.length === 0 && doneLoading) {
       return (
-        <div className="col-12 text-center">
-          <p className="no-room">No room match your filter parameters</p>
+        <div className="col-12 no-room">
+          <p className="no-rooms">No room match your filter parameters</p>
         </div>
       );
     } else {
@@ -68,6 +72,10 @@ const Rooms = () => {
         />
       );
     }
+  };
+  const handleSizeChange = (min, max) => {
+    setSizeMinValue(min);
+    setSizeMaxValue(max);
   };
   const handlePriceChange = (min, max) => {
     setPriceMinValue(min);
@@ -80,13 +88,13 @@ const Rooms = () => {
 
   const handleSearchFormSubmit = (e) => {
     e.preventDefault();
-    let startDate = date[0].startDate;
-    let endDate = date[0].endDate;
-    let formattedStartDate = format(startDate, "dd/MM/yyy");
-    let formattedEndDate = format(endDate, "dd/MM/yyy");
+    // let startDate = date[0].startDate;
+    // let endDate = date[0].endDate;
+    // let formattedStartDate = format(startDate, "dd/MM/yyy");
+    // let formattedEndDate = format(endDate, "dd/MM/yyy");
     fetchFilteredApartments([
-      formattedStartDate,
-      formattedEndDate,
+      sizeMinValue,
+      sizeMaxValue,
       priceMinValue,
       priceMaxValue,
       capacityMinValue,
@@ -94,18 +102,18 @@ const Rooms = () => {
     ]);
   };
   const handleOutsideClick = (e) => {
-    if (calendarRef.current.contains(e.target)) {
-      setOpenSlider(false);
+    if (sizeRef.current.contains(e.target)) {
+      setOpenPrice(false);
       setOpenCapacity(false);
     } else if (priceRef.current.contains(e.target)) {
-      setOpenCalendar(false);
+      setOpenSize(false);
       setOpenCapacity(false);
     } else if (capacityRef.current.contains(e.target)) {
-      setOpenSlider(false);
-      setOpenCalendar(false);
+      setOpenPrice(false);
+      setOpenSize(false);
     } else {
-      setOpenCalendar(false);
-      setOpenSlider(false);
+      setOpenSize(false);
+      setOpenPrice(false);
       setOpenCapacity(false);
     }
   };
@@ -116,8 +124,8 @@ const Rooms = () => {
       void document.removeEventListener("click", handleOutsideClick, false);
   }, []);
 
-  // Helps with not showing no room match your parameters because
-  // of empty list before api promise is fulfilled
+  // Helps with not showing no room match your parameters
+  // because of empty list before api promise is fulfilled
   useEffect(() => {
     if (currentApartmentData.length !== 0) {
       setDoneLoading(true);
@@ -127,12 +135,12 @@ const Rooms = () => {
   useEffect(() => {
     const getBody = document.body;
     if (noInternet) {
-      getBody.classList.add("no-internet");
+      getBody.classList.add("dark-nav");
     } else {
-      getBody.classList.remove("no-internet");
+      getBody.classList.remove("dark-nav");
     }
     return () => {
-      getBody.classList.remove("no-internet");
+      getBody.classList.remove("dark-nav");
     };
   }, [noInternet]);
 
@@ -159,41 +167,44 @@ const Rooms = () => {
               <form onSubmit={handleSearchFormSubmit}>
                 <div className="row">
                   <div className="my-auto col-4">
-                    <div ref={calendarRef} className="search-item">
-                      <i className="fa fa-calendar-alt"></i>
+                    <div ref={sizeRef} className="search-item">
+                      <i className="fa fa-ruler-combined"></i>
                       <span
-                        // ref={calendarRef}
-                        onClick={() => setOpenCalendar(!openCalendar)}
-                        // className={openCalendar ? "search-item-date hide-date" : null}
-                      >{`${format(date[0].startDate, "dd/MM/yyy")} to ${format(
-                        date[0].endDate,
-                        "dd/MM/yyy"
-                      )}`}</span>
-                      {openCalendar && (
-                        <DateRange
-                          editableDateInputs={false}
-                          onChange={(item) => setDate([item.selection])}
-                          moveRangeOnFirstSelection={false}
-                          ranges={date}
-                          className="the-date-range"
-                        />
+                        onClick={() => setOpenSize(!openSize)}
+                        className="search-item-slider"
+                      >
+                        room size of ${sizeMinValue}m<sup>2</sup> to $
+                        {sizeMaxValue}m<sup>2</sup>
+                      </span>
+                      {openSize && (
+                        <div className="slider-div">
+                          <MultiRangeSlider
+                            min={highestRoomPriceSizeAndCapacity["min_size"]}
+                            max={highestRoomPriceSizeAndCapacity["max_size"]}
+                            onChange={({ min, max }) =>
+                              handleSizeChange(min, max)
+                            }
+                          />
+                        </div>
                       )}
                     </div>
                   </div>
                   <div className="my-auto col-3">
                     <div ref={priceRef} className="search-item">
-                      <i className="fa fa-lock"></i>
+                      <i className="fas fa-coins"></i>
                       <span
-                        onClick={() => setOpenSlider(!openSlider)}
+                        onClick={() => setOpenPrice(!openPrice)}
                         className="search-item-slider"
                       >
                         price of ${priceMinValue} to ${priceMaxValue}
                       </span>
-                      {openSlider && (
+                      {openPrice && (
                         <div className="slider-div">
                           <MultiRangeSlider
                             min={1}
-                            max={highestRoomPriceAndCapacity["highest_price"]}
+                            max={
+                              highestRoomPriceSizeAndCapacity["highest_price"]
+                            }
                             onChange={({ min, max }) =>
                               handlePriceChange(min, max)
                             }
@@ -216,7 +227,9 @@ const Rooms = () => {
                           <MultiRangeSlider
                             min={1}
                             max={
-                              highestRoomPriceAndCapacity["highest_capacity"]
+                              highestRoomPriceSizeAndCapacity[
+                                "highest_capacity"
+                              ]
                             }
                             onChange={({ min, max }) =>
                               handleCapacityChange(min, max)
@@ -237,7 +250,6 @@ const Rooms = () => {
           </div>
         </div>
       </div>
-      {/* <ApartmentsPlusPagination data={allApartmentsData} backendUrl={backendUrl} /> */}
       {renderRooms()}
     </>
   );

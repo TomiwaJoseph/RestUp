@@ -7,7 +7,18 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Adobe Clean", sans-serif;
+  background: #fbfbfb;
 }
+body.dark-nav nav {
+  background: #373737;
+}
+body.transparent nav {
+  background: transparent;
+}
+.Toastify__toast-container--top-center {
+  z-index: 99999999 !important;
+}
+
 html {
   scroll-behavior: smooth;
   /* overflow-x: hidden; */

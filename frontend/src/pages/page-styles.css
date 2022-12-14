@@ -561,6 +561,7 @@
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
+  width: 100%;
 }
 .room-search-btn:hover {
   border: 1px solid #1a6692;
@@ -571,12 +572,21 @@
   box-shadow: none;
   outline: none;
 }
-.search-form .search-item span {
-  color: #6f6f6f;
+.search-box .search-item span {
+  color: #373737;
+  margin-left: 5px;
 }
-/* .rdrCalendarWrapper {
-  background: #000 !important;
-} */
+.no-room {
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.no-room p {
+  color: #454545;
+  font-size: 24px;
+}
 
 /* =========================================
 ================= ERROR STYLES =================
@@ -625,10 +635,99 @@
   outline: none;
 }
 
-/* .Toastify__toast-container--top-center {
-  z-index: 99999999 !important;
+/* =========================================
+=========== LOGIN/SIGNUP STYLES ============
+========================================= */
+/* .signup-div,
+.login-div {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  text-align: center;
+}
+.login-div::before {
+  filter: grayscale(100%);
 } */
+.signup-container,
+.login-container {
+  position: relative;
+  margin-top: 10vh;
+  height: 80vh;
+}
+.auth-img {
+  height: 80vh;
+  width: 100%;
+  filter: brightness(8%);
+}
+.signup-block,
+.login-block {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  background: #fff;
+  padding: 50px 40px;
+  border-radius: 3px;
+}
+.signup-block h2,
+.login-block h2 {
+  text-align: center;
+  color: #373737;
+}
 
-body.no-internet nav {
-  background: #373737;
+.signup-block form input:focus,
+.login-block form input:focus {
+  box-shadow: none;
+  border: 1px solid var(--main-color);
+}
+.signup-block form input,
+.login-block form input {
+  margin-bottom: 10px;
+}
+.signup-block form button,
+.login-block form button {
+  padding: 6px 0;
+  background: var(--main-color);
+  color: #fff;
+  border: 1px solid var(--main-color);
+  width: 100%;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+.login-block .demo-btn {
+  background: #1a6692;
+  color: #fff;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  padding: 5px 0;
+  margin-bottom: 10px;
+}
+.signup-block button:focus,
+.login-block button:focus {
+  box-shadow: none;
+  outline: none;
+}
+.signup-block .sign-in-option,
+.login-block .sign-up-option {
+  color: #454545;
+  font-size: 16px;
+  margin: 0 10px;
+}
+.signup-block .sign-in-option a,
+.login-block .sign-up-option a {
+  color: #373737;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+/* =========================================
+=========== DASHBOARD STYLES ============
+========================================= */
+.dashboard-container {
+  margin-top: 10vh;
 }

@@ -9,6 +9,7 @@ from django.core.files import File
 from .serializers import ApartmentSerializer, RoomSerializer
 from django.utils import timezone
 from datetime import date, timedelta
+from rest_framework.views import APIView
 
 
 images_path = r'C:\Users\dretech\Documents\bluetooth\apartments'
@@ -161,28 +162,16 @@ def get_apartments(request):
 @api_view(['POST'])
 def filtered_apartments(request):
     # # Get the values passed in the request parameters
-    startDate = request.data.get('startDate')
-    endDate = request.data.get('endDate')
+    sizeMinValue = request.data.get('sizeMinValue')
+    sizeMaxValue = request.data.get('sizeMaxValue')
     priceMinValue = request.data.get('priceMinValue')
     priceMaxValue = request.data.get('priceMaxValue')
     capacityMinValue = request.data.get('capacityMinValue')
     capacityMaxValue = request.data.get('capacityMaxValue')
 
-    splitted_start_date = [int(i) for i in startDate.split('/')]
-    splitted_end_date = [int(i) for i in endDate.split('/')]
-    start_date = date(
-        splitted_start_date[2], splitted_start_date[1], splitted_start_date[0])
-    # print()
-    # print()
-    # test_date = Room.objects.first().booked_start_date
-    # print(start_date)
-    # print(test_date)
-    # print(start_date >= test_date)
-    # print()
-    # print()
-
     room_query = Room.objects.filter(
-        # booked_end_date=endDate,
+        size__gte=sizeMinValue,
+        size__lte=sizeMaxValue,
         price__gte=priceMinValue,
         price__lte=priceMaxValue,
         max_people__gte=capacityMinValue,
@@ -190,13 +179,7 @@ def filtered_apartments(request):
         availability=True,
     )
     search_results = [room.apartment for room in room_query]
-    # print()
-    # print(search_results)
-    # print(len(search_results))
-    # print()
-
-    data = list(Apartment.objects.all())
-    serializer = ApartmentSerializer(choices(data, k=3), many=True).data
+    serializer = ApartmentSerializer(search_results, many=True).data
     return Response(serializer)
 
 
@@ -209,11 +192,16 @@ def get_featured_apartments(request):
 
 
 @api_view(['GET'])
-def get_highest_price_and_capacity(request):
+def get_highest_price_size_and_capacity(request):
+    all_room_size = [obj.size for obj in Room.objects.all()]
     highest_price = max([obj.price for obj in Room.objects.all()])
     highest_capacity = max([obj.max_people for obj in Room.objects.all()])
-    data = {"highest_price": highest_price,
-            "highest_capacity": highest_capacity}
+    data = {
+        "min_size": min(all_room_size),
+        "max_size": max(all_room_size),
+        "highest_price": highest_price,
+        "highest_capacity": highest_capacity
+    }
     return Response(data)
 
 
@@ -245,6 +233,16 @@ def get_single_apartment(request, slug):
     }
     # new_serializer.update(serializer)
     return Response(new_serializer, status=status.HTTP_200_OK)
+
+
+class LoginView(APIView):
+
+    def post(self, request):
+        print('loggin in...')
+        email = request.data.get('email')
+        password = request.data.get('password')
+        print('email is ', email)
+        print('password is ', password)
 
 
 @api_view(['POST'])

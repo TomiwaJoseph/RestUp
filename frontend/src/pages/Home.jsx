@@ -50,12 +50,12 @@ const Home = () => {
   useEffect(() => {
     const getBody = document.body;
     if (noInternet) {
-      getBody.classList.add("no-internet");
+      getBody.classList.add("dark-nav");
     } else {
-      getBody.classList.remove("no-internet");
+      getBody.classList.remove("dark-nav");
     }
     return () => {
-      getBody.classList.remove("no-internet");
+      getBody.classList.remove("dark-nav");
     };
   }, [noInternet]);
 

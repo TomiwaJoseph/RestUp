@@ -84,6 +84,30 @@ const Search = () => {
               </form>
             </div>
           </div>
+          <div className="col-lg-9">
+            {/* <div className="my-auto col-4">
+                    <div ref={calendarRef} className="search-item">
+                      <i className="fa fa-calendar-alt"></i>
+                      <span
+                        // ref={calendarRef}
+                        onClick={() => setOpenCalendar(!openCalendar)}
+                        // className={openCalendar ? "search-item-date hide-date" : null}
+                      >{`${format(date[0].startDate, "dd/MM/yyy")} to ${format(
+                        date[0].endDate,
+                        "dd/MM/yyy"
+                      )}`}</span>
+                      {openCalendar && (
+                        <DateRange
+                          editableDateInputs={false}
+                          onChange={(item) => setDate([item.selection])}
+                          moveRangeOnFirstSelection={false}
+                          ranges={date}
+                          className="the-date-range"
+                        />
+                      )}
+                    </div>
+                  </div> */}
+          </div>
         </div>
       </div>
     </>

@@ -6,12 +6,14 @@ const globalState = {
   currentApartmentData: [],
   randomApartmentImage: "",
   testPageData: [],
+  userInfo: {},
   highestRoomPrice: 360,
   highestCapacity: 6,
-  highestRoomPriceAndCapacity: {},
+  highestRoomPriceSizeAndCapacity: {},
   badRequest: false,
   noInternet: false,
   fetchingData: false,
+  isAuthenticated: false,
   backendUrl: "http://localhost:8000",
 };
 
@@ -37,10 +39,10 @@ export const roomReducer = (state = globalState, { type, payload }) => {
         ...state,
         currentApartmentData: payload,
       };
-    case ActionTypes.SET_HIGHEST_PRICE_AND_CAPACITY_DATA:
+    case ActionTypes.SET_HIGHEST_PRICE_SIZE_AND_CAPACITY_DATA:
       return {
         ...state,
-        highestRoomPriceAndCapacity: payload,
+        highestRoomPriceSizeAndCapacity: payload,
       };
     case ActionTypes.SET_RANDOM_APARTMENT_IMAGE:
       return {
@@ -66,6 +68,11 @@ export const roomReducer = (state = globalState, { type, payload }) => {
       return {
         ...state,
         noInternet: payload,
+      };
+    case ActionTypes.SET_USER_INFO:
+      return {
+        ...state,
+        userInfo: payload,
       };
     default:
       return state;

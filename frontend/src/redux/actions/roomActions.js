@@ -24,9 +24,9 @@ export const setRandomApartmentImage = (data) => {
     payload: data,
   };
 };
-export const setHighestPriceAndCapacity = (data) => {
+export const setHighestPriceSizeAndCapacity = (data) => {
   return {
-    type: ActionTypes.SET_HIGHEST_PRICE_AND_CAPACITY_DATA,
+    type: ActionTypes.SET_HIGHEST_PRICE_SIZE_AND_CAPACITY_DATA,
     payload: data,
   };
 };
@@ -56,6 +56,25 @@ export const setInternetError = (status) => {
 export const setBadRequest = (value) => {
   return {
     type: ActionTypes.SET_BAD_REQUEST,
+    payload: value,
+  };
+};
+export const setUserInfo = (value) => {
+  return {
+    type: ActionTypes.SET_USER_INFO,
+    payload: value,
+  };
+};
+
+export const setLoginUser = (value) => {
+  return {
+    type: ActionTypes.LOGIN_USER,
+    payload: value,
+  };
+};
+export const setLogoutUser = (value) => {
+  return {
+    type: ActionTypes.LOGOUT_USER,
     payload: value,
   };
 };

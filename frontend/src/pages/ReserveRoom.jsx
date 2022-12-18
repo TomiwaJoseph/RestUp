@@ -3,21 +3,59 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../components/CheckoutForm";
 import roomImg2 from "../statics/room-2.jpg";
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
+// import "react-date-range/dist/styles.css";
+// import "react-date-range/dist/theme/default.css";
 // import { DateRange } from "react-date-range";
 import { useState, useEffect, useRef } from "react";
+import { fetchSingleRoomDetails } from "../redux/actions/fetchers";
+import { removeSingleRoomDetails } from "../redux/actions/roomActions";
+import { useDispatch, useSelector } from "react-redux";
+import NoInternet from "../components/NoInternet";
+import Preloader from "../components/Preloader";
+import ErrorPage from "../components/ErrorPage";
+import { toast } from "react-toastify";
 
 const PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 const stripePromise = loadStripe(PUBLISHABLE_KEY);
 
 const ReserveRoom = () => {
-  const { roomSlug } = useParams();
+  const { roomSlug, apartmentSlug } = useParams();
+  const dispatch = useDispatch();
+  const storeContext = useSelector((state) => state.store);
+  const { fetchingData, badRequest, noInternet, singleRoomDetails } =
+    storeContext;
+  const { room_price, room_refundable } = singleRoomDetails;
+  // Date formatter
+  let getTodayDate = new Date().toString();
+  let splittedDate = getTodayDate.split(" ");
+  let startDate = `${splittedDate[0]}, ${splittedDate[1]} ${splittedDate[2]}, ${splittedDate[3]}`;
   const detailsFormRef = useRef();
   const navigate = useNavigate();
   const [paymentCompleted, setPaymentCompleted] = useState(true);
   const [activeCrumb, setActiveCrumb] = useState(0);
   const [openModal, setOpenModal] = useState(false);
+  const [userFirstName, setUserFirstName] = useState("");
+  const [userLastName, setUserLastName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPhoneNumber, setUserPhoneNumber] = useState("");
+  const [duration, setDuration] = useState(0);
+  const [durationPrice, setDurationPrice] = useState("");
+  const [checkInDate, setCheckInDate] = useState(startDate);
+  const [checkOutDate, setCheckOutDate] = useState(startDate);
+
+  const notify = (message, errorType) =>
+    toast(message, {
+      position: "top-center",
+      autoClose: "3000",
+      pauseOnHover: true,
+      closeOnClick: true,
+      type: errorType,
+      theme: "colored",
+    });
+
+  console.log(PUBLISHABLE_KEY);
+  console.log(stripePromise);
+
   // const handleCTA = (destination) => {
   //   document.body.style.overflow = "auto";
   //   if (destination === "rooms") {
@@ -25,6 +63,7 @@ const ReserveRoom = () => {
   //   }
   //   return navigate("/");
   // };
+
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -32,6 +71,7 @@ const ReserveRoom = () => {
       key: "selection",
     },
   ]);
+
   // const successMessage = () => {
   //   return (
   //     <div className="success-msg">
@@ -63,10 +103,6 @@ const ReserveRoom = () => {
   // };
 
   // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
-
-  // useEffect(() => {
   //   if (paymentCompleted) {
   //     document.body.style.overflow = "hidden";
   //   } else {
@@ -74,20 +110,75 @@ const ReserveRoom = () => {
   //   }
   // }, [paymentCompleted]);
 
-  // console.log(PUBLISHABLE_KEY);
-  // console.log(stripePromise);
-  // console.log(activeCrumb);
-  // console.log(activeCrumb === 0);
-  // console.log(" ");
+  const handleDurationStay = () => {
+    if (duration < 1 || duration === "" || duration === "e") {
+      notify("Please select duration of stay.", "info");
+    } else {
+      setActiveCrumb(1);
+    }
+  };
+  const handleInputChange = (event) => {
+    let duration_value = event.target.value;
+    duration_value !== "" ? setDuration(duration_value) : setDuration(0);
+    duration_value !== ""
+      ? setDurationPrice(duration_value * room_price)
+      : setDurationPrice("");
+    let addedDate = new Date(Date.now() + duration_value * 86400000).toString();
+    let splittedDate = addedDate.split(" ");
+    let newEndDate = `${splittedDate[0]}, ${splittedDate[1]} ${splittedDate[2]}, ${splittedDate[3]}`;
+    duration_value !== ""
+      ? setCheckOutDate(newEndDate)
+      : setCheckOutDate(startDate);
+  };
   const handleDetailsSubmit = (e) => {
     e.preventDefault();
-    console.log("details submitted...");
     const data = new FormData(e.target);
-    // let name = data.get("name");
+    // let firstName = data.get("first-name");
+    // let lastName = data.get("last-name");
     // let email = data.get("email");
-    // let message = data.get("message");
+    // let phoneNumber = data.get("phone");
+    setUserFirstName(data.get("first-name"));
+    setUserLastName(data.get("last-name"));
+    setUserEmail(data.get("email"));
+    setUserPhoneNumber(data.get("phone"));
     setActiveCrumb(2);
   };
+
+  useEffect(() => {
+    fetchSingleRoomDetails([apartmentSlug, roomSlug]);
+    return () => {
+      dispatch(removeSingleRoomDetails());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const getBody = document.body;
+    if (noInternet || badRequest) {
+      getBody.classList.add("dark-nav");
+    } else {
+      getBody.classList.remove("dark-nav");
+    }
+    return () => {
+      getBody.classList.remove("dark-nav");
+    };
+  }, [noInternet, badRequest]);
+
+  if (fetchingData) {
+    return <Preloader />;
+  }
+
+  if (badRequest) {
+    return <ErrorPage />;
+  }
+
+  if (noInternet) {
+    return <NoInternet />;
+  }
 
   return (
     <>
@@ -97,7 +188,7 @@ const ReserveRoom = () => {
         </div>
         <div className="nav-hero"></div>
         <div className="name-hero">
-          <h1>Single Economy</h1>
+          <h1>{roomSlug}</h1>
           <hr className="accent" />
         </div>
       </div>
@@ -125,7 +216,7 @@ const ReserveRoom = () => {
                 onClick={() => setActiveCrumb(0)}
                 className={activeCrumb === 0 ? "btn crumb active" : "btn crumb"}
               >
-                Your selection
+                Stay Duration
               </button>
               <div className="crumb-demarcate"></div>
               <button
@@ -147,39 +238,45 @@ const ReserveRoom = () => {
         <div className="row">
           {activeCrumb === 0 && (
             <div className="mx-auto col-md-5 my-3 reserve-box">
-              <p className="booking-text">Your booking details</p>
+              <input
+                className="form-control"
+                placeholder="Enter number of nights"
+                onChange={handleInputChange}
+                type="number"
+                min={1}
+              />
               <hr />
               <div className="date-div">
                 <div className="check-in">
                   <p className="check-in-text">Check-in</p>
                   <div className="check-in-details">
-                    <p>Wed, Nov 23, 2022</p>
+                    <p>{checkInDate}</p>
                     <p>2:00 PM - 12:00 AM</p>
                   </div>
                 </div>
                 <div className="check-out">
                   <p className="check-out-text">Check-out</p>
                   <div className="check-out-details">
-                    <p>Wed, Nov 27, 2022</p>
+                    <p>{checkOutDate}</p>
                     <p>Until 12:00 PM</p>
                   </div>
                 </div>
               </div>
               <div className="stay-div">
                 <p>Total length of stay:</p>
-                <p>3 nights</p>
+                <p>{`${duration} ${duration > 1 ? "nights" : "night"}`}</p>
               </div>
               <hr />
               <div className="price-div">
                 <p>Price</p>
-                <p>USD 150</p>
+                <p>USD {durationPrice}</p>
               </div>
               <hr className="mt-1" />
               <button
-                onClick={() => setActiveCrumb(1)}
+                onClick={() => handleDurationStay()}
                 className="btn w-100 selection-confirm"
               >
-                Next
+                Continue
               </button>
             </div>
           )}
@@ -247,7 +344,7 @@ const ReserveRoom = () => {
             <div className="mx-auto col-md-5 my-3 checkout-box">
               <Elements stripe={stripePromise}>
                 <CheckoutForm
-                  amount={"120"}
+                  amount={durationPrice}
                   setPaymentCompleted={setPaymentCompleted}
                 />
               </Elements>

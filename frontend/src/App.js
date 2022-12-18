@@ -15,8 +15,20 @@ import ErrorPage from "./components/ErrorPage";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import DashBoard from "./pages/Dashboard";
+import fetchUser from "./redux/actions/auth";
+import store from "./redux/store/store";
+import { setLoginUser } from "./redux/actions/roomActions";
+import { useEffect } from "react";
 
 const App = () => {
+  const getUserUrl = "http://localhost:8000/api/auth/user/";
+
+  useEffect(() => {
+    fetchUser(getUserUrl, (status) => {
+      store.dispatch(setLoginUser(status));
+    });
+  }, []);
+
   return (
     <Router>
       <Navbar />
@@ -24,10 +36,13 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/apartments" element={<Apartments />} />
         <Route
-          path="/apartments/apartment-detail/:apartmentSlug"
+          path="/apartments/:apartmentSlug"
           element={<SingleApartment />}
         />
-        <Route path="/reserve-room/:roomSlug" element={<ReserveRoom />} />
+        <Route
+          path="/reserve-room/:apartmentSlug/:roomSlug"
+          element={<ReserveRoom />}
+        />
         <Route path="/restaurant" element={<Restaurant />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />

@@ -1,15 +1,19 @@
 import os
+from datetime import date, timedelta
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.authtoken.models import Token
 from base.models import Apartment, Room, RoomInfo, RoomExtra, ApartmentImages
 from random import shuffle, choice, choices, seed, sample
+import random
 from django.db.models import Q
+from django.contrib.auth import authenticate
 from django.core.files import File
-from .serializers import ApartmentSerializer, RoomSerializer
 from django.utils import timezone
-from datetime import date, timedelta
-from rest_framework.views import APIView
+from .serializers import ApartmentSerializer, RoomSerializer, RegisterSerializer
 
 
 images_path = r'C:\Users\dretech\Documents\bluetooth\apartments'
@@ -142,7 +146,8 @@ def test_page(request):
 @api_view(['GET'])
 def get_apartments(request):
     data = list(Apartment.objects.all())
-    random_image = choice(data)
+    sys_random = random.SystemRandom()
+    random_image = sys_random.choice(data)
 
     # Get apartments with at least 1 free room
     all_rooms = Room.objects.filter(
@@ -150,7 +155,7 @@ def get_apartments(request):
     )
     apartment_with_available_rooms = list(
         set([room.apartment for room in all_rooms]))
-    seed(18)
+    seed(10)
     shuffle(apartment_with_available_rooms)
     serializer = ApartmentSerializer(
         apartment_with_available_rooms, many=True).data
@@ -161,7 +166,7 @@ def get_apartments(request):
 
 @api_view(['POST'])
 def filtered_apartments(request):
-    # # Get the values passed in the request parameters
+    # Get the values passed in the request parameters
     sizeMinValue = request.data.get('sizeMinValue')
     sizeMaxValue = request.data.get('sizeMaxValue')
     priceMinValue = request.data.get('priceMinValue')
@@ -178,7 +183,7 @@ def filtered_apartments(request):
         max_people__lte=capacityMaxValue,
         availability=True,
     )
-    search_results = [room.apartment for room in room_query]
+    search_results = list(set([room.apartment for room in room_query]))
     serializer = ApartmentSerializer(search_results, many=True).data
     return Response(serializer)
 
@@ -235,14 +240,100 @@ def get_single_apartment(request, slug):
     return Response(new_serializer, status=status.HTTP_200_OK)
 
 
+@api_view(['POST'])
+def get_single_room(request):
+    apartment_slug = request.data.get('apartmentSlug')
+    room_slug = request.data.get('roomSlug')
+    # print(apartment_slug)
+    # print(room_slug)
+    # print()
+
+    # Get Room
+    try:
+        single_room = Room.objects.get(
+            apartment__slug=apartment_slug,
+            slug=room_slug,
+        )
+        if not single_room.availability:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+    except Room.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    new_serializer = {
+        "room_price": single_room.price,
+        "room_refundable": single_room.refundable,
+    }
+    return Response(new_serializer, status=status.HTTP_200_OK)
+
+
+class RegisterView(generics.GenericAPIView):
+    serializer_class = RegisterSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({
+            'user': serializer.data,
+        })
+
+
 class LoginView(APIView):
 
     def post(self, request):
-        print('loggin in...')
         email = request.data.get('email')
         password = request.data.get('password')
-        print('email is ', email)
-        print('password is ', password)
+        user = authenticate(request, email=email, password=password)
+        if user:
+            token = Token.objects.get_or_create(user=user)
+            return Response({
+                'token': user.auth_token.key
+            })
+        return Response({"error": 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def get_user_info(request):
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+    user = User.objects.first()
+
+    data = list(Apartment.objects.all())
+    random_image = choice(data)
+    return Response({
+        "user_info": {
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "email": user.email,
+        },
+        "booked_room_info": ['test', 'two'],
+        "random_dashboard_image": random_image.main_image.url,
+    })
+
+
+@api_view(['GET'])
+def logout(request):
+    request.user.auth_token.delete()
+    data = {'success': 'Successfully logged out.'}
+    return Response(data=data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def fetch_user(request):
+    the_token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
+    try:
+        token = Token.objects.get(key=the_token)
+    except Token.DoesNotExist:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+    response = {
+        "first_name": token.user.first_name,
+        "last_name": token.user.last_name,
+        "email": token.user.email,
+        'ok': True,
+    }
+
+    return Response(response)
 
 
 @api_view(['POST'])

@@ -25,8 +25,9 @@
   margin: 0 10px;
 }
 .pageNumbers li.active {
-  background: #4c4c4c;
+  background: var(--main-color);
   color: #fff;
+  border-color: var(--main-color);
 }
 .pageNumbers .btn__cover__prev,
 .pageNumbers .btn__cover__next {
@@ -34,9 +35,9 @@
 }
 .pageNumbers .btn__cover__prev button,
 .pageNumbers .btn__cover__next button {
-  background: #f51167;
+  background: #4c4c4c;
   color: #fff;
-  border: 1px solid #f51167;
+  border: 1px solid #4c4c4c;
   cursor: pointer;
   border-radius: 4px;
   padding: 5px 20px;

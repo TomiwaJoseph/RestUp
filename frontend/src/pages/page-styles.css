@@ -274,9 +274,9 @@
   margin-bottom: 5px;
   font-weight: 600;
 }
-.apartment-room .apartment-cta .duration {
+/* .apartment-room .apartment-cta .duration {
   color: var(--main-color);
-}
+} */
 .apartment-room .apartment-cta .refundable,
 .apartment-room .apartment-cta .not-refundable {
   font-size: 12px;
@@ -293,6 +293,9 @@
 .apartment-room .apartment-cta .reserve-now-btn:hover {
   background: #fff;
   color: #1a6692;
+}
+.apartment-room .apartment-cta .reserve-now-btn:focus {
+  box-shadow: none;
 }
 
 /* =========================================
@@ -319,22 +322,41 @@
   box-shadow: none;
 }
 .details-box,
-.checkout-box,
-.reserve-box {
+.checkout-box {
   border: 1px solid #d0d0d0;
   padding: 20px;
   border-radius: 3px;
   margin-bottom: 40px !important;
 }
-.details-box .details-text,
-.reserve-box .booking-text {
+.reserve-box {
+  border: 1px solid #d0d0d0;
+  padding: 30px;
+  border-radius: 3px;
+  margin-bottom: 40px !important;
+}
+.details-box .details-text {
   font-size: 24px;
   font-weight: 600;
+}
+/* .reserve-box input {
+  width: 80%;
+} */
+.reserve-box input:focus {
+  box-shadow: none;
+  border: 1px solid #1a6692;
 }
 .details-confirm,
 .selection-confirm {
   background: #1a6692;
+  color: #e4e4e4;
+}
+.details-confirm:hover,
+.selection-confirm:hover {
   color: #fff;
+}
+.details-confirm:focus,
+.selection-confirm:focus {
+  box-shadow: none;
 }
 .price-div {
   display: flex;
@@ -607,7 +629,7 @@
   margin-top: 10px;
 }
 .error-div h1 {
-  color: #f51167;
+  color: var(--main-color);
   margin-top: 10px;
 }
 .error-div p {
@@ -728,6 +750,51 @@
 /* =========================================
 =========== DASHBOARD STYLES ============
 ========================================= */
-.dashboard-container {
-  margin-top: 10vh;
+.dashboard-container .list-group .list-group-item {
+  border-color: #9e9e9e;
+  background: transparent;
+  /* margin-bottom: 10px; */
+  color: #373737;
+}
+.dashboard-container .list-group .list-group-item:hover {
+  border-color: none;
+  background: var(--main-color);
+  color: #fff;
+}
+.dashboard-container .list-group .list-group-item.active {
+  background: #1a6692 !important;
+  color: #fff;
+  border-color: #1a6692;
+}
+.dashboard-container .list-group .list-group-item:focus {
+  box-shadow: none;
+}
+.dashboard-container .list-group .logout-btn {
+  border: 1px solid var(--main-color);
+  color: #4c4c4c;
+  padding: 10px 20px;
+  margin: 10px 0;
+}
+.dashboard-container .list-group .logout-btn:hover {
+  background: var(--main-color);
+  color: #fff;
+}
+.dashboard-container .user-info-container,
+.dashboard-container .booking-info-container {
+  border: 1px solid #4c4c4c;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
+.dashboard-container .user-information p {
+  color: var(--main-color);
+  margin: 12px 0;
+}
+.dashboard-container .booking-info-container .no-booked-room a {
+  /* border: 1px solid #1a6692; */
+  background: var(--main-color);
+  color: #fff;
+  padding: 10px 25px;
+  margin-bottom: 10px;
+  text-align: left;
 }

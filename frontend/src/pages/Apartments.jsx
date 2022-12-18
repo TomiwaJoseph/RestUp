@@ -1,25 +1,22 @@
 import ApartmentsPlusPagination from "../components/ApartmentsPlusPagination";
 import Hero from "../components/Hero";
-import { hero } from "../data";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Preloader from "../components/Preloader";
 import MultiRangeSlider from "../components/MultiRangeSlider";
 import { useState, useRef, useEffect } from "react";
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
-import { DateRange } from "react-date-range";
-import { format } from "date-fns";
 import {
   fetchAllApartments,
   fetchFilteredApartments,
   fetchHighestPriceSizeAndCapacity,
 } from "../redux/actions/fetchers";
 import NoInternet from "../components/NoInternet";
+import { removeRandomImage } from "../redux/actions/roomActions";
 
 const Rooms = () => {
   const sizeRef = useRef();
   const priceRef = useRef();
   const capacityRef = useRef();
+  const dispatch = useDispatch();
   const [openSize, setOpenSize] = useState(false);
   const [openPrice, setOpenPrice] = useState(false);
   const [openCapacity, setOpenCapacity] = useState(false);
@@ -120,8 +117,10 @@ const Rooms = () => {
 
   useEffect(() => {
     document.addEventListener("click", handleOutsideClick, false);
-    return () =>
+    return () => {
+      dispatch(removeRandomImage());
       void document.removeEventListener("click", handleOutsideClick, false);
+    };
   }, []);
 
   // Helps with not showing no room match your parameters
@@ -141,6 +140,7 @@ const Rooms = () => {
     }
     return () => {
       getBody.classList.remove("dark-nav");
+      // dispatch(removeRandomImage());
     };
   }, [noInternet]);
 

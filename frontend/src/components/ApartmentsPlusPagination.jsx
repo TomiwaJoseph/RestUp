@@ -78,9 +78,7 @@ const ApartmentsPlusPagination = ({ data, backendUrl }) => {
                   <h5 className="card-title">{apartment.name}</h5>
                 </div>
                 <div className="card-footer text-center">
-                  <NavLink
-                    to={`/apartments/apartment-detail/${apartment.slug}`}
-                  >
+                  <NavLink to={`/apartments/${apartment.slug}`}>
                     <button className="btn">
                       Check Rooms <span className="fa fa-arrow-right"></span>
                     </button>

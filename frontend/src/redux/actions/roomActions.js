@@ -36,9 +36,25 @@ export const setSingleApartment = (data) => {
     payload: data,
   };
 };
-export const removeSelectedApartment = (data) => {
+export const setSingleRoomDetails = (data) => {
   return {
-    type: ActionTypes.REMOVE_SELECTED_PRODUCT,
+    type: ActionTypes.SET_SINGLE_ROOM_DETAILS,
+    payload: data,
+  };
+};
+export const removeSelectedApartment = () => {
+  return {
+    type: ActionTypes.REMOVE_SELECTED_SINGLE_APARTMENT,
+  };
+};
+export const removeRandomImage = () => {
+  return {
+    type: ActionTypes.REMOVE_RANDOM_IMAGE,
+  };
+};
+export const removeSingleRoomDetails = () => {
+  return {
+    type: ActionTypes.REMOVE_SINGLE_ROOM_DETAILS,
   };
 };
 export const setPreloaderStatus = (status) => {
@@ -68,13 +84,19 @@ export const setUserInfo = (value) => {
 
 export const setLoginUser = (value) => {
   return {
-    type: ActionTypes.LOGIN_USER,
+    type: ActionTypes.USER_IS_AUTHENTICATED,
     payload: value,
   };
 };
 export const setLogoutUser = (value) => {
   return {
     type: ActionTypes.LOGOUT_USER,
+    payload: value,
+  };
+};
+export const setRandomDashboardImage = (value) => {
+  return {
+    type: ActionTypes.SET_DASHBOARD_IMAGE,
     payload: value,
   };
 };

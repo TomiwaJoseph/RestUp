@@ -2,11 +2,13 @@ import { ActionTypes } from "../actions/action-types";
 
 const globalState = {
   singleApartmentData: [],
+  singleRoomDetails: {},
   featuredApartmentData: [],
   currentApartmentData: [],
   randomApartmentImage: "",
-  testPageData: [],
   userInfo: {},
+  booked_room_info: [],
+  randomDashboardImage: "",
   highestRoomPrice: 360,
   highestCapacity: 6,
   highestRoomPriceSizeAndCapacity: {},
@@ -24,11 +26,6 @@ export const roomReducer = (state = globalState, { type, payload }) => {
         ...state,
         singleApartmentData: payload,
       };
-    // case ActionTypes.REMOVE_SELECTED_PRODUCT:
-    //   return {
-    //     ...state,
-    //     singleApartmentData: [],
-    //   };
     case ActionTypes.SET_FEATURED_DATA:
       return {
         ...state,
@@ -39,6 +36,11 @@ export const roomReducer = (state = globalState, { type, payload }) => {
         ...state,
         currentApartmentData: payload,
       };
+    case ActionTypes.SET_SINGLE_ROOM_DETAILS:
+      return {
+        ...state,
+        singleRoomDetails: payload,
+      };
     case ActionTypes.SET_HIGHEST_PRICE_SIZE_AND_CAPACITY_DATA:
       return {
         ...state,
@@ -48,11 +50,6 @@ export const roomReducer = (state = globalState, { type, payload }) => {
       return {
         ...state,
         randomApartmentImage: payload,
-      };
-    case ActionTypes.SET_TEST_PAGE_DATA:
-      return {
-        ...state,
-        testPageData: payload,
       };
     case ActionTypes.IS_FETCHING_DATA:
       return {
@@ -69,10 +66,37 @@ export const roomReducer = (state = globalState, { type, payload }) => {
         ...state,
         noInternet: payload,
       };
+    case ActionTypes.USER_IS_AUTHENTICATED:
+      return {
+        ...state,
+        isAuthenticated: payload,
+      };
     case ActionTypes.SET_USER_INFO:
       return {
         ...state,
-        userInfo: payload,
+        userInfo: payload["user_info"],
+        booked_room_info: payload["booked_room_info"],
+        randomDashboardImage: payload["random_dashboard_image"],
+      };
+    case ActionTypes.SET_DASHBOARD_IMAGE:
+      return {
+        ...state,
+        randomDashboardImage: payload,
+      };
+    case ActionTypes.REMOVE_SELECTED_SINGLE_APARTMENT:
+      return {
+        ...state,
+        singleApartmentData: [],
+      };
+    case ActionTypes.REMOVE_RANDOM_IMAGE:
+      return {
+        ...state,
+        randomApartmentImage: "",
+      };
+    case ActionTypes.REMOVE_SINGLE_ROOM_DETAILS:
+      return {
+        ...state,
+        singleRoomDetails: {},
       };
     default:
       return state;

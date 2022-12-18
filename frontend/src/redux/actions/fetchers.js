@@ -7,26 +7,27 @@ import {
   setHighestPriceSizeAndCapacity,
   setInternetError,
   setLoginUser,
+  setLogoutUser,
   setPreloaderStatus,
   setRandomApartmentImage,
   setSingleApartment,
+  setSingleRoomDetails,
   setUserInfo,
-  // setSingleApartment,
-  // setTestPage,
 } from "./roomActions";
 import { toast } from "react-toastify";
 
-const testPageUrl = "http://localhost:8000/api/test-page/";
 const featuredApartmentsUrl = "http://localhost:8000/api/featured-apartments/";
 const highestRoomPriceSizeAndCapacityUrl =
   "http://localhost:8000/api/highest-price-size-and-capacity/";
 const allApartmentsUrl = "http://localhost:8000/api/apartments/";
 const singleApartmentsUrl = "http://localhost:8000/api/apartment/";
+const singleRoomDetailsUrl = "http://localhost:8000/api/get-single-room/";
 const filteredApartmentsUrl = "http://localhost:8000/api/filtered-apartments/";
 const demoUserUrl = "http://localhost:8000/api/login-demo-user/";
 const userRegisterUrl = "http://localhost:8000/api/auth/register/";
 const userLoginUrl = "http://localhost:8000/api/auth/login/";
 const userLogoutUrl = "http://localhost:8000/api/auth/logout/";
+const fetchDashboardInfoUrl = "http://localhost:8000/api/dashboard-info/";
 
 const notify = (message, errorType) =>
   toast(message, {
@@ -38,20 +39,6 @@ const notify = (message, errorType) =>
     theme: "colored",
   });
 
-export const fetchTestPage = async () => {
-  switchPreloader(true);
-  await axios
-    .get(testPageUrl)
-    .then((response) => {
-      console.log(response.data);
-      store.dispatch(setFeaturedApartments(response.data));
-      switchPreloader(false);
-    })
-    .catch((err) => {
-      console.log(err);
-      switchPreloader(false);
-    });
-};
 // Turn preloader on or off
 export const switchPreloader = (status) => {
   store.dispatch(setPreloaderStatus(status));
@@ -94,6 +81,9 @@ export const fetchAllApartments = async () => {
   await axios
     .get(allApartmentsUrl)
     .then((response) => {
+      // console.log(response);
+      // console.log(response.data.slice(-1));
+      // console.log(" ");
       store.dispatch(setInternetError(false));
       store.dispatch(setCurrentApartments(response.data.slice(0, -1)));
       store.dispatch(setRandomApartmentImage(response.data.slice(-1)));
@@ -112,6 +102,8 @@ export const fetchSingleApartment = async (slug) => {
     .get(singleApartmentsUrl + slug)
     .then((response) => {
       store.dispatch(setInternetError(false));
+      // console.log(response.data);
+      // console.log(" ");
       store.dispatch(setSingleApartment(response.data));
       // switchPreloader(false);
     })
@@ -132,7 +124,7 @@ export const fetchFeaturedApartments = async () => {
   await axios
     .get(featuredApartmentsUrl)
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       store.dispatch(setInternetError(false));
       store.dispatch(setFeaturedApartments(response.data));
       switchPreloader(false);
@@ -140,6 +132,36 @@ export const fetchFeaturedApartments = async () => {
     .catch((err) => {
       // console.log(err);
       store.dispatch(setInternetError(true));
+      switchPreloader(false);
+    });
+};
+export const fetchSingleRoomDetails = async (slugs) => {
+  switchPreloader(true);
+  let apartmentSlug = slugs[0];
+  let roomSlug = slugs[1];
+  let body = JSON.stringify({
+    apartmentSlug: apartmentSlug,
+    roomSlug: roomSlug,
+  });
+  await axios
+    .post(singleRoomDetailsUrl, body, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      // console.log(response.data);
+      store.dispatch(setSingleRoomDetails(response.data));
+      switchPreloader(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      if (err.message === "Network Error") {
+        store.dispatch(setInternetError(true));
+      } else {
+        console.log("bad request set...");
+        store.dispatch(setBadRequest(true));
+      }
       switchPreloader(false);
     });
 };
@@ -151,6 +173,21 @@ export const fetchHighestPriceSizeAndCapacity = async () => {
     .then((response) => {
       store.dispatch(setInternetError(false));
       store.dispatch(setHighestPriceSizeAndCapacity(response.data));
+      switchPreloader(false);
+    })
+    .catch((err) => {
+      store.dispatch(setInternetError(true));
+      switchPreloader(false);
+    });
+};
+// Get the highest room price and capacity the hotel has from api
+export const fetchUserInfo = async () => {
+  switchPreloader(true);
+  await axios
+    .get(fetchDashboardInfoUrl)
+    .then((response) => {
+      store.dispatch(setUserInfo(response.data));
+      store.dispatch(setInternetError(false));
       switchPreloader(false);
     })
     .catch((err) => {
@@ -172,9 +209,8 @@ export const signInUser = async (signInData) => {
       },
     })
     .then((result) => {
-      store.dispatch(setUserInfo(result.data.user_info));
-      notify("Successful login! Enjoy your shopping.", "success");
-      localStorage.setItem("token", result.data.token);
+      notify("Successful login! Your rest is RestUp assured.", "success");
+      localStorage.setItem("restupToken", result.data.token);
       store.dispatch(setLoginUser(true));
       switchPreloader(false);
     })
@@ -194,7 +230,7 @@ export const loginDemoUser = async () => {
     .get(demoUserUrl)
     .then((result) => {
       store.dispatch(setUserInfo(result.data.user_info));
-      notify("Successful login! Enjoy your shopping.", "success");
+      notify("Successful login! Your rest is RestUp assured.", "success");
       localStorage.setItem("token", result.data.token);
       store.dispatch(setLoginUser(true));
       switchPreloader(false);
@@ -205,6 +241,28 @@ export const loginDemoUser = async () => {
       }
       notify("Something unexpected happened!", "error");
       switchPreloader(false);
+    });
+};
+// Log out the user with token
+export const logOutUser = async () => {
+  let token = localStorage.getItem("token");
+  await axios
+    .get(userLogoutUrl, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((result) => {
+      store.dispatch(setLogoutUser(false));
+      localStorage.removeItem("token");
+      document.getElementById("home").click();
+      notify("Logout successful!", "info");
+    })
+    .catch((err) => {
+      if (err.message === "Network Error") {
+        store.dispatch(setInternetError(true));
+      }
+      notify("Unable to log out! Try again.", "error");
     });
 };
 // Sign up users with the credentials that are provided

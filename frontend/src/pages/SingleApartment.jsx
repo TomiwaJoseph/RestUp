@@ -1,12 +1,6 @@
 import { NavLink, useParams } from "react-router-dom";
-import roomImg3 from "../statics/room-4.jpg";
-import roomImg1 from "../statics/room-1.jpg";
-import roomImg2 from "../statics/room-2.jpg";
-import roomImg4 from "../statics/room-3.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useEffect } from "react";
-import { ApartmentRooms } from "../data";
-import { format } from "date-fns";
 import NoInternet from "../components/NoInternet";
 import Preloader from "../components/Preloader";
 import ErrorPage from "../components/ErrorPage";
@@ -46,6 +40,7 @@ const SingleApartment = () => {
   ];
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchSingleApartment(apartmentSlug);
     return () => {
       dispatch(removeSelectedApartment());
@@ -172,8 +167,8 @@ const SingleApartment = () => {
                     </div>
                   </div>
                   <div className="col-md-4 apartment-cta my-auto">
-                    <p className="duration">3 nights</p>
-                    <p>Price ${room.price}</p>
+                    {/* <p className="duration">3 nights</p> */}
+                    <p>${room.price} / night</p>
                     <p
                       className={
                         room.refundable * 1 ? "refundable" : "not-refundable"
@@ -181,7 +176,7 @@ const SingleApartment = () => {
                     >
                       {cancellationInfo[room.refundable * 1]}
                     </p>
-                    <NavLink to={`/reserve-room/${room.slug}`}>
+                    <NavLink to={`/reserve-room/${apartmentSlug}/${room.slug}`}>
                       <button className="btn reserve-now-btn">Reserve</button>
                     </NavLink>
                   </div>

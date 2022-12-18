@@ -1,21 +1,32 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { loginDemoUser } from "../redux/actions/fetchers";
-import { NavLink } from "react-router-dom";
+import { loginDemoUser, signInUser } from "../redux/actions/fetchers";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import authImg from "../statics/authImg.jpg";
+import NoInternet from "../components/NoInternet";
+import Preloader from "../components/Preloader";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { state } = useLocation();
   const storeContext = useSelector((state) => state.store);
   const { noInternet, fetchingData, isAuthenticated } = storeContext;
 
   const handleLoginForm = (e) => {
     e.preventDefault();
-    console.log("form submitted...");
-    console.log("email is ", email);
-    console.log("password is ", password);
+    signInUser([email, password]);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    let previousUrl = state?.previousPath || "/user/dashboard";
+    if (isAuthenticated) {
+      navigate(previousUrl);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
 
   useEffect(() => {
     const getBody = document.body;
@@ -24,6 +35,14 @@ const Login = () => {
       getBody.classList.remove("dark-nav");
     };
   }, []);
+
+  if (fetchingData) {
+    return <Preloader />;
+  }
+
+  if (noInternet) {
+    return <NoInternet />;
+  }
 
   return (
     <>

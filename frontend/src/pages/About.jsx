@@ -1,14 +1,18 @@
 import Hero from "../components/Hero";
 import { hotelBranches, hero } from "../data";
 import Features from "../components/Features";
-// import "./page-styles.css";
 import HeaderSection from "../components/HeaderSection";
 import aboutImg from "../statics/pexels-donald-tong-189296.jpg";
+import { useEffect } from "react";
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
-      <Hero section={"About Us"} orient={"top"} img={hero.about} />
+      <Hero section={"About Us"} orient={"center"} img={hero.about} />
       <div className="container picture-text-container">
         <div className="row">
           <div className="col-md-7">

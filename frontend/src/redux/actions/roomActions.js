@@ -88,12 +88,12 @@ export const setLoginUser = (value) => {
     payload: value,
   };
 };
-export const setLogoutUser = (value) => {
-  return {
-    type: ActionTypes.LOGOUT_USER,
-    payload: value,
-  };
-};
+// export const setLogoutUser = (value) => {
+//   return {
+//     type: ActionTypes.LOGOUT_USER,
+//     payload: value,
+//   };
+// };
 export const setRandomDashboardImage = (value) => {
   return {
     type: ActionTypes.SET_DASHBOARD_IMAGE,

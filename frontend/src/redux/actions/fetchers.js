@@ -7,7 +7,6 @@ import {
   setHighestPriceSizeAndCapacity,
   setInternetError,
   setLoginUser,
-  setLogoutUser,
   setPreloaderStatus,
   setRandomApartmentImage,
   setSingleApartment,
@@ -231,7 +230,7 @@ export const loginDemoUser = async () => {
     .then((result) => {
       store.dispatch(setUserInfo(result.data.user_info));
       notify("Successful login! Your rest is RestUp assured.", "success");
-      localStorage.setItem("token", result.data.token);
+      localStorage.setItem("restupToken", result.data.token);
       store.dispatch(setLoginUser(true));
       switchPreloader(false);
     })
@@ -245,7 +244,7 @@ export const loginDemoUser = async () => {
 };
 // Log out the user with token
 export const logOutUser = async () => {
-  let token = localStorage.getItem("token");
+  let token = localStorage.getItem("restupToken");
   await axios
     .get(userLogoutUrl, {
       headers: {
@@ -253,8 +252,8 @@ export const logOutUser = async () => {
       },
     })
     .then((result) => {
-      store.dispatch(setLogoutUser(false));
-      localStorage.removeItem("token");
+      store.dispatch(setLoginUser(false));
+      localStorage.removeItem("restupToken");
       document.getElementById("home").click();
       notify("Logout successful!", "info");
     })

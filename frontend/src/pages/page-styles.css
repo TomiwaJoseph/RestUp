@@ -779,6 +779,9 @@
   background: var(--main-color);
   color: #fff;
 }
+.dashboard-container .list-group .logout-btn:focus {
+  box-shadow: none;
+}
 .dashboard-container .user-info-container,
 .dashboard-container .booking-info-container {
   border: 1px solid #4c4c4c;

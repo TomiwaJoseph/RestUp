@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./apartmentspluspagination.css";
 import { NavLink } from "react-router-dom";
-import featured1 from "../statics/room-1.jpg";
 
 const ApartmentsPlusPagination = ({ data, backendUrl }) => {
   const dataToRender = data;
@@ -58,9 +57,9 @@ const ApartmentsPlusPagination = ({ data, backendUrl }) => {
     }
   };
 
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [currentPage]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   return (
     <>

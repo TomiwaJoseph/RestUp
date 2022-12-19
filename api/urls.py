@@ -18,5 +18,5 @@ urlpatterns = [
     path('auth/logout/', views.logout),
     path('auth/user/', views.fetch_user, name='fetch_user'),
     # STRIPE URL
-    path('save-stripe-info/', views.save_stripe_info),
+    path('save-stripe-info/', views.save_stripe_info, name='save-stripe-info'),
 ]

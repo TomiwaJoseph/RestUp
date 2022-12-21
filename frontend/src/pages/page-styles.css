@@ -422,16 +422,19 @@
   border: 1px solid #1a6692;
   box-shadow: none;
 }
-
 .success-msg {
   color: #20925d;
   text-align: center;
   height: 40vh;
+  margin-top: 20vh;
+  padding: 40px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 2rem;
+  margin-bottom: 10vh;
+  border: 1px solid #1a6692;
+  border-radius: 3px;
 }
 .success-msg svg {
   font-size: 60px;
@@ -449,21 +452,21 @@
 }
 .success-msg .call-to-action {
   display: flex;
-  margin-left: auto;
+  /* margin-left: auto; */
 }
-.success-msg .call-to-action .btn {
-  border: 1px solid var(--main-color);
+.success-msg .call-to-action a {
+  border: 1px solid #1a6692;
   padding: 5px 20px;
   margin: 0 10px;
   border-radius: 3px;
   color: #6f6f6f;
   background: transparent;
 }
-.success-msg .call-to-action .btn:hover {
-  background: var(--main-color);
+.success-msg .call-to-action a:hover {
+  background: #1a6692;
   color: #fff;
 }
-.success-msg .call-to-action .btn:focus {
+.success-msg .call-to-action a:focus {
   box-shadow: none;
 }
 /* =========================================
@@ -781,6 +784,7 @@
 }
 .dashboard-container .list-group .logout-btn:focus {
   box-shadow: none;
+  outline: none;
 }
 .dashboard-container .user-info-container,
 .dashboard-container .booking-info-container {

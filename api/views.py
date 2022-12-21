@@ -1,19 +1,25 @@
+import math
 import os
+import random
+import stripe
+from base.models import Apartment, Room, RoomInfo, RoomExtra, ApartmentImages
 from datetime import date, timedelta
+from django.db.models import Q
+from django.contrib.auth import authenticate, get_user_model
+from django.conf import settings
+from django.core.files import File
+from django.utils import timezone
+from random import shuffle, choice, choices, seed, sample
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
-from base.models import Apartment, Room, RoomInfo, RoomExtra, ApartmentImages
-from random import shuffle, choice, choices, seed, sample
-import random
-from django.db.models import Q
-from django.contrib.auth import authenticate
-from django.core.files import File
-from django.utils import timezone
 from .serializers import ApartmentSerializer, RoomSerializer, RegisterSerializer
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+User = get_user_model()
 
 
 images_path = r'C:\Users\dretech\Documents\bluetooth\apartments'
@@ -134,15 +140,6 @@ def create_all():
 
 # create_all()
 
-
-@api_view(['GET'])
-def test_page(request):
-    data = list(set([room.apartment for room in Room.objects.filter(
-        availability=True) if room.availability]))
-    serializer = ApartmentSerializer(choices(data, k=3), many=True).data
-    return Response(serializer)
-
-
 @api_view(['GET'])
 def get_apartments(request):
     data = list(Apartment.objects.all())
@@ -261,7 +258,7 @@ def get_single_room(request):
 
     new_serializer = {
         "room_price": single_room.price,
-        "room_refundable": single_room.refundable,
+        # "room_refundable": single_room.refundable,
     }
     return Response(new_serializer, status=status.HTTP_200_OK)
 
@@ -287,25 +284,23 @@ class LoginView(APIView):
         if user:
             token = Token.objects.get_or_create(user=user)
             return Response({
+                "first_name": user.first_name,
+                "last_name": user.last_name,
+                "email": user.email,
                 'token': user.auth_token.key
             })
         return Response({"error": 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
-def get_user_info(request):
-    from django.contrib.auth import get_user_model
-    User = get_user_model()
+def get_user_bookings(request):
     user = User.objects.first()
 
     data = list(Apartment.objects.all())
-    random_image = choice(data)
+    sys_random = random.SystemRandom()
+    random_image = sys_random.choice(data)
+
     return Response({
-        "user_info": {
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-            "email": user.email,
-        },
         "booked_room_info": ['test', 'two'],
         "random_dashboard_image": random_image.main_image.url,
     })
@@ -313,7 +308,15 @@ def get_user_info(request):
 
 @api_view(['GET'])
 def logout(request):
-    request.user.auth_token.delete()
+    the_token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
+    try:
+        token = Token.objects.get(key=the_token)
+    except Token.DoesNotExist:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+    user = User.objects.get(auth_token=token)
+    # print(user)
+    # print()
+    user.auth_token.delete()
     data = {'success': 'Successfully logged out.'}
     return Response(data=data, status=status.HTTP_200_OK)
 
@@ -338,4 +341,47 @@ def fetch_user(request):
 
 @api_view(['POST'])
 def save_stripe_info(request):
-    pass
+    data = request.data
+    payment_method_id = data['payment_method_id']
+    email = data['email']
+    amount = math.ceil(data['amount'])
+    user_info = data['userInfo']
+    stay_duration = data['stayDuration']
+    room_apartment_slug = data['roomApartmentSlug']
+    token = data['token']
+    print(email, amount)
+    print(user_info)
+    print(stay_duration, room_apartment_slug, token)
+    print()
+
+    # checking if customer with provided email already exists
+    # customer_data = stripe.Customer.list(email=email).data
+
+    # if len(customer_data) == 0:
+    #     # creating customer
+    #     customer = stripe.Customer.create(
+    #         email=email,
+    #         payment_method=payment_method_id,
+    #         invoice_settings={
+    #             'default_payment_method': payment_method_id
+    #         }
+    #     )
+    # else:
+    #     customer = customer_data[0]
+
+    # creating paymentIntent
+    # stripe.PaymentIntent.create(
+    #     customer=customer,
+    #     payment_method=payment_method_id,
+    #     currency='usd',
+    #     amount=amount*100,
+    #     confirm=True
+    # )
+
+    return Response(status=status.HTTP_200_OK, data={
+        'message': 'Success',
+        'data': {
+            'customer_id': customer.id,
+            'customer_email': customer.email,
+        }
+    })

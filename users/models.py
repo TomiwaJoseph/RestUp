@@ -3,7 +3,8 @@ from django.contrib.auth.models import (
     BaseUserManager,
     AbstractUser
 )
-# from base.models import Apartment
+from django.conf import settings
+from base.models import Room
 
 
 class UserManager(BaseUserManager):
@@ -55,3 +56,17 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.first_name + " " + self.last_name
+
+
+class Booking(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    room = models.ForeignKey(
+        Room, on_delete=models.CASCADE, related_name="booked_room")
+    phone_number = models.CharField(max_length=20, default='+123 456 7890')
+    ref_code = models.CharField(max_length=25, blank=True, null=True)
+    start_date = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{}'s order - {}".format(self.user, self.ref_code)

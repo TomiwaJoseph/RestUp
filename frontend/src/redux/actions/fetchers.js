@@ -1,8 +1,10 @@
 import axios from "axios";
 import store from "../store/store";
 import {
+  removeUserInfo,
   setBadRequest,
   setCurrentApartments,
+  setDashboardInfo,
   setFeaturedApartments,
   setHighestPriceSizeAndCapacity,
   setInternetError,
@@ -180,12 +182,12 @@ export const fetchHighestPriceSizeAndCapacity = async () => {
     });
 };
 // Get the highest room price and capacity the hotel has from api
-export const fetchUserInfo = async () => {
+export const fetchDashboardInfo = async () => {
   switchPreloader(true);
   await axios
     .get(fetchDashboardInfoUrl)
     .then((response) => {
-      store.dispatch(setUserInfo(response.data));
+      store.dispatch(setDashboardInfo(response.data));
       store.dispatch(setInternetError(false));
       switchPreloader(false);
     })
@@ -210,6 +212,11 @@ export const signInUser = async (signInData) => {
     .then((result) => {
       notify("Successful login! Your rest is RestUp assured.", "success");
       localStorage.setItem("restupToken", result.data.token);
+      // console.log(result.data);
+      delete result.data.token;
+      // console.log(result.data);
+      console.log(" ");
+      store.dispatch(setUserInfo(result.data));
       store.dispatch(setLoginUser(true));
       switchPreloader(false);
     })
@@ -255,6 +262,7 @@ export const logOutUser = async () => {
       store.dispatch(setLoginUser(false));
       localStorage.removeItem("restupToken");
       document.getElementById("home").click();
+      store.dispatch(removeUserInfo());
       notify("Logout successful!", "info");
     })
     .catch((err) => {

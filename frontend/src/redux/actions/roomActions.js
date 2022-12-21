@@ -57,6 +57,11 @@ export const removeSingleRoomDetails = () => {
     type: ActionTypes.REMOVE_SINGLE_ROOM_DETAILS,
   };
 };
+export const removeUserInfo = () => {
+  return {
+    type: ActionTypes.REMOVE_USER_INFO,
+  };
+};
 export const setPreloaderStatus = (status) => {
   return {
     type: ActionTypes.IS_FETCHING_DATA,
@@ -81,22 +86,16 @@ export const setUserInfo = (value) => {
     payload: value,
   };
 };
+export const setDashboardInfo = (value) => {
+  return {
+    type: ActionTypes.SET_DASHBOARD_INFO,
+    payload: value,
+  };
+};
 
 export const setLoginUser = (value) => {
   return {
     type: ActionTypes.USER_IS_AUTHENTICATED,
-    payload: value,
-  };
-};
-// export const setLogoutUser = (value) => {
-//   return {
-//     type: ActionTypes.LOGOUT_USER,
-//     payload: value,
-//   };
-// };
-export const setRandomDashboardImage = (value) => {
-  return {
-    type: ActionTypes.SET_DASHBOARD_IMAGE,
     payload: value,
   };
 };

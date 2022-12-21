@@ -7,8 +7,8 @@ const globalState = {
   currentApartmentData: [],
   randomApartmentImage: "",
   userInfo: {},
-  booked_room_info: [],
-  randomDashboardImage: "",
+  dashboard_info: {},
+  // randomDashboardImage: "",
   highestRoomPrice: 360,
   highestCapacity: 6,
   highestRoomPriceSizeAndCapacity: {},
@@ -74,14 +74,12 @@ export const roomReducer = (state = globalState, { type, payload }) => {
     case ActionTypes.SET_USER_INFO:
       return {
         ...state,
-        userInfo: payload["user_info"],
-        booked_room_info: payload["booked_room_info"],
-        randomDashboardImage: payload["random_dashboard_image"],
+        userInfo: payload,
       };
-    case ActionTypes.SET_DASHBOARD_IMAGE:
+    case ActionTypes.SET_DASHBOARD_INFO:
       return {
         ...state,
-        randomDashboardImage: payload,
+        dashboard_info: payload,
       };
     case ActionTypes.REMOVE_SELECTED_SINGLE_APARTMENT:
       return {
@@ -97,6 +95,11 @@ export const roomReducer = (state = globalState, { type, payload }) => {
       return {
         ...state,
         singleRoomDetails: {},
+      };
+    case ActionTypes.REMOVE_USER_INFO:
+      return {
+        ...state,
+        userInfo: {},
       };
     default:
       return state;

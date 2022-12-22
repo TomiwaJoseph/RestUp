@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Hero from "../components/Hero";
-import { fetchUserInfo, logOutUser } from "../redux/actions/fetchers";
+import { fetchDashboardInfo, logOutUser } from "../redux/actions/fetchers";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import NoInternet from "../components/NoInternet";
 import Preloader from "../components/Preloader";
@@ -14,12 +14,12 @@ const Dashboard = () => {
     fetchingData,
     noInternet,
     isAuthenticated,
-    booked_room_info,
-    randomDashboardImage,
+    dashboard_info,
     userInfo,
     backendUrl,
   } = storeContext;
   const { first_name, last_name, email } = userInfo;
+  const { booked_room_info, random_dashboard_image } = dashboard_info;
   const [currentSection, setCurrentSection] = useState(0);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchUserInfo();
+    fetchDashboardInfo();
   }, []);
 
   if (fetchingData) {
@@ -47,7 +47,7 @@ const Dashboard = () => {
       <Hero
         section={"Dashboard"}
         orient="center"
-        img={randomDashboardImage}
+        img={random_dashboard_image}
         backendUrl={backendUrl}
       />
       <div className="dashboard-container">

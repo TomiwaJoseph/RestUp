@@ -28,29 +28,28 @@ const CARD_ELEMENT_OPTIONS = {
 const CheckoutForm = (props) => {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [nameOnCard, setNameOnCard] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
 
   const stripe = useStripe();
   const elements = useElements();
   const handlePaymentFormSubmit = async (event) => {
     event.preventDefault();
 
-    // if (!stripe || !elements) {
-    //   // Stripe.js has not yet loaded.
-    //   // Make sure to disable form submission until Stripe.js has loaded.
-    //   return;
-    // }
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
 
     setLoading(true);
     setErrorMsg("");
+    let name = props.userInfo[0] + " " + props.userInfo[1];
+    let email = props.userInfo[2];
 
     const paymentMethodObj = {
       type: "card",
       card: elements.getElement(CardNumberElement),
       billing_details: {
-        nameOnCard,
+        name,
         email,
       },
     };
@@ -61,7 +60,9 @@ const CheckoutForm = (props) => {
     stripePaymentMethodHandler(
       {
         amount: props.amount,
-        orderInfo: props.orderInfo,
+        userInfo: props.userInfo,
+        stayDuration: props.stayDuration,
+        roomApartmentSlug: props.roomApartmentSlug,
         result: paymentMethodResult,
       },
       handleResponse
@@ -71,7 +72,6 @@ const CheckoutForm = (props) => {
   const handleResponse = (response) => {
     setLoading(false);
     if (response.error) {
-      console.log("some serious error occured...");
       setErrorMsg(
         typeof response.error === "string"
           ? response.error

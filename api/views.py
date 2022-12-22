@@ -1,8 +1,10 @@
 import math
 import os
 import random
+import string
 import stripe
 from base.models import Apartment, Room, RoomInfo, RoomExtra, ApartmentImages
+from users.models import Booking
 from datetime import date, timedelta
 from django.db.models import Q
 from django.contrib.auth import authenticate, get_user_model
@@ -20,6 +22,10 @@ from .serializers import ApartmentSerializer, RoomSerializer, RegisterSerializer
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 User = get_user_model()
+
+
+def create_ref_code():
+    return "".join(random.choices(string.ascii_lowercase + string.digits, k=25))
 
 
 images_path = r'C:\Users\dretech\Documents\bluetooth\apartments'
@@ -122,8 +128,8 @@ def create_all():
                 price=price,
                 bed_type=bed_types[0],
                 size=size,
-                booked_start_date=timezone.now(),
-                booked_end_date=timezone.now() + timedelta(days=3),
+                # booked_start_date=timezone.now(),
+                # booked_end_date=timezone.now(),
                 refundable=refundable,
             )
             room.save()
@@ -139,6 +145,43 @@ def create_all():
 
 
 # create_all()
+
+email = 'stephaniemiller@hotmail.com'
+amount = 600
+user_info = ['Stephanie', 'Miller',
+             'stephaniemiller@hotmail.com', '+234 906 315 4578']
+stay_duration = 3
+room_apartment_slug = ['apartment-room-1', 'kauia-grande']
+token = 'f70991fcda5e706bf9be24391b4895338b2775e0'
+
+restup_user = User.objects.get(auth_token=token)
+room = Room.objects.get(
+    apartment__slug=room_apartment_slug[1],
+    slug=room_apartment_slug[0],
+)
+
+
+def create_booking():
+    # create new booking for room
+    new_booking = Booking.objects.create(
+        user=restup_user,
+        room=room,
+        occupant_first_name=user_info[0],
+        occupant_last_name=user_info[1],
+        occupant_email=user_info[2],
+        occupant_phone_number=user_info[3],
+        stay_duration=stay_duration,
+        ref_code=create_ref_code(),
+        start_date=timezone.now(),
+        end_date=timezone.now() + timedelta(days=stay_duration)
+    )
+    # make the room unavailable
+    room.availability = False
+    room.save()
+
+
+# create_booking()
+
 
 @api_view(['GET'])
 def get_apartments(request):
@@ -221,7 +264,6 @@ def get_single_apartment(request, slug):
     # Available Rooms
     available_rooms = Room.objects.filter(
         apartment=single_apartment,
-        booked_end_date__lte=timezone.now(),
         availability=True
     )
     room_serializer = RoomSerializer(
@@ -346,37 +388,56 @@ def save_stripe_info(request):
     email = data['email']
     amount = math.ceil(data['amount'])
     user_info = data['userInfo']
-    stay_duration = data['stayDuration']
+    stay_duration = int(data['stayDuration'])
     room_apartment_slug = data['roomApartmentSlug']
     token = data['token']
-    print(email, amount)
-    print(user_info)
-    print(stay_duration, room_apartment_slug, token)
-    print()
 
     # checking if customer with provided email already exists
-    # customer_data = stripe.Customer.list(email=email).data
+    customer_data = stripe.Customer.list(email=email).data
 
-    # if len(customer_data) == 0:
-    #     # creating customer
-    #     customer = stripe.Customer.create(
-    #         email=email,
-    #         payment_method=payment_method_id,
-    #         invoice_settings={
-    #             'default_payment_method': payment_method_id
-    #         }
-    #     )
-    # else:
-    #     customer = customer_data[0]
+    if len(customer_data) == 0:
+        # creating customer
+        customer = stripe.Customer.create(
+            email=email,
+            payment_method=payment_method_id,
+            invoice_settings={
+                'default_payment_method': payment_method_id
+            }
+        )
+    else:
+        customer = customer_data[0]
 
     # creating paymentIntent
-    # stripe.PaymentIntent.create(
-    #     customer=customer,
-    #     payment_method=payment_method_id,
-    #     currency='usd',
-    #     amount=amount*100,
-    #     confirm=True
-    # )
+    stripe.PaymentIntent.create(
+        customer=customer,
+        payment_method=payment_method_id,
+        currency='usd',
+        amount=amount*100,
+        confirm=True
+    )
+
+    restup_user = User.objects.get(auth_token=token)
+    room = Room.objects.get(
+        apartment__slug=room_apartment_slug[1],
+        slug=room_apartment_slug[0],
+    )
+
+    # create new booking for room
+    new_booking = Booking.objects.create(
+        user=restup_user,
+        room=room,
+        occupant_first_name=user_info[0],
+        occupant_last_name=user_info[1],
+        occupant_email=user_info[2],
+        occupant_phone_number=user_info[3],
+        stay_duration=stay_duration,
+        ref_code=create_ref_code(),
+        start_date=timezone.now(),
+        end_date=timezone.now() + timedelta(days=stay_duration)
+    )
+    # make the room unavailable
+    room.availability = False
+    room.save()
 
     return Response(status=status.HTTP_200_OK, data={
         'message': 'Success',

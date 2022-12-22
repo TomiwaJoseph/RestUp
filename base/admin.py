@@ -8,8 +8,8 @@ class ApartmentAdmin(admin.ModelAdmin):
 
 
 class RoomAdmin(admin.ModelAdmin):
-    list_display = ['apartment', 'name', 'max_people', 'price', 'bed_type',
-                    'size', 'refundable', 'availability']
+    list_display = ['apartment', 'name', 'price', 'max_people',  'bed_type',
+                    'refundable', 'availability']
     prepopulated_fields = {'slug': ('name',)}
     list_editable = ['availability']
     # list_filter = ['category']

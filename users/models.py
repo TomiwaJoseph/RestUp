@@ -63,10 +63,14 @@ class Booking(models.Model):
                              on_delete=models.CASCADE)
     room = models.ForeignKey(
         Room, on_delete=models.CASCADE, related_name="booked_room")
-    phone_number = models.CharField(max_length=20, default='+123 456 7890')
+    occupant_first_name = models.CharField(max_length=50)
+    occupant_last_name = models.CharField(max_length=50)
+    occupant_email = models.EmailField(max_length=100)
+    occupant_phone_number = models.CharField(max_length=20)
+    stay_duration = models.IntegerField()
     ref_code = models.CharField(max_length=25, blank=True, null=True)
-    start_date = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateTimeField(auto_now_add=True)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
 
     def __str__(self):
-        return "{}'s order - {}".format(self.user, self.ref_code)
+        return "{}'s booking - {}".format(self.user, self.ref_code)

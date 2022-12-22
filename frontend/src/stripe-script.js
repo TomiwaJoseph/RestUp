@@ -1,7 +1,7 @@
 const API_ENDPOINT = "http://localhost:8000/api";
 
 export const stripePaymentMethodHandler = async (data, cb) => {
-  const { amount, orderInfo, result } = data;
+  const { amount, userInfo, stayDuration, roomApartmentSlug, result } = data;
   if (result.error) {
     // show error in payment form
     cb(result);
@@ -11,8 +11,10 @@ export const stripePaymentMethodHandler = async (data, cb) => {
       name: result.paymentMethod.billing_details.name,
       email: result.paymentMethod.billing_details.email,
       amount: amount,
-      orderInfo: orderInfo,
-      token: localStorage.getItem("token"),
+      userInfo: userInfo,
+      stayDuration: stayDuration,
+      roomApartmentSlug: roomApartmentSlug,
+      token: localStorage.getItem("restupToken"),
     });
     cb(paymentResponse);
   }

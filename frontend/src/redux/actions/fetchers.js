@@ -29,6 +29,7 @@ const userRegisterUrl = "http://localhost:8000/api/auth/register/";
 const userLoginUrl = "http://localhost:8000/api/auth/login/";
 const userLogoutUrl = "http://localhost:8000/api/auth/logout/";
 const fetchDashboardInfoUrl = "http://localhost:8000/api/dashboard-info/";
+const cancelBookingUrl = "http://localhost:8000/api/cancel-booking/";
 
 const notify = (message, errorType) =>
   toast(message, {
@@ -181,19 +182,62 @@ export const fetchHighestPriceSizeAndCapacity = async () => {
       switchPreloader(false);
     });
 };
-// Get the highest room price and capacity the hotel has from api
+// Get the bookings of logged in user from api
 export const fetchDashboardInfo = async () => {
-  switchPreloader(true);
+  // switchPreloader(true);
+  let token = localStorage.getItem("restupToken");
+  let config = {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  };
   await axios
-    .get(fetchDashboardInfoUrl)
+    .get(fetchDashboardInfoUrl, config)
     .then((response) => {
       store.dispatch(setDashboardInfo(response.data));
       store.dispatch(setInternetError(false));
-      switchPreloader(false);
+      // switchPreloader(false);
     })
     .catch((err) => {
       store.dispatch(setInternetError(true));
+      // switchPreloader(false);
+    });
+};
+// Sign in user with token if correct credentials are provided
+export const cancelBooking = async (refCode) => {
+  switchPreloader(true);
+  let token = localStorage.getItem("restupToken");
+  let body = JSON.stringify({
+    ref: refCode,
+    token: token,
+  });
+  await axios
+    .post(cancelBookingUrl, body, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((result) => {
+      store.dispatch(setInternetError(false));
+      notify(
+        "Successful cancelled. Your funds will be refunded shortly.",
+        "success"
+      );
+      store.dispatch(setDashboardInfo(result.data));
+      // document.getElementById("back-arrow").click();
       switchPreloader(false);
+    })
+    .catch((err) => {
+      // console.log(err);
+      // console.log(err.response.data.error);
+      // console.log(" ");
+      switchPreloader(false);
+      if (err.message === "Network Error") {
+        store.dispatch(setInternetError(true));
+      } else if (err.response.data.error === "Unauthorized user") {
+        notify("You can't cancel this booking", "info");
+      }
     });
 };
 // Sign in user with token if correct credentials are provided
@@ -268,8 +312,9 @@ export const logOutUser = async () => {
     .catch((err) => {
       if (err.message === "Network Error") {
         store.dispatch(setInternetError(true));
+      } else {
+        notify("Unable to log out! Try again.", "error");
       }
-      notify("Unable to log out! Try again.", "error");
     });
 };
 // Sign up users with the credentials that are provided

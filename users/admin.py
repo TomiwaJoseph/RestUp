@@ -25,8 +25,12 @@ class UserAdmin(BaseUserAdmin):
 
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ['user', 'room', 'occupant_email',
+    list_display = ['user', 'room', 'refundable',
                     'stay_duration',  'start_date', 'end_date']
+
+    def refundable(self, obj):
+        return obj.room.refundable
+
     # list_editable = ['start_date', 'end_date']
     # list_filter = ['category']
     # search_fields = ['name', 'price']

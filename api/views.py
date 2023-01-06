@@ -4,8 +4,8 @@ import random
 import string
 import stripe
 from base.models import Apartment, Room, RoomInfo, RoomExtra, ApartmentImages
-from users.models import Booking
-from datetime import date, timedelta
+from users.models import Booking, CustomUser
+from datetime import timedelta, time
 from django.db.models import Q
 from django.contrib.auth import authenticate, get_user_model
 from django.conf import settings
@@ -18,7 +18,7 @@ from rest_framework import status
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
-from .serializers import ApartmentSerializer, RoomSerializer, RegisterSerializer
+from .serializers import ApartmentSerializer, RoomSerializer, RegisterSerializer, BookingSerializer
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 User = get_user_model()
@@ -145,44 +145,6 @@ def create_all():
 
 
 # create_all()
-
-email = 'stephaniemiller@hotmail.com'
-amount = 600
-user_info = ['Stephanie', 'Miller',
-             'stephaniemiller@hotmail.com', '+234 906 315 4578']
-stay_duration = 3
-room_apartment_slug = ['apartment-room-1', 'kauia-grande']
-token = 'f70991fcda5e706bf9be24391b4895338b2775e0'
-
-restup_user = User.objects.get(auth_token=token)
-room = Room.objects.get(
-    apartment__slug=room_apartment_slug[1],
-    slug=room_apartment_slug[0],
-)
-
-
-def create_booking():
-    # create new booking for room
-    new_booking = Booking.objects.create(
-        user=restup_user,
-        room=room,
-        occupant_first_name=user_info[0],
-        occupant_last_name=user_info[1],
-        occupant_email=user_info[2],
-        occupant_phone_number=user_info[3],
-        stay_duration=stay_duration,
-        ref_code=create_ref_code(),
-        start_date=timezone.now(),
-        end_date=timezone.now() + timedelta(days=stay_duration)
-    )
-    # make the room unavailable
-    room.availability = False
-    room.save()
-
-
-# create_booking()
-
-
 @api_view(['GET'])
 def get_apartments(request):
     data = list(Apartment.objects.all())
@@ -283,9 +245,6 @@ def get_single_apartment(request, slug):
 def get_single_room(request):
     apartment_slug = request.data.get('apartmentSlug')
     room_slug = request.data.get('roomSlug')
-    # print(apartment_slug)
-    # print(room_slug)
-    # print()
 
     # Get Room
     try:
@@ -300,7 +259,7 @@ def get_single_room(request):
 
     new_serializer = {
         "room_price": single_room.price,
-        # "room_refundable": single_room.refundable,
+        "room_image": single_room.apartment.main_image.url,
     }
     return Response(new_serializer, status=status.HTTP_200_OK)
 
@@ -336,16 +295,76 @@ class LoginView(APIView):
 
 @api_view(['GET'])
 def get_user_bookings(request):
-    user = User.objects.first()
+    the_token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
+    try:
+        token = Token.objects.get(key=the_token)
+        if token.user != request.user:
+            raise Token.DoesNotExist
+    except Token.DoesNotExist:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
 
+    all_user_bookings = Booking.objects.filter(
+        user=token.user
+    )
+    booking_serializer = BookingSerializer(
+        list(all_user_bookings), many=True).data
     data = list(Apartment.objects.all())
     sys_random = random.SystemRandom()
     random_image = sys_random.choice(data)
 
     return Response({
-        "booked_room_info": ['test', 'two'],
+        "booked_room_info": booking_serializer,
         "random_dashboard_image": random_image.main_image.url,
     })
+
+
+@api_view(['POST'])
+def cancel_booking(request):
+    # print()
+    # return Response({'error': 'Unauthorized user'}, status=status.HTTP_401_UNAUTHORIZED)
+    # booking_ref_code = request.data.get('ref')
+    # token = request.data.get('token')
+    # print(booking_ref_code)
+    # print(token)
+    # return Response(status=status.HTTP_200_OK)
+
+    booking_ref_code = request.data.get('ref')
+    token = request.data.get('token')
+    try:
+        token = Token.objects.get(key=token)
+        # print(token.user)
+        # print(request.user)
+        if token.user != request.user:
+            # print('bad token user')
+            raise Token.DoesNotExist
+        ref_code_query = Booking.objects.get(ref_code=booking_ref_code)
+        if ref_code_query.user != request.user:
+            # print('bad user')
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        if timezone.now().time() <= time(23, 59):
+            ref_code_query.delete()
+            # Refund user and delete the booking
+            # goes here
+
+        all_user_bookings = Booking.objects.filter(
+            user=token.user
+        )
+        booking_serializer = BookingSerializer(
+            list(all_user_bookings), many=True).data
+        data = list(Apartment.objects.all())
+        sys_random = random.SystemRandom()
+        random_image = sys_random.choice(data)
+        return Response({
+            "booked_room_info": booking_serializer,
+            "random_dashboard_image": random_image.main_image.url,
+        })
+    except Token.DoesNotExist:
+        # print('bad token')
+        return Response({'error': 'Unauthorized user'}, status=status.HTTP_401_UNAUTHORIZED)
+    except Booking.DoesNotExist:
+        # print('bad booking')
+        return Response({'error': 'Unauthorized user'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view(['GET'])
@@ -355,12 +374,35 @@ def logout(request):
         token = Token.objects.get(key=the_token)
     except Token.DoesNotExist:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
+
     user = User.objects.get(auth_token=token)
-    # print(user)
-    # print()
     user.auth_token.delete()
     data = {'success': 'Successfully logged out.'}
     return Response(data=data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def login_demo_user(request):
+    query_user = CustomUser.objects.filter(email='demouser@gmail.com')
+    if not query_user:
+        user = CustomUser.objects.create(
+            email='demouser@gmail.com',
+            first_name='Demo',
+            last_name='User',
+            password='a'
+        )
+        token = Token.objects.get_or_create(user=user)
+    else:
+        user = query_user[0]
+
+    return Response({
+        'user_info': {
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "email": user.email
+        },
+        'token': user.auth_token.key
+    })
 
 
 @api_view(['GET'])
@@ -407,42 +449,88 @@ def save_stripe_info(request):
     else:
         customer = customer_data[0]
 
-    # creating paymentIntent
-    stripe.PaymentIntent.create(
-        customer=customer,
-        payment_method=payment_method_id,
-        currency='usd',
-        amount=amount*100,
-        confirm=True
-    )
+    try:
+        # creating paymentIntent
+        payment_intent = stripe.PaymentIntent.create(
+            customer=customer,
+            payment_method=payment_method_id,
+            currency='usd',
+            amount=amount*100,
+            confirm=True
+        )
 
-    restup_user = User.objects.get(auth_token=token)
-    room = Room.objects.get(
-        apartment__slug=room_apartment_slug[1],
-        slug=room_apartment_slug[0],
-    )
+        # Only confirm an order after you have status: succeeded
+        # should be succeeded
+        if payment_intent['status'] == 'succeeded':
+            restup_user = User.objects.get(auth_token=token)
+            room = Room.objects.get(
+                apartment__slug=room_apartment_slug[1],
+                slug=room_apartment_slug[0],
+            )
 
-    # create new booking for room
-    new_booking = Booking.objects.create(
-        user=restup_user,
-        room=room,
-        occupant_first_name=user_info[0],
-        occupant_last_name=user_info[1],
-        occupant_email=user_info[2],
-        occupant_phone_number=user_info[3],
-        stay_duration=stay_duration,
-        ref_code=create_ref_code(),
-        start_date=timezone.now(),
-        end_date=timezone.now() + timedelta(days=stay_duration)
-    )
-    # make the room unavailable
-    room.availability = False
-    room.save()
+            new_date = timezone.now() + timedelta(days=stay_duration)
+            end_date = new_date.replace(hour=12, minute=00)
 
-    return Response(status=status.HTTP_200_OK, data={
-        'message': 'Success',
-        'data': {
-            'customer_id': customer.id,
-            'customer_email': customer.email,
-        }
-    })
+            # create new booking for room
+            new_booking = Booking.objects.create(
+                user=restup_user,
+                room=room,
+                occupant_first_name=user_info[0],
+                occupant_last_name=user_info[1],
+                occupant_email=user_info[2],
+                occupant_phone_number=user_info[3],
+                stay_duration=stay_duration,
+                ref_code=create_ref_code(),
+                start_date=timezone.now(),
+                end_date=end_date
+            )
+            # make the room unavailable
+            room.availability = False
+            room.save()
+
+            return Response(status=status.HTTP_200_OK, data={
+                'message': 'Success',
+            })
+        else:
+            raise stripe.error.CardError
+
+    except stripe.error.CardError as e:
+        body = e.json_body
+        err = body.get('error', {})
+        # print('Status is: %s' % e.http_status)
+        # print('Type is: %s' % err.get('type'))
+        # print('Code is: %s' % err.get('code'))
+        # print('Message is %s' % err.get('message'))
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={
+            'error': err.get('message')
+        })
+    except stripe.error.RateLimitError as e:
+        # Too many requests made to the API too quickly
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={
+            'error': "The API was not able to respond, try again."
+        })
+    except stripe.error.InvalidRequestError as e:
+        # invalid parameters were supplied to Stripe's API
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={
+            'error': "Invalid parameters, unable to process payment."
+        })
+    except stripe.error.AuthenticationError as e:
+        # Authentication with Stripe's API failed
+        # (maybe you changed API keys recently)
+        pass
+    except stripe.error.APIConnectionError as e:
+        # Network communication with Stripe failed
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={
+            'error': 'Network communication failed, try again.'
+        })
+    except stripe.error.StripeError as e:
+        # Display a very generic error to the user, and maybe
+        # send yourself an email
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={
+            'error': 'Internal Error, contact support.'
+        })
+    # Something else happened, completely unrelated to Stripe
+    except Exception as e:
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={
+            'error': 'Unable to process payment, try again.'
+        })

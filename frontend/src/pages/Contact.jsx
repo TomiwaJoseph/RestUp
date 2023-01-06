@@ -21,6 +21,7 @@ const Contact = () => {
   // }, []);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (openModal) {
       // console.log("modal is open");
       document.body.style["overflow-y"] = "hidden";

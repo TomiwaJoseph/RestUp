@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Preloader from "../components/Preloader";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -63,7 +63,6 @@ const SignUp = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="signup-container">
         <img src={authImg} alt="" className="img-fluid auth-img" />
         <div className="signup-block">

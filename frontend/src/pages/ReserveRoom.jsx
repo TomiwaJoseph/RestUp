@@ -2,7 +2,6 @@ import { NavLink, useParams, useNavigate, useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../components/CheckoutForm";
-import roomImg2 from "../statics/room-2.jpg";
 import { useState, useEffect, useRef } from "react";
 import { fetchSingleRoomDetails } from "../redux/actions/fetchers";
 import { removeSingleRoomDetails } from "../redux/actions/roomActions";
@@ -25,13 +24,14 @@ const ReserveRoom = () => {
   const navigate = useNavigate();
   const storeContext = useSelector((state) => state.store);
   const {
+    backendUrl,
     fetchingData,
     isAuthenticated,
     badRequest,
     noInternet,
     singleRoomDetails,
   } = storeContext;
-  const { room_price } = singleRoomDetails;
+  const { room_price, room_image } = singleRoomDetails;
   const detailsFormRef = useRef();
   const [paymentCompleted, setPaymentCompleted] = useState(false);
   const [activeCrumb, setActiveCrumb] = useState(0);
@@ -179,7 +179,12 @@ const ReserveRoom = () => {
         <>
           <div className="apartment-header">
             <div className="img-container">
-              <img src={roomImg2} className="img-fluid" alt="heroku-promises" />
+              <img
+                // src={roomImg2}
+                src={`${backendUrl}${room_image}`}
+                className="img-fluid"
+                alt="apartment-header-visual"
+              />
             </div>
             <div className="nav-hero"></div>
             <div className="name-hero">

@@ -11,10 +11,11 @@ urlpatterns = [
     path('apartment/<slug:slug>/', views.get_single_apartment),
     path('get-single-room/', views.get_single_room),
     path('dashboard-info/', views.get_user_bookings),
+    path('cancel-booking/', views.cancel_booking),
     # AUTHENTICATION URLS
     path('auth/login/', views.LoginView.as_view(), name='login'),
     path('auth/register/', views.RegisterView.as_view(), name='register'),
-    # path('login-demo-user/', views.login_demo_user, name='demo-login'),
+    path('login-demo-user/', views.login_demo_user, name='demo-login'),
     path('auth/logout/', views.logout),
     path('auth/user/', views.fetch_user, name='fetch_user'),
     # STRIPE URL

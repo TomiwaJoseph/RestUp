@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import HeaderSection from "./HeaderSection";
-import featured1 from "../statics/room-2.jpg";
 
 const FeaturedRooms = ({ data, backendUrl }) => {
   return (
@@ -20,9 +19,7 @@ const FeaturedRooms = ({ data, backendUrl }) => {
                   <h5 className="card-title">{apartment.name}</h5>
                 </div>
                 <div className="card-footer text-center">
-                  <NavLink
-                    to={`/apartments/apartment-detail/${apartment.slug}`}
-                  >
+                  <NavLink to={`/apartments/${apartment.slug}`}>
                     <button className="btn">
                       View Details <span className="fa fa-arrow-right"></span>
                     </button>

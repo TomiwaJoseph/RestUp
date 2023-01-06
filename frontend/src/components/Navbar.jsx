@@ -22,7 +22,7 @@ const Navbar = () => {
   const { isAuthenticated } = storeContext;
 
   useEffect(() => {
-    const onScroll = (e) => {
+    const onScroll = () => {
       let scroll = window.pageYOffset;
       let navbar = document.getElementsByClassName("the_navbar")[0];
       // console.log(scroll);

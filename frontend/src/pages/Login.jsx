@@ -5,7 +5,7 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import authImg from "../statics/authImg.jpg";
 import NoInternet from "../components/NoInternet";
 import Preloader from "../components/Preloader";
-import fetchUser from "../redux/actions/auth";
+import { fetchUser } from "../redux/actions/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");

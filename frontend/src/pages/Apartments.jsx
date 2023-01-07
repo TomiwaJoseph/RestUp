@@ -85,10 +85,6 @@ const Rooms = () => {
 
   const handleSearchFormSubmit = (e) => {
     e.preventDefault();
-    // let startDate = date[0].startDate;
-    // let endDate = date[0].endDate;
-    // let formattedStartDate = format(startDate, "dd/MM/yyy");
-    // let formattedEndDate = format(endDate, "dd/MM/yyy");
     fetchFilteredApartments([
       sizeMinValue,
       sizeMaxValue,
@@ -99,19 +95,23 @@ const Rooms = () => {
     ]);
   };
   const handleOutsideClick = (e) => {
-    if (sizeRef.current.contains(e.target)) {
-      setOpenPrice(false);
-      setOpenCapacity(false);
-    } else if (priceRef.current.contains(e.target)) {
-      setOpenSize(false);
-      setOpenCapacity(false);
-    } else if (capacityRef.current.contains(e.target)) {
-      setOpenPrice(false);
-      setOpenSize(false);
-    } else {
-      setOpenSize(false);
-      setOpenPrice(false);
-      setOpenCapacity(false);
+    try {
+      if (sizeRef.current.contains(e.target)) {
+        setOpenPrice(false);
+        setOpenCapacity(false);
+      } else if (priceRef.current.contains(e.target)) {
+        setOpenSize(false);
+        setOpenCapacity(false);
+      } else if (capacityRef.current.contains(e.target)) {
+        setOpenPrice(false);
+        setOpenSize(false);
+      } else {
+        setOpenSize(false);
+        setOpenPrice(false);
+        setOpenCapacity(false);
+      }
+    } catch (err) {
+      console.log(" ");
     }
   };
 
@@ -121,6 +121,7 @@ const Rooms = () => {
       dispatch(removeRandomImage());
       void document.removeEventListener("click", handleOutsideClick, false);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Helps with not showing no room match your parameters
@@ -140,7 +141,6 @@ const Rooms = () => {
     }
     return () => {
       getBody.classList.remove("dark-nav");
-      // dispatch(removeRandomImage());
     };
   }, [noInternet]);
 

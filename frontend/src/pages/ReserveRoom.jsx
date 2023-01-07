@@ -14,9 +14,6 @@ import { toast } from "react-toastify";
 const PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 const stripePromise = loadStripe(PUBLISHABLE_KEY);
 
-// console.log(PUBLISHABLE_KEY);
-// console.log(stripePromise);
-
 const ReserveRoom = () => {
   const { roomSlug, apartmentSlug } = useParams();
   const dispatch = useDispatch();
@@ -180,7 +177,6 @@ const ReserveRoom = () => {
           <div className="apartment-header">
             <div className="img-container">
               <img
-                // src={roomImg2}
                 src={`${backendUrl}${room_image}`}
                 className="img-fluid"
                 alt="apartment-header-visual"
@@ -300,7 +296,6 @@ const ReserveRoom = () => {
                           name="first-name"
                           required
                           className="form-control"
-                          // placeholder="First Name"
                         />
                       </div>
                       <div className="col-6">
@@ -311,7 +306,6 @@ const ReserveRoom = () => {
                           name="last-name"
                           required
                           className="form-control"
-                          // placeholder="Last Name"
                         />
                       </div>
                       <div className="col-12">
@@ -322,7 +316,6 @@ const ReserveRoom = () => {
                           name="email"
                           required
                           className="form-control"
-                          // placeholder="Email"
                         />
                       </div>
                       <div className="col-12">
@@ -333,7 +326,6 @@ const ReserveRoom = () => {
                           name="phone"
                           required
                           className="form-control"
-                          // placeholder="Phone"
                         />
                       </div>
                     </div>

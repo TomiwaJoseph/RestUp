@@ -1,11 +1,9 @@
 .testimonial-container {
-  /* background: var(--main-color); */
   padding: 30px 0 70px 0;
   margin-top: 3rem;
 }
 .testimonial-container .section-title h2 {
   color: #454545;
-  /* font-weight: 300; */
   letter-spacing: 3px;
   margin-bottom: 30px;
 }
@@ -15,7 +13,6 @@
   justify-content: center;
   height: 30vh;
   text-align: center;
-  /* border: 1px solid #c0c0c0; */
   border: 1px solid var(--main-color);
   border-radius: 3px;
   padding: 10px 20px;

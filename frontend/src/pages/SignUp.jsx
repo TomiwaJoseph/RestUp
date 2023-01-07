@@ -9,10 +9,9 @@ import NoInternet from "../components/NoInternet";
 import authImg from "../statics/authImg.jpg";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const storeContext = useSelector((state) => state.store);
   const { fetchingData, noInternet, isAuthenticated } = storeContext;
-  const navigate = useNavigate();
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -39,9 +38,6 @@ const SignUp = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
     const getBody = document.body;
     getBody.classList.add("dark-nav");
     return () => {

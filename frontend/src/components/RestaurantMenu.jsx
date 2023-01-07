@@ -1,4 +1,3 @@
-import "./restaurantmenu.css";
 import RestaurantFilter from "./RestaurantFilter";
 import HeaderSection from "./HeaderSection";
 

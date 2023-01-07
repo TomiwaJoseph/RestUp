@@ -83,7 +83,6 @@ const SingleApartment = () => {
             <div className="img-container">
               <img
                 src={`${backendUrl}${all_apartment_images[0]}`}
-                // src={roomImg1}
                 className="img-fluid"
                 alt="apartment-header-visual"
               />
@@ -108,7 +107,6 @@ const SingleApartment = () => {
                 <div key={index} className="img-wrapper">
                   <img
                     src={`${backendUrl}${photo}`}
-                    // src={photo}
                     alt="room-visual"
                     className="room-img"
                   />
@@ -167,7 +165,6 @@ const SingleApartment = () => {
                     </div>
                   </div>
                   <div className="col-md-4 apartment-cta my-auto">
-                    {/* <p className="duration">3 nights</p> */}
                     <p>${room.price} / night</p>
                     <p
                       className={

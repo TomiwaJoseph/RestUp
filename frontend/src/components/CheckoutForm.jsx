@@ -66,15 +66,10 @@ const CheckoutForm = (props) => {
         },
       });
 
-      // console.log("Here is the payment method...");
-      // console.log(paymentMethod);
-      // console.log(" ");
-
       if (error) {
         setLoading(false);
         setErrorMsg(error.message);
       } else {
-        // console.log("Sending details to server...");
         stripePaymentMethodHandler({
           amount: props.amount,
           userInfo: props.userInfo,
@@ -83,8 +78,6 @@ const CheckoutForm = (props) => {
           result: paymentMethod,
         })
           .then((response) => {
-            // console.log(response);
-            // console.log(response.data.message);
             props.setPaymentCompleted(
               response.data.message === "Success" ? true : false
             );

@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import Hero from "../components/Hero";
-import { cancelBooking, fetchDashboardInfo, logOutUser } from "../redux/actions/fetchers";
+import {
+  cancelBooking,
+  fetchDashboardInfo,
+  logOutUser,
+} from "../redux/actions/fetchers";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import NoInternet from "../components/NoInternet";
 import Preloader from "../components/Preloader";
@@ -24,17 +28,14 @@ const Dashboard = () => {
   const [singleBooking, setSingleBooking] = useState({});
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!isAuthenticated) {
       <Preloader />;
       return navigate("/login", { state: { previousPath: pathname } });
     }
+    fetchDashboardInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchDashboardInfo();
-  }, []);
 
   useEffect(() => {
     const getBody = document.body;
@@ -161,7 +162,7 @@ const Dashboard = () => {
                             </div>
                             <div className="booking-details hide">
                               <i
-                              id='back-arrow'
+                                id="back-arrow"
                                 onClick={handleBackButton}
                                 className="fa fa-arrow-left"
                               ></i>
@@ -196,7 +197,12 @@ const Dashboard = () => {
                                   </span>
                                 </p>
                                 {singleBooking.show_cancel ? (
-                                  <button onClick={()=> cancelBooking(singleBooking.ref_code)} className="btn">
+                                  <button
+                                    onClick={() =>
+                                      cancelBooking(singleBooking.ref_code)
+                                    }
+                                    className="btn"
+                                  >
                                     Cancel booking
                                   </button>
                                 ) : null}

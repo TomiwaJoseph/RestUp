@@ -10,12 +10,11 @@ import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 import SingleApartment from "./pages/SingleApartment";
 import ReserveRoom from "./pages/ReserveRoom";
-import Search from "./pages/Search";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import DashBoard from "./pages/Dashboard";
-import fetchUser from "./redux/actions/auth";
+import { fetchUser } from "./redux/actions/auth";
 import store from "./redux/store/store";
 import { setLoginUser } from "./redux/actions/roomActions";
 import { useEffect } from "react";
@@ -49,7 +48,6 @@ const App = () => {
         <Route path="/user/dashboard" element={<DashBoard />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/contact-us" element={<Contact />} />
-        <Route path="/search-apartments" element={<Search />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

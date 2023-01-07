@@ -9,10 +9,10 @@ import "react-slideshow-image/dist/styles.css";
 const LandingCarousel = () => {
   return (
     <>
-      <Fade arrows={false} duration={5000} pauseOnHover={false}>
+      <Fade arrows={false} duration={6000} pauseOnHover={false}>
         <div className="each-fade-effect">
           <div className="image__container">
-            <img src={img1} alt="" />
+            <img src={img1} alt="landing-page-visual-1" />
           </div>
           <div className="carousel__captions">
             <p>"If you get tired, learn to rest, not to quit."</p>
@@ -23,7 +23,7 @@ const LandingCarousel = () => {
         </div>
         <div className="each-fade-effect">
           <div className="image__container">
-            <img src={img2} alt="" />
+            <img src={img2} alt="landing-page-visual-2" />
           </div>
           <div className="carousel__captions">
             <p className="animate__animated animate__slideInUp">
@@ -39,7 +39,7 @@ const LandingCarousel = () => {
         </div>
         <div className="each-fade-effect">
           <div className="image__container">
-            <img src={img3} alt="" />
+            <img src={img3} alt="landing-page-visual-3" />
           </div>
           <div className="carousel__captions">
             <p>"Wisdom is knowing when to have rest."</p>

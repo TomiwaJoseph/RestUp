@@ -1,5 +1,4 @@
-import restaurantImage from "./statics/qt-bg.jpg";
-import roomImage from "./statics/216720655.jpg";
+import restaurantImage from "./statics/restaurant.jpg";
 import aboutImage from "./statics/about-us.jpg";
 import contactImage from "./statics/contact-us.jpg";
 
@@ -69,44 +68,6 @@ export const hotelBranches = [
     image: hotel3,
   },
 ];
-
-// export const roomDetails = [
-//   {
-//     id: 1,
-//     name: "single economy",
-//     slug: "single-economy",
-//     type: "single",
-//     price: 100,
-//     size: 200,
-//     capacity: 1,
-//     pets: false,
-//     breakfast: false,
-//     featured: false,
-//     images: [roomImg1, roomImg2, roomImg3],
-//     description: `Located a 5-minute walk from St. Bug's Gate in Oversight / Overthinking Department, Single
-//       Economy Apartments has accommodations with air conditioning and
-//       free WiFi. The units come with hardwood floors and feature a
-//       fully equipped kitchenette with a microwave, a flat-screen TV,
-//       and a private bathroom with shower and a hairdryer. A fridge is
-//       also offered, as well as an electric tea pot and a coffee
-//       machine. Popular points of interest near the apartment include
-//       StackOverflow Hall, GitHub Market Square and Google Hall Tower. The nearest
-//       airport is Fly Me There International Flights, 16.1 km
-//       from Single Economy Apartments, and the property offers a paid
-//       airport shuttle service.`,
-//     // description:
-//     //   "When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus in quae veniam nostrum numquam, architecto quod saepe est eos ipsam? Pityful a rethoric question ran over her cheek, then she continued her way.",
-//     extras: [
-//       "Plush pillows and breathable bed linens",
-//       "Soft, oversized bath towels",
-//       "Full-sized, pH-balanced toiletries",
-//       "Complimentary refreshments",
-//       "Adequate safety/security",
-//       "Internet",
-//       "Comfortable beds",
-//     ],
-//   },
-// ];
 
 export const menuData = [
   {
@@ -223,52 +184,9 @@ export const menuData = [
   },
 ];
 
-export const ApartmentRooms = [
-  {
-    id: 1,
-    name: "Double Room",
-    slug: "double-room",
-    price: 250,
-    max_people: 2,
-    refundable: true,
-    bedType: "1 full bed",
-    roomInfo: [
-      "26 m",
-      "Air conditioning",
-      "Flat-screen TV",
-      "Soundproof",
-      "Free WiFi",
-    ],
-    roomExtras: [
-      "Free toileteries",
-      "Socket near the bed",
-      "Refrigerator",
-      "Ironing facilities",
-      "Tea/Coffee maker",
-      "Laptop safe",
-    ],
-  },
-  {
-    id: 2,
-    name: "Twin Room",
-    slug: "twin-room",
-    price: 350,
-    max_people: 4,
-    refundable: false,
-    bedType: "2 full beds",
-    roomInfo: ["32 m", "Air conditioning", "Free WiFi"],
-    roomExtras: [
-      "Socket near the bed",
-      "Ironing facilities",
-      "Refrigerator",
-      "Tea/Coffee maker",
-    ],
-  },
-];
-
 export const hero = {
   restaurant: restaurantImage,
-  room: roomImage,
+  // room: roomImage,
   about: aboutImage,
   contact: contactImage,
 };

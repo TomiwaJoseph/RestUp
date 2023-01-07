@@ -43,12 +43,10 @@
 }
 .menu-text .test {
   position: absolute;
-  /* background: #000; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   bottom: auto;
-  /* justify-content: center; */
 }
 .menu-text h4 {
   color: #fff;

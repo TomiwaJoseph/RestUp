@@ -1,32 +1,20 @@
 import Hero from "../components/Hero";
 import { hero } from "../data";
-// import "./page-styles.css";
 import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-// import Preloader from "../components/Preloader";
-// import { useSelector } from "react-redux";
-// import { fetchTestPage } from "../redux/actions/fetchers";
 
 const Contact = () => {
   const formRef = useRef();
   const modalRef = useRef();
   const containerRef = useRef();
-  // const storeContext = useSelector((state) => state.store);
-  // const { fetchingData } = storeContext;
   const [openModal, setOpenModal] = useState(false);
   const [sendButtonClicked, setSendButtonClicked] = useState(false);
-
-  // useEffect(() => {
-  //   fetchTestPage();
-  // }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     if (openModal) {
-      // console.log("modal is open");
       document.body.style["overflow-y"] = "hidden";
     } else {
-      // console.log("modal is now closed");
       document.body.style["overflow-y"] = "auto";
     }
   }, [openModal]);
@@ -97,14 +85,6 @@ const Contact = () => {
         );
     }
   };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  // if (fetchingData) {
-  //   return <Preloader />;
-  // }
 
   return (
     <>

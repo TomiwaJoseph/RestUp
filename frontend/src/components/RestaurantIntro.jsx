@@ -1,4 +1,4 @@
-import restaurantIntroImg from "../statics/gallery-img-05.jpg";
+import restaurantIntroImg from "../statics/gallery-img-04.jpg";
 
 const RestaurantIntro = () => {
   return (

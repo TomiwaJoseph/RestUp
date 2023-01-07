@@ -17,7 +17,6 @@ const Navbar = () => {
     setClick(false);
     document.body.style["overflow"] = "auto";
   };
-  const [scrollDown, setScrollDown] = useState(false);
   const storeContext = useSelector((state) => state.store);
   const { isAuthenticated } = storeContext;
 
@@ -25,7 +24,7 @@ const Navbar = () => {
     const onScroll = () => {
       let scroll = window.pageYOffset;
       let navbar = document.getElementsByClassName("the_navbar")[0];
-      // console.log(scroll);
+
       if (scroll > 450) {
         if (!navbar.classList.contains("fix__navbar")) {
           navbar.classList.add("fix__navbar");
@@ -33,40 +32,13 @@ const Navbar = () => {
       } else {
         navbar.classList.remove("fix__navbar");
       }
-      // if (scroll < 450) {
-      //   if (navbar.classList.contains("fix__navbar")) {
-      //     navbar.classList.remove("fix__navbar");
-      //   }
-      // }
-      // if (scroll > 150) {
-      //   if (!navbar.classList.contains("scrolled")) {
-      //     navbar.classList.add("scrolled");
-      //   }
-      // }
-      // if (scroll < 150) {
-      //   if (navbar.classList.contains("scrolled")) {
-      //     navbar.classList.remove("scrolled");
-      //     navbar.classList.remove("sleep");
-      //   }
-      // }
-      // if (scroll > 350) {
-      //   if (!navbar.classList.contains("awake")) {
-      //     navbar.classList.add("awake");
-      //   }
-      // }
-      // if (scroll < 350) {
-      //   if (navbar.classList.contains("awake")) {
-      //     navbar.classList.remove("awake");
-      //     navbar.classList.add("sleep");
-      //   }
-      // }
     };
     window.addEventListener("scroll", onScroll);
 
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
-  }, [scrollDown]);
+  }, []);
 
   return (
     <>
@@ -169,9 +141,6 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navBrands">
-          {/* <NavLink to="/search-room" className="search__icon navLink">
-            <i className="fas fa-search"></i>
-          </NavLink> */}
           {isAuthenticated ? (
             <NavLink
               onClick={closeMobileMenu}

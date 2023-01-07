@@ -221,8 +221,6 @@
   width: 100%;
   object-fit: cover;
 }
-/* .room-description {
-} */
 .room-description p {
   color: #525252;
   letter-spacing: 1px;
@@ -254,7 +252,6 @@
 }
 .apartment-room .single-room .bedtype-capacity span b {
   color: #1a6692;
-  /* font-weight: 600; */
 }
 .apartment-room .single-room hr {
   border-color: #f51168a6;
@@ -280,9 +277,6 @@
   margin-bottom: 5px;
   font-weight: 600;
 }
-/* .apartment-room .apartment-cta .duration {
-  color: var(--main-color);
-} */
 .apartment-room .apartment-cta .refundable,
 .apartment-room .apartment-cta .not-refundable {
   font-size: 12px;
@@ -344,9 +338,6 @@
   font-size: 24px;
   font-weight: 600;
 }
-/* .reserve-box input {
-  width: 80%;
-} */
 .reserve-box input:focus {
   box-shadow: none;
   border: 1px solid #1a6692;
@@ -378,7 +369,6 @@
 }
 .reserve-box .stay-div {
   margin-top: 20px;
-  /* font-size: 14px; */
 }
 .reserve-box .stay-div p:first-child {
   color: #4c4c4c;
@@ -386,7 +376,6 @@
   margin-bottom: 0;
 }
 .reserve-box .stay-div p:last-child {
-  /* font-size: 14px; */
   margin-bottom: 0;
   font-weight: 700;
 }
@@ -458,7 +447,6 @@
 }
 .success-msg .call-to-action {
   display: flex;
-  /* margin-left: auto; */
 }
 .success-msg .call-to-action a {
   border: 1px solid #1a6692;
@@ -479,11 +467,7 @@
       ================= CARD STYLES =================
       ========================================= */
 
-/* .room-card {
-  margin-bottom: 5rem;
-} */
 .room-card .card {
-  /* box-shadow: 1px 4px 5px 2px #6f6f6f; */
   -webkit-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
   -moz-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
   -ms-box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.705);
@@ -498,24 +482,12 @@
   color: var(--main-color);
   font-size: 24px;
   display: inline;
-  /* border-bottom: 2px solid var(--main-color); */
 }
 .room-card .card .card-body p ~ span {
   color: #949494;
   margin-left: 5px;
   letter-spacing: 1px;
 }
-/* .room-card .card .card-body .list {
-  padding-inline-start: 0 !important;
-  color: #6f6f6f;
-  margin-bottom: 0 !important;
-}
-.room-card .card .card-body .list li {
-  list-style: none;
-}
-.room-card .card .card-body .list li span {
-  color: var(--main-color);
-} */
 .room-card .card-footer button {
   padding: 5px 25px;
   background: transparent;
@@ -669,19 +641,6 @@
 /* =========================================
 =========== LOGIN/SIGNUP STYLES ============
 ========================================= */
-/* .signup-div,
-.login-div {
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 20px;
-  text-align: center;
-}
-.login-div::before {
-  filter: grayscale(100%);
-} */
 .signup-container,
 .login-container {
   position: relative;

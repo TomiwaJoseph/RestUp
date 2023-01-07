@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils import timezone
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import CustomUser, Booking
 
@@ -25,11 +26,11 @@ class UserAdmin(BaseUserAdmin):
 
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ['user', 'room', 'refundable',
-                    'stay_duration',  'start_date', 'end_date']
+    list_display = ['user', 'room', 'stay_duration',
+                    'start_date', 'end_date', 'expired']
 
-    def refundable(self, obj):
-        return obj.room.refundable
+    def expired(self, obj):
+        return obj.end_date < timezone.now()
 
     # list_editable = ['start_date', 'end_date']
     # list_filter = ['category']

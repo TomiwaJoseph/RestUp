@@ -376,16 +376,17 @@ def logout(request):
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
     user = User.objects.get(auth_token=token)
-    user.auth_token.delete()
+    if not user.email == 'demouser@gmail.com':
+        user.auth_token.delete()
     data = {'success': 'Successfully logged out.'}
     return Response(data=data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
 def login_demo_user(request):
-    query_user = CustomUser.objects.filter(email='demouser@gmail.com')
+    query_user = User.objects.filter(email='demouser@gmail.com')
     if not query_user:
-        user = CustomUser.objects.create(
+        user = User.objects.create(
             email='demouser@gmail.com',
             first_name='Demo',
             last_name='User',

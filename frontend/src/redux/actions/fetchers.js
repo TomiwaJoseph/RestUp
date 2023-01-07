@@ -73,7 +73,6 @@ export const fetchFilteredApartments = async (filter_values) => {
       switchPreloader(false);
     })
     .catch((err) => {
-      console.log(err);
       switchPreloader(false);
     });
 };
@@ -83,60 +82,48 @@ export const fetchAllApartments = async () => {
   await axios
     .get(allApartmentsUrl)
     .then((response) => {
-      // console.log(response);
-      // console.log(response.data.slice(-1));
-      // console.log(" ");
       store.dispatch(setInternetError(false));
       store.dispatch(setCurrentApartments(response.data.slice(0, -1)));
       store.dispatch(setRandomApartmentImage(response.data.slice(-1)));
       switchPreloader(false);
     })
     .catch((err) => {
-      console.log(err);
       store.dispatch(setInternetError(true));
       switchPreloader(false);
     });
 };
-// Get all apartments + random hero image from api
+// Get single apartment details from api
 export const fetchSingleApartment = async (slug) => {
-  // switchPreloader(true);
   await axios
     .get(singleApartmentsUrl + slug)
     .then((response) => {
       store.dispatch(setInternetError(false));
-      // console.log(response.data);
-      // console.log(" ");
       store.dispatch(setSingleApartment(response.data));
-      // switchPreloader(false);
     })
     .catch((err) => {
-      console.log(err);
-      // console.log(err.message);
       if (err.message === "Network Error") {
         store.dispatch(setInternetError(true));
       } else {
-        console.log("bad request set...");
         store.dispatch(setBadRequest(true));
       }
-      // switchPreloader(false);
     });
 };
+// Get featured apartments from api
 export const fetchFeaturedApartments = async () => {
   switchPreloader(true);
   await axios
     .get(featuredApartmentsUrl)
     .then((response) => {
-      // console.log(response.data);
       store.dispatch(setInternetError(false));
       store.dispatch(setFeaturedApartments(response.data));
       switchPreloader(false);
     })
     .catch((err) => {
-      // console.log(err);
       store.dispatch(setInternetError(true));
       switchPreloader(false);
     });
 };
+// Get single room details from api
 export const fetchSingleRoomDetails = async (slugs) => {
   switchPreloader(true);
   let apartmentSlug = slugs[0];
@@ -152,16 +139,13 @@ export const fetchSingleRoomDetails = async (slugs) => {
       },
     })
     .then((response) => {
-      // console.log(response.data);
       store.dispatch(setSingleRoomDetails(response.data));
       switchPreloader(false);
     })
     .catch((err) => {
-      console.log(err);
       if (err.message === "Network Error") {
         store.dispatch(setInternetError(true));
       } else {
-        console.log("bad request set...");
         store.dispatch(setBadRequest(true));
       }
       switchPreloader(false);
@@ -184,7 +168,6 @@ export const fetchHighestPriceSizeAndCapacity = async () => {
 };
 // Get the bookings of logged in user from api
 export const fetchDashboardInfo = async () => {
-  // switchPreloader(true);
   let token = localStorage.getItem("restupToken");
   let config = {
     headers: {
@@ -196,14 +179,12 @@ export const fetchDashboardInfo = async () => {
     .then((response) => {
       store.dispatch(setDashboardInfo(response.data));
       store.dispatch(setInternetError(false));
-      // switchPreloader(false);
     })
     .catch((err) => {
       store.dispatch(setInternetError(true));
-      // switchPreloader(false);
     });
 };
-// Sign in user with token if correct credentials are provided
+// Cancel user booking provided correct parameters are present
 export const cancelBooking = async (refCode) => {
   switchPreloader(true);
   let token = localStorage.getItem("restupToken");
@@ -225,13 +206,9 @@ export const cancelBooking = async (refCode) => {
         "success"
       );
       store.dispatch(setDashboardInfo(result.data));
-      // document.getElementById("back-arrow").click();
       switchPreloader(false);
     })
     .catch((err) => {
-      // console.log(err);
-      // console.log(err.response.data.error);
-      // console.log(" ");
       switchPreloader(false);
       if (err.message === "Network Error") {
         store.dispatch(setInternetError(true));
@@ -256,10 +233,7 @@ export const signInUser = async (signInData) => {
     .then((result) => {
       notify("Successful login! Your rest is RestUp assured.", "success");
       localStorage.setItem("restupToken", result.data.token);
-      // console.log(result.data);
       delete result.data.token;
-      // console.log(result.data);
-      console.log(" ");
       store.dispatch(setUserInfo(result.data));
       store.dispatch(setLoginUser(true));
       switchPreloader(false);

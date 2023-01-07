@@ -8,7 +8,6 @@ const globalState = {
   randomApartmentImage: "",
   userInfo: {},
   dashboard_info: {},
-  // randomDashboardImage: "",
   highestRoomPrice: 360,
   highestCapacity: 6,
   highestRoomPriceSizeAndCapacity: {},

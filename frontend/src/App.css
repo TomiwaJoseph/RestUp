@@ -23,6 +23,7 @@ html {
   scroll-behavior: smooth;
   /* overflow-x: hidden; */
 }
+
 .demarcator {
   background: #1a6692;
 }
@@ -48,6 +49,7 @@ html {
 .video-text-container .icons i:hover {
   color: var(--main-color);
 }
+
 .restaurant-intro-container .the-text h1,
 .video-text-container .the-text h1 {
   color: #454545;
@@ -56,6 +58,20 @@ html {
 .video-text-container .the-text p {
   color: #6f6f6f;
   letter-spacing: 1px;
+  text-align: justify;
+}
+@media only screen and (max-width: 480px) {
+  .video-text-container {
+    padding: 5rem 0 1rem 0;
+  }
+  .video-text-container .the-video,
+  .video-text-container .the-text {
+    padding: 0 30px;
+  }
+  .video-text-container .the-text h1 {
+    font-size: 32px;
+    margin-top: 20px;
+  }
 }
 .flip-image {
   transform: scaleX(-1);

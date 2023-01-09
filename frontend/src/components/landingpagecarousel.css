@@ -57,6 +57,9 @@
   .each-fade-effect .carousel__captions {
     width: 85%;
   }
+  /* .each-fade-effect .carousel__captions p{
+    font-size: 20px;
+  } */
 }
 
 /* MOBILE */
@@ -64,6 +67,10 @@
 @media only screen and (max-width: 480px) {
   .each-fade-effect .carousel__captions h5 {
     font-size: 18px;
+  }
+  .each-fade-effect .carousel__captions p {
+    font-size: 35px;
+    line-height: 45px;
   }
   .each-fade-effect .carousel__captions h1 {
     font-size: 40px;

@@ -21,7 +21,7 @@ const LandingCarousel = () => {
             </NavLink>
           </div>
         </div>
-        <div className="each-fade-effect">
+        {/* <div className="each-fade-effect">
           <div className="image__container">
             <img src={img2} alt="landing-page-visual-2" />
           </div>
@@ -47,7 +47,7 @@ const LandingCarousel = () => {
               View Apartments
             </NavLink>
           </div>
-        </div>
+        </div> */}
       </Fade>
     </>
   );

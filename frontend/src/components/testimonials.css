@@ -45,3 +45,8 @@
   width: 10px !important;
   background: var(--main-color) !important;
 }
+@media only screen and (max-width: 480px) {
+.testimonial-container .section-title h2{
+margin-bottom: 15px;
+}
+}

@@ -5,7 +5,7 @@ const VideoText = () => {
   return (
     <div className="container video-text-container">
       <div className="row">
-        <div className="col-md-7">
+        <div className="col-md-7 the-video">
           <video
             preload="none"
             poster={posterImg}

@@ -1,16 +1,51 @@
 nav {
   background: rgba(147, 147, 147, 0.105);
-  height: 70px;
-  width: 100%;
+  height: 10vh;
+  width: 100vw;
   display: flex;
   position: absolute;
-  top: 0;
+  align-items: center;
   justify-content: space-between;
   padding: 0.5rem calc((100vw - 900px) / 2);
   z-index: 99999;
   transition: all 0.5s ease-in-out 0.5s;
 }
-.the_navbar.fix__navbar {
+nav h2 {
+  margin-top: 0.5rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 26px;
+  font-weight: 700;
+}
+nav h2 em {
+  font-style: normal;
+  color: var(--main-color);
+}
+nav .nav-menu {
+  display: flex;
+  align-items: center;
+}
+nav .nav-link {
+  color: #cbcbcb;
+  cursor: pointer;
+  font-size: 18px;
+}
+nav .nav-link:hover {
+  color: #fff;
+  border-bottom: 2px solid var(--main-color);
+}
+nav .mobile-icons {
+  display: none;
+}
+nav .mobile-links {
+  display: none;
+}
+
+/* =========================================
+=========== Fixed Navbar Styles ============
+========================================= */
+
+nav.fix-navbar {
   width: 100vw;
   top: 0;
   position: fixed;
@@ -21,124 +56,120 @@ nav {
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
 }
-a:hover {
-  text-decoration: none;
-}
-nav h2 {
-  margin-top: 10px;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 26px;
-  font-weight: 700;
-}
-.the_navbar.fix__navbar h2 {
+nav.fix-navbar h2 {
   color: #454545;
 }
-nav h2 em {
-  font-style: normal;
-  color: var(--main-color);
-}
-.navMenu {
-  display: flex;
-  align-items: center;
-}
-.navLink,
-.logo {
-  color: #cbcbcb;
-  display: flex;
-  align-items: center;
-  padding: 0 1rem;
-  height: 100%;
-  cursor: pointer;
-  font-size: 18px;
-  transition: all 0.2 ease-in-out;
-  border-bottom: 1px solid transparent;
-}
-.the_navbar.fix__navbar .logo,
-.the_navbar.fix__navbar .navLink {
+
+.the_navbar.fix-navbar .nav-link {
   color: #454545;
 }
-.the_navbar.fix__navbar .navLink:hover {
+.the_navbar.fix__navbar .nav-link:hover {
   color: var(--main-color);
   border-bottom: 2px solid var(--main-color);
 }
-.navLink:hover {
-  color: #fff;
-  border-bottom: 2px solid var(--main-color);
-}
-.the_navbar.fix__navbar .navLink.active,
-.navLink.active {
+
+.the_navbar.fix__navbar .nav-link.active,
+.nav-link.active {
   color: var(--main-color);
   font-weight: 600;
 }
-nav .fa {
-  display: none;
-}
-.mobileLink {
-  display: none;
-}
-.navBrands {
-  display: flex;
-  align-items: center;
-  margin-right: 24px;
-}
-.navBrandsLink .fab {
-  margin: 10px;
-  color: #fff;
-  font-size: 18px;
-}
+/* =========================================
+========== Responsiveness Styles ===========
+========================================= */
 
-@media screen and (max-width: 768px) {
-  nav .fa {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 75%);
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #fff;
-  }
-  nav .search__mobile-icon {
-    padding-right: 5%;
-  }
-  .navMenu {
+@media only screen and (min-width: 768px) {
+  .mobile-links {
     display: none;
   }
-  .navMenu.active {
+  .desktop-links {
+    display: flex;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  nav.nav-clicked {
+    background: #454545;
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+  }
+  .nav-menu.active {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
+    top: 10%;
     height: 90vh;
-    position: absolute;
-    background: #373737;
-    top: 72px;
+    position: fixed;
+    background: #373737 !important;
     z-index: 99999;
   }
-  .navMenu.active .navLink {
-    margin: 0;
-    height: 15%;
-    color: #fff;
+  nav .nav-menu {
+    display: none;
   }
-  .navMenu.active .mobileLink {
+  .nav-menu.active .mobile-links {
     display: block;
-    height: 17%;
   }
-  .navMenu.active .navLink.active {
-    color: var(--main-color);
+  nav .mobile-icons {
+    display: flex;
+    margin-right: 30px;
   }
-  .nav-brands-mobile .fab {
+  nav .mobile-icons .fa {
+    display: block;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #fff;
+    margin-left: 20px;
+  }
+  nav .mobile-icons a:hover {
+    text-decoration: none;
+  }
+  nav .nav-right {
+    display: none;
+  }
+  nav h2 {
+    margin-left: 30px;
+  }
+  nav .mobile-links .fab {
+    font-size: 18px;
     padding: 30px 20px;
     text-align: center;
     border-radius: 4px;
     color: #fff;
+    cursor: pointer;
     transition: all 0.3s ease-out;
   }
-  .nav-brands-mobile .fab:hover {
+  nav .mobile-links .fab:hover {
     color: var(--main-color);
   }
-  .navBrands {
-    display: none;
+  .nav-menu.active .nav-link {
+    margin: 0;
+    text-align: center;
+    margin: 15px;
+    color: #fff;
+  }
+  .nav-menu.active .nav-link.active {
+    color: var(--main-color);
+  }
+  nav.fix-navbar .fa {
+    color: #454545;
+  }
+}
+
+@media only screen and (max-width: 1000) and (min-width: 768px) {
+  nav h2 {
+    margin-left: 45px;
+  }
+  nav .last-link {
+    margin-right: 75px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  nav h2 {
+    margin-left: 15px;
+  }
+  nav .mobile-icons {
+    margin-right: 15px;
   }
 }

@@ -23,14 +23,14 @@ const Navbar = () => {
   useEffect(() => {
     const onScroll = () => {
       let scroll = window.pageYOffset;
-      let navbar = document.getElementsByClassName("the_navbar")[0];
+      let navbar = document.getElementsByClassName("the-navbar")[0];
 
       if (scroll > 450) {
-        if (!navbar.classList.contains("fix__navbar")) {
-          navbar.classList.add("fix__navbar");
+        if (!navbar.classList.contains("fix-navbar")) {
+          navbar.classList.add("fix-navbar");
         }
       } else {
-        navbar.classList.remove("fix__navbar");
+        navbar.classList.remove("fix-navbar");
       }
     };
     window.addEventListener("scroll", onScroll);
@@ -42,71 +42,78 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="the_navbar">
-        <NavLink onClick={closeMobileMenu} className="logo" to="/">
-          <h2>
-            Rest <em>Up</em>
-          </h2>
-        </NavLink>
-        <NavLink to="/search-dress">
+      <nav className={click ? "nav-clicked the-navbar" : "the-navbar"}>
+        <div className="nav-left">
+          <NavLink onClick={closeMobileMenu} to="/">
+            <h2>
+              Rest <em>Up</em>
+            </h2>
+          </NavLink>
+        </div>
+        <div className="mobile-icons">
+          <NavLink to="/apartments">
+            <i onClick={closeMobileMenu} className="fa fa-home"></i>
+          </NavLink>
           <i
-            onClick={closeMobileMenu}
-            className="fa fa-search search__mobile-icon"
+            onClick={handleClick}
+            className={click ? "fa fa-times" : "fa fa-align-right"}
           ></i>
-        </NavLink>
-        <i
-          onClick={handleClick}
-          className={click ? "fa fa-times" : "fa fa-align-right"}
-        ></i>
-        <div className={click ? "navMenu active" : "navMenu"}>
-          <NavLink
-            onClick={closeMobileMenu}
-            id="home"
-            className="navLink"
-            to="/"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            onClick={closeMobileMenu}
-            className="navLink"
-            to="/apartments"
-          >
-            Apartments
-          </NavLink>
-          <NavLink
-            onClick={closeMobileMenu}
-            className="navLink"
-            to="/restaurant"
-          >
-            Restaurant
-          </NavLink>
-          <NavLink
-            onClick={closeMobileMenu}
-            className="navLink"
-            to="/contact-us"
-          >
-            Contact
-          </NavLink>
-          {/* {isAuthenticated ? (
+        </div>
+        <div className={click ? "nav-menu active" : "nav-menu"}>
+          <div className="desktop-links">
             <NavLink
               onClick={closeMobileMenu}
-              className="navLink"
-              to="/user/dashboard"
+              id="home"
+              className="nav-link"
+              to="/"
             >
-              Dashboard
+              Home
             </NavLink>
-          ) : (
             <NavLink
               onClick={closeMobileMenu}
-              id="login"
-              className="navLink"
-              to="/login"
+              className="nav-link"
+              to="/apartments"
             >
-              Login
+              Apartments
             </NavLink>
-          )} */}
-          <div className="mobileLink">
+            <NavLink
+              onClick={closeMobileMenu}
+              className="nav-link"
+              to="/restaurant"
+            >
+              Restaurant
+            </NavLink>
+            <NavLink
+              onClick={closeMobileMenu}
+              className="nav-link"
+              to="/contact-us"
+            >
+              Contact
+            </NavLink>
+            {click && (
+              <>
+                {isAuthenticated ? (
+                  <NavLink
+                    onClick={closeMobileMenu}
+                    className="nav-link last-link"
+                    to="/user/dashboard"
+                  >
+                    Dashboard
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    onClick={closeMobileMenu}
+                    id="login"
+                    className="nav-link last-link"
+                    to="/login"
+                  >
+                    Login
+                  </NavLink>
+                )}
+              </>
+            )}
+          </div>
+          <div className="mobile-links">
             {click ? (
               <>
                 <a
@@ -140,11 +147,11 @@ const Navbar = () => {
             ) : null}
           </div>
         </div>
-        <div className="navBrands">
+        <div className="nav-right">
           {isAuthenticated ? (
             <NavLink
               onClick={closeMobileMenu}
-              className="navLink"
+              className="nav-link"
               to="/user/dashboard"
             >
               Dashboard
@@ -153,7 +160,7 @@ const Navbar = () => {
             <NavLink
               onClick={closeMobileMenu}
               id="login"
-              className="navLink"
+              className="nav-link"
               to="/login"
             >
               Login

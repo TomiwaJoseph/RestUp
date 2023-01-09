@@ -19,7 +19,7 @@ const Hero = (params) => {
       <div className="overlay"></div>
       <div className="container">
         <div className="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
-          <div className="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          <div className="col-md-9 text-center d-flex align-items-end justify-content-center">
             <div className="text">
               <h1 className="bread">{params.section}</h1>
             </div>

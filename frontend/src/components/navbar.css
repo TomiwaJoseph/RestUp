@@ -60,15 +60,15 @@ nav.fix-navbar h2 {
   color: #454545;
 }
 
-.the_navbar.fix-navbar .nav-link {
-  color: #454545;
+.the-navbar.fix-navbar .nav-link {
+  color: #6f6f6f;
 }
-.the_navbar.fix__navbar .nav-link:hover {
+.the-navbar.fix-navbar .nav-link:hover {
   color: var(--main-color);
   border-bottom: 2px solid var(--main-color);
 }
 
-.the_navbar.fix__navbar .nav-link.active,
+.the-navbar.fix-navbar .nav-link.active,
 .nav-link.active {
   color: var(--main-color);
   font-weight: 600;
@@ -76,6 +76,15 @@ nav.fix-navbar h2 {
 /* =========================================
 ========== Responsiveness Styles ===========
 ========================================= */
+
+@media only screen and (max-width: 950px) and (min-width: 768px) {
+  nav h2 {
+    margin-left: 45px;
+  }
+  nav .nav-right .nav-link {
+    margin-right: 45px;
+  }
+}
 
 @media only screen and (min-width: 768px) {
   .mobile-links {
@@ -145,8 +154,12 @@ nav.fix-navbar h2 {
   .nav-menu.active .nav-link {
     margin: 0;
     text-align: center;
-    margin: 15px;
+    margin: 20% 0;
     color: #fff;
+    font-size: 1.2rem;
+  }
+  .desktop-links {
+    flex-direction: column;
   }
   .nav-menu.active .nav-link.active {
     color: var(--main-color);
@@ -156,12 +169,9 @@ nav.fix-navbar h2 {
   }
 }
 
-@media only screen and (max-width: 1000) and (min-width: 768px) {
-  nav h2 {
-    margin-left: 45px;
-  }
-  nav .last-link {
-    margin-right: 75px;
+@media only screen and (max-width: 768px) and (min-width: 480px) {
+  nav .mobile-icons .fa {
+    margin-left: 30px;
   }
 }
 

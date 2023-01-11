@@ -95,7 +95,7 @@ const Navbar = () => {
                 {isAuthenticated ? (
                   <NavLink
                     onClick={closeMobileMenu}
-                    className="nav-link last-link"
+                    className="nav-link"
                     to="/user/dashboard"
                   >
                     Dashboard
@@ -104,7 +104,7 @@ const Navbar = () => {
                   <NavLink
                     onClick={closeMobileMenu}
                     id="login"
-                    className="nav-link last-link"
+                    className="nav-link"
                     to="/login"
                   >
                     Login

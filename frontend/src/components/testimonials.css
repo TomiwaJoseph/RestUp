@@ -7,6 +7,10 @@
   letter-spacing: 3px;
   margin-bottom: 30px;
 }
+.testimonial-container .fade-testimonial-container {
+  width: 100%;
+  margin: 0 auto;
+}
 .testimonial-container .each-fade-effect {
   display: flex;
   align-items: center;
@@ -45,8 +49,40 @@
   width: 10px !important;
   background: var(--main-color) !important;
 }
-@media only screen and (max-width: 480px) {
-.testimonial-container .section-title h2{
-margin-bottom: 15px;
+/* @media only screen and (min-width: 1000px) {
+  .testimonial-container .fade-testimonial-container {
+    width: 70% !important;
+  }
+} */
+@media only screen and (min-width: 768px) {
+  .testimonial-container .fade-testimonial-container {
+    width: 70%;
+  }
 }
+@media only screen and (min-width: 600px) {
+  .testimonial-container .each-fade-effect {
+    height: 20vh;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .testimonial-container .fade-testimonial-container {
+    width: 90%;
+  }
+  .testimonial-container .section-title h2 {
+    margin-bottom: 15px;
+  }
+  .testimonial-container .each-fade-effect {
+    height: 35vh;
+    flex-direction: column;
+  }
+  .testimonial-container .each-fade-effect .testimonial-image-container img {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .testimonial-container .each-fade-effect {
+    height: 50vh;
+  }
 }

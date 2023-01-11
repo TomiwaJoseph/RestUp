@@ -11,7 +11,8 @@ const Testimonials = () => {
           <div className="section-title text-center">
             <h2>Happy Customers Say...</h2>
           </div>
-          <div className="mx-auto col-md-7">
+          {/* <div className="mx-auto col-md-8 col-lg-7"> */}
+          <div className="fade-testimonial-container">
             <Fade
               arrows={false}
               indicators={true}

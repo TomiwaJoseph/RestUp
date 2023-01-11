@@ -101,7 +101,7 @@ const SingleApartment = () => {
               </button>
             </div>
           </div>
-          <div className="container">
+          <div className="container apartment-container">
             <div className="room-images">
               {all_apartment_images.slice(1).map((photo, index) => (
                 <div key={index} className="img-wrapper">
@@ -132,7 +132,7 @@ const SingleApartment = () => {
               <hr />
             </div>
             <div ref={roomsRef} style={{ height: "10vh" }}></div>
-            <div className="rooms-container text-center my-5">
+            <div className="rooms-container text-center my-3">
               {room_details.map((room) => (
                 <div key={room.id} className="row apartment-room mx-auto">
                   <div className="col-md-8 single-room">
@@ -143,6 +143,7 @@ const SingleApartment = () => {
                         Max people: <b>{room.max_people}</b>
                       </span>
                     </div>
+                    <hr />
                     <div className="room-info">
                       <small>
                         <span className="fa fa-ruler-combined"></span>
@@ -163,6 +164,7 @@ const SingleApartment = () => {
                         </small>
                       ))}
                     </div>
+                    <hr />
                   </div>
                   <div className="col-md-4 apartment-cta my-auto">
                     <p>${room.price} / night</p>

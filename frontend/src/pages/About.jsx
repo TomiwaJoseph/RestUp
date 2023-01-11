@@ -15,11 +15,11 @@ const About = () => {
       <Hero section={"About Us"} orient={"center"} img={hero.about} />
       <div className="container picture-text-container">
         <div className="row">
-          <div className="col-md-7">
+          <div className="col-md-6">
             <img src={aboutImg} alt="about-visual" className="img-fluid" />
           </div>
-          <div className="col-md-5 my-auto the-text">
-            <h1>Welcome to our Hotel</h1>
+          <div className="col-md-6 my-auto the-text">
+            <h1>Be Rest Assured!</h1>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
               error soluta odit, explicabo vero fugit tempore! Iusto facere

@@ -32,6 +32,7 @@ const ReserveRoom = () => {
   const detailsFormRef = useRef();
   const [paymentCompleted, setPaymentCompleted] = useState(false);
   const [activeCrumb, setActiveCrumb] = useState(0);
+  const [doneSections, setDoneSections] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
@@ -41,6 +42,18 @@ const ReserveRoom = () => {
   const [durationPrice, setDurationPrice] = useState("");
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
+
+  const handleGoBack = (section) => {
+    // console.log(section);
+    // console.log(" ");
+    if (section === 1) {
+      setActiveCrumb(0);
+      setDoneSections([]);
+    } else {
+      setActiveCrumb(1);
+      setDoneSections([0]);
+    }
+  };
 
   const notify = (message, errorType) =>
     toast(message, {
@@ -96,6 +109,7 @@ const ReserveRoom = () => {
     if (duration < 1 || duration === "" || duration === "e") {
       notify("Please select duration of stay.", "info");
     } else {
+      setDoneSections([0]);
       setActiveCrumb(1);
     }
   };
@@ -120,6 +134,7 @@ const ReserveRoom = () => {
     setUserLastName(data.get("last-name"));
     setUserEmail(data.get("email"));
     setUserPhoneNumber(data.get("phone"));
+    setDoneSections([0, 1]);
     setActiveCrumb(2);
   };
 
@@ -210,18 +225,22 @@ const ReserveRoom = () => {
                 <div className="d-flex justify-content-between align-items-center">
                   <button
                     onClick={() => setActiveCrumb(0)}
-                    className={
+                    className={`${
                       activeCrumb === 0 ? "btn crumb active" : "btn crumb"
-                    }
+                    } ${
+                      doneSections.includes(0) ? "completed" : "uncompleted"
+                    }`}
                   >
                     Stay Duration
                   </button>
                   <div className="crumb-demarcate"></div>
                   <button
                     onClick={() => setActiveCrumb(1)}
-                    className={
+                    className={`${
                       activeCrumb === 1 ? "btn crumb active" : "btn crumb"
-                    }
+                    } ${
+                      doneSections.includes(1) ? "completed" : "uncompleted"
+                    }`}
                   >
                     Your Details
                   </button>
@@ -237,9 +256,9 @@ const ReserveRoom = () => {
                 </div>
               </div>
             </div>
-            <div className="row">
+            <div className="row mt-3">
               {activeCrumb === 0 && (
-                <div className="mx-auto col-md-5 my-3 reserve-box">
+                <div className="reserve-box">
                   <input
                     className="form-control"
                     placeholder="Enter number of nights"
@@ -283,12 +302,12 @@ const ReserveRoom = () => {
                 </div>
               )}
               {activeCrumb === 1 && (
-                <div className="mx-auto col-md-5 my-3 details-box">
+                <div className="details-box">
                   <p className="details-text">Enter your details</p>
                   <hr />
                   <form ref={detailsFormRef} onSubmit={handleDetailsSubmit}>
                     <div className="row">
-                      <div className="col-6">
+                      <div className="col-md-6 col-xs-12 col-sm-12">
                         <label htmlFor="first-name">First Name</label>
                         <input
                           type="text"
@@ -298,7 +317,7 @@ const ReserveRoom = () => {
                           className="form-control"
                         />
                       </div>
-                      <div className="col-6">
+                      <div className="col-md-6 col-xs-12 col-sm-12">
                         <label htmlFor="last-name">Last Name</label>
                         <input
                           type="text"
@@ -329,17 +348,26 @@ const ReserveRoom = () => {
                         />
                       </div>
                     </div>
+                    {/* <div className="details-cta"> */}
+                    <button
+                      type="button"
+                      onClick={() => handleGoBack(1)}
+                      className="btn w-100 mt-2 go-back"
+                    >
+                      Go Back
+                    </button>
                     <button
                       type="submit"
                       className="btn w-100 mt-2 details-confirm"
                     >
-                      Next
+                      Continue
                     </button>
+                    {/* </div> */}
                   </form>
                 </div>
               )}
               {activeCrumb === 2 && (
-                <div className="mx-auto col-md-5 my-3 checkout-box">
+                <div className="checkout-box">
                   <Elements stripe={stripePromise}>
                     <CheckoutForm
                       amount={durationPrice}
@@ -354,6 +382,13 @@ const ReserveRoom = () => {
                       roomApartmentSlug={[roomSlug, apartmentSlug]}
                     />
                   </Elements>
+                  <button
+                    type="button"
+                    onClick={() => handleGoBack(2)}
+                    className="btn w-100 mt-2 go-back"
+                  >
+                    Go Back
+                  </button>
                 </div>
               )}
             </div>

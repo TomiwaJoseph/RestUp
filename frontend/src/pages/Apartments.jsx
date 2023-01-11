@@ -58,7 +58,7 @@ const Rooms = () => {
     } else if (currentApartmentData.length === 0 && doneLoading) {
       return (
         <div className="col-12 no-room">
-          <p className="no-rooms">No room match your filter parameters</p>
+          <p>No room match your filter parameters</p>
         </div>
       );
     } else {
@@ -166,7 +166,7 @@ const Rooms = () => {
             <div className="search-box">
               <form onSubmit={handleSearchFormSubmit}>
                 <div className="row">
-                  <div className="my-auto col-4">
+                  <div className="my-auto col-4 room-size-range">
                     <div ref={sizeRef} className="search-item">
                       <i className="fa fa-ruler-combined"></i>
                       <span
@@ -189,7 +189,7 @@ const Rooms = () => {
                       )}
                     </div>
                   </div>
-                  <div className="my-auto col-3">
+                  <div className="my-auto col-3 price-range">
                     <div ref={priceRef} className="search-item">
                       <i className="fas fa-coins"></i>
                       <span
@@ -213,7 +213,7 @@ const Rooms = () => {
                       )}
                     </div>
                   </div>
-                  <div className="my-auto col-3">
+                  <div className="my-auto col-3 persons-range">
                     <div ref={capacityRef} className="search-item">
                       <i className="fa fa-user"></i>
                       <span
@@ -239,7 +239,7 @@ const Rooms = () => {
                       )}
                     </div>
                   </div>
-                  <div className="col-2">
+                  <div className="col-2 apartment-search-btn">
                     <button type="submit" className="room-search-btn">
                       Search
                     </button>

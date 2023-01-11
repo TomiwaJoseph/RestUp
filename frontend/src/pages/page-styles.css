@@ -34,6 +34,19 @@
   letter-spacing: 1px;
 }
 
+@media only screen and (max-width: 767px) {
+  .picture-text-container .the-text h1 {
+    margin-top: 30px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .picture-text-container .col-md-6,
+  .picture-text-container .col-md-6 {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
 /* =========================================
 ================= CONTACT =================
 ========================================= */
@@ -151,7 +164,7 @@
 }
 
 /* =========================================
-  ================= SINGLE APARTMENT =================
+  ============ SINGLE APARTMENT ============
   ========================================= */
 .apartment-header {
   position: relative;
@@ -207,17 +220,17 @@
   button {
   box-shadow: none;
 }
-.room-images {
+.apartment-container .room-images {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
-.img-wrapper {
+.apartment-container .img-wrapper {
   width: 33%;
 }
-.room-img {
+.apartment-container .room-img {
   width: 100%;
   object-fit: cover;
 }
@@ -239,6 +252,7 @@
 .apartment-room .single-room h3 {
   color: #1a6692;
   font-weight: 700;
+  margin-bottom: 0;
 }
 .apartment-room .single-room .bedtype-capacity {
   display: flex;
@@ -253,14 +267,25 @@
 .apartment-room .single-room .bedtype-capacity span b {
   color: #1a6692;
 }
+/* .bedtype-capacity p {
+  margin-bottom: 0;
+} */
+.apartment-room .single-room hr:last-child {
+  display: none;
+}
 .apartment-room .single-room hr {
   border-color: #f51168a6;
   margin-top: 0;
 }
-.apartment-room .room-extras,
+/* .apartment-room .room-extras,
 .apartment-room .room-info {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+} */
+.apartment-room .room-extras,
+.apartment-room .room-info {
+  display: flex;
+  flex-wrap: wrap;
 }
 .apartment-room .room-extras small,
 .apartment-room .room-info small {
@@ -297,13 +322,102 @@
 .apartment-room .apartment-cta .reserve-now-btn:focus {
   box-shadow: none;
 }
+.apartment-container hr:last-child {
+  margin: 40px 0 20px 0;
+}
+
+@media only screen and (max-width: 1000px) {
+  .apartment-container .img-wrapper {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .apartment-room .apartment-cta {
+    margin-top: 10px !important;
+    text-align: left;
+  }
+  .apartment-room .apartment-cta .reserve-now-btn {
+    width: 100%;
+  }
+  .apartment-room .single-room hr:last-child {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .apartment-container .img-wrapper {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .apartment-header .name-hero {
+    width: 70%;
+  }
+  .apartment-room .single-room h3 {
+    font-size: 20px;
+    margin-bottom: 3px;
+  }
+  .apartment-header .name-hero .book-now {
+    width: 70%;
+  }
+  .apartment-room .single-room .bedtype-capacity span,
+  .apartment-room .single-room .bedtype-capacity p {
+    font-size: 15px;
+  }
+  .bedtype-capacity p {
+    margin-bottom: 5px;
+  }
+  .apartment-container .room-description h4 {
+    font-size: 22px;
+  }
+  .apartment-container .room-description p {
+    font-size: 14px;
+  }
+  .apartment-room .room-extras small,
+  .apartment-room .room-info small {
+    display: inline-block;
+  }
+  .apartment-room .room-extras,
+  .apartment-room .room-info {
+    display: block;
+  }
+  .apartment-room .single-room hr {
+    margin-bottom: 0;
+  }
+  .apartment-room .single-room .room-info,
+  .apartment-room .single-room .room-extras {
+    margin: 10px 0 0 0;
+  }
+}
+
+/* =========================================
+    ================= RESTAURANT =================
+    ========================================= */
+
+@media only screen and (max-width: 767px) {
+  .restaurant-intro-container .the-text h1 {
+    margin-top: 30px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .restaurant-intro-container .col-md-6 {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .restaurant-intro-container .the-text h1 {
+    font-size: 33px;
+  }
+}
 
 /* =========================================
     ================= RESERVE ROOM =================
     ========================================= */
-
 .crumb {
-  border: 1px solid var(--main-color);
+  border: 1px solid #373737;
   border-radius: 3px;
   color: #4c4c4c;
   width: 100%;
@@ -311,7 +425,11 @@
 }
 .crumb.active {
   color: #fff;
-  background: var(--main-color);
+  background: #454545;
+}
+.crumb.completed {
+  color: #fff;
+  background: green;
 }
 .crumb-demarcate {
   background: #ececec;
@@ -321,16 +439,12 @@
 .crumb:focus {
   box-shadow: none;
 }
+.reserve-box,
 .details-box,
 .checkout-box {
+  margin: 0 auto;
   border: 1px solid #d0d0d0;
   padding: 20px;
-  border-radius: 3px;
-  margin-bottom: 40px !important;
-}
-.reserve-box {
-  border: 1px solid #d0d0d0;
-  padding: 30px;
   border-radius: 3px;
   margin-bottom: 40px !important;
 }
@@ -338,24 +452,16 @@
   font-size: 24px;
   font-weight: 600;
 }
-.reserve-box input:focus {
-  box-shadow: none;
-  border: 1px solid #1a6692;
-}
 .details-confirm,
 .selection-confirm {
   background: #1a6692;
   color: #e4e4e4;
 }
-.details-confirm:hover,
-.selection-confirm:hover {
-  color: #fff;
-}
-.details-confirm:focus,
-.selection-confirm:focus {
+.reserve-box input:focus {
   box-shadow: none;
+  border: 1px solid #1a6692;
 }
-.price-div {
+.reserve-box .price-div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -410,6 +516,27 @@
   font-weight: normal;
   margin-bottom: 0;
 }
+/* ============================================ */
+/* ========== Details Section ============ */
+/* ============================================ */
+.details-confirm:hover,
+.selection-confirm:hover {
+  color: #fff;
+}
+.details-confirm:focus,
+.details-box .go-back,
+.selection-confirm:focus {
+  box-shadow: none;
+}
+.checkout-box .go-back {
+  background: #373737;
+  color: #e4e4e4;
+}
+.details-box .go-back {
+  background: #373737;
+  color: #e4e4e4;
+  margin-top: 20px !important;
+}
 .details-box input {
   margin-bottom: 10px;
 }
@@ -417,6 +544,11 @@
   border: 1px solid #1a6692;
   box-shadow: none;
 }
+.checkout-box,
+.details-box {
+  width: 50%;
+}
+
 .success-msg {
   color: #20925d;
   text-align: center;
@@ -463,6 +595,52 @@
 .success-msg .call-to-action a:focus {
   box-shadow: none;
 }
+
+@media only screen and (min-width: 1024px) {
+  .checkout-box,
+  .details-box {
+    width: 45%;
+  }
+}
+
+@media only screen and (max-width: 690px) and (min-width: 600px) {
+  .checkout-box,
+  .details-box {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .apartment-header .name-hero h1 {
+    font-size: 30px;
+  }
+  .checkout-box,
+  .details-box {
+    width: 80%;
+  }
+  .crumb {
+    padding: 10px 30px;
+    font-size: 0.8rem;
+  }
+  .details-box form label {
+    margin-bottom: 0;
+    margin-top: 12px;
+  }
+  .details-box hr {
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .crumb {
+    padding: 8px 25px;
+    font-size: 0.8rem;
+  }
+  .reserve-box {
+    width: 90%;
+  }
+}
+
 /* =========================================
       ================= CARD STYLES =================
       ========================================= */
@@ -560,7 +738,7 @@
 .room-search-btn {
   background-color: #1a6692;
   border: 1px solid #1a6692;
-  padding: 10px 30px;
+  padding: 10px 0;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -580,7 +758,7 @@
   margin-left: 5px;
 }
 .no-room {
-  height: 20vh;
+  height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -589,6 +767,42 @@
 .no-room p {
   color: #454545;
   font-size: 24px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .search-box form .col-3 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .search-box form .col-2,
+  .search-box form .col-4 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .search-box form .search-item {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .search-box form .room-size-range,
+  .search-box form .price-range,
+  .search-box form .persons-range,
+  .search-box form .apartment-search-btn {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .search-box form .search-item {
+    margin-bottom: 10px;
+  }
+  .room-search-btn {
+    padding: 7px 0;
+    color: #fff;
+  }
 }
 
 /* =========================================

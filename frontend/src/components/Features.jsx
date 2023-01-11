@@ -5,37 +5,37 @@ const Features = () => {
     <div className="container features-container">
       <hr />
       <div className="row features-row">
-        <div className="col-md-2 icon-container text-center">
+        <div className="col-sm-6 col-md-4 col-lg-4 icon-container text-center">
           <div className="icon">
             <i className="flaticon-restaurant"></i>
             <p>Restaurant</p>
           </div>
         </div>
-        <div className="col-md-2 icon-container text-center">
+        <div className="col-sm-6 col-md-4 col-lg-4 icon-container text-center">
           <div className="icon">
             <i className="flaticon-cup"></i>
             <p>Bar</p>
           </div>
         </div>
-        <div className="col-md-2 icon-container text-center">
+        <div className="col-sm-6 col-md-4 col-lg-4 icon-container text-center">
           <div className="icon">
             <i className="flaticon-car"></i>
             <p>Pick-Up</p>
           </div>
         </div>
-        <div className="col-md-2 icon-container text-center">
+        <div className="col-sm-6 col-md-4 col-lg-4 icon-container text-center">
           <div className="icon">
             <i className="flaticon-swimming"></i>
             <p>Pool</p>
           </div>
         </div>
-        <div className="col-md-2 icon-container text-center">
+        <div className="col-sm-6 col-md-4 col-lg-4 icon-container text-center">
           <div className="icon">
             <i className="flaticon-massage"></i>
             <p>Spa</p>
           </div>
         </div>
-        <div className="col-md-2 icon-container text-center">
+        <div className="col-sm-6 col-md-4 col-lg-4 icon-container text-center">
           <div className="icon">
             <i className="flaticon-bicycle"></i>
             <p>Gym</p>

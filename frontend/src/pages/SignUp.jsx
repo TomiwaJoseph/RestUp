@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Preloader from "../components/Preloader";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -36,14 +36,14 @@ const SignUp = () => {
     }
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const getBody = document.body;
-    getBody.classList.add("dark-nav");
-    return () => {
-      getBody.classList.remove("dark-nav");
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  //   const getBody = document.body;
+  //   getBody.classList.add("dark-nav");
+  //   return () => {
+  //     getBody.classList.remove("dark-nav");
+  //   };
+  // }, []);
 
   if (isAuthenticated) {
     return navigate("/");
@@ -60,59 +60,68 @@ const SignUp = () => {
   return (
     <>
       <div className="signup-container">
-        <img src={authImg} alt="" className="img-fluid auth-img" />
-        <div className="signup-block">
-          <h2>SIGN UP</h2>
-          <form onSubmit={handleSignUpSubmit}>
-            <input
-              onChange={(e) => setFirstName(e.target.value)}
-              className="form-control"
-              name="firstName"
-              required
-              placeholder="First Name"
-              type="text"
+        <div className="signup-background">
+          <div className="img-container">
+            <img
+              src={authImg}
+              className="img-fluid"
+              alt="signup-background-visual"
             />
-            <input
-              onChange={(e) => setLastName(e.target.value)}
-              className="form-control"
-              name="lastName"
-              required
-              placeholder="Last Name"
-              type="text"
-            />
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              className="form-control"
-              name="email"
-              required
-              placeholder="Email"
-              type="email"
-            />
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              className="form-control"
-              name="password"
-              required
-              placeholder="Password"
-              type="password"
-            />
-            <input
-              onChange={(e) => setRepeatPassword(e.target.value)}
-              className="form-control"
-              name="repeatPassword"
-              required
-              placeholder="Repeat Password"
-              type="password"
-            />
-            <button type="submit">Sign Up</button>
-          </form>
-          <div className="sign-in-option">
-            Already have an account? {""}
-            <NavLink to="/login" className="sign-up">
-              sign in
-            </NavLink>
+          </div>
+          <div className="signup-block">
+            <h2>SIGN UP</h2>
+            <form onSubmit={handleSignUpSubmit}>
+              <input
+                onChange={(e) => setFirstName(e.target.value)}
+                className="form-control"
+                name="firstName"
+                required
+                placeholder="First Name"
+                type="text"
+              />
+              <input
+                onChange={(e) => setLastName(e.target.value)}
+                className="form-control"
+                name="lastName"
+                required
+                placeholder="Last Name"
+                type="text"
+              />
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                className="form-control"
+                name="email"
+                required
+                placeholder="Email"
+                type="email"
+              />
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                className="form-control"
+                name="password"
+                required
+                placeholder="Password"
+                type="password"
+              />
+              <input
+                onChange={(e) => setRepeatPassword(e.target.value)}
+                className="form-control"
+                name="repeatPassword"
+                required
+                placeholder="Repeat Password"
+                type="password"
+              />
+              <button type="submit">Sign Up</button>
+            </form>
+            <div className="sign-in-option">
+              Already have an account? {""}
+              <NavLink to="/login" className="sign-up">
+                sign in
+              </NavLink>
+            </div>
           </div>
         </div>
+        {/* <img src={authImg} alt="" className="img-fluid auth-img" /> */}
       </div>
     </>
   );

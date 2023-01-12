@@ -111,70 +111,82 @@ const Contact = () => {
           </div>
         </div>
         <div className="row contact__info">
-          <div className="ml-auto col-md-3 text-center">
-            <div className="phone-div">
-              <h5>Phone</h5>
-              <p>+123 456 789</p>
-            </div>
-          </div>
-          <div className="col-md-3 text-center">
-            <div className="email-div">
-              <h5>Email</h5>
-              <p>restupemail@ymail.com</p>
-            </div>
-          </div>
-          <div className="mr-auto col-md-3 text-center">
-            <div className="website-div">
-              <h5>Website</h5>
-              <p>tomiwajoseph.vercel.app</p>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6 mx-auto">
-            <form ref={formRef} onSubmit={sendEmail} className="contact-form">
-              <div className="row">
-                <div className="col-12">
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    className="form-control"
-                    placeholder="Your Name"
-                  />
-                </div>
-                <div className="col-12">
-                  <input
-                    type="text"
-                    name="email"
-                    required
-                    className="form-control"
-                    placeholder="Your Email"
-                  />
-                </div>
-                <div className="col-12">
-                  <textarea
-                    className="form-control"
-                    name="message"
-                    id="message"
-                    rows="7"
-                    required
-                    placeholder="Your message to the developer."
-                  ></textarea>
-                </div>
-                <div className="col-12">
-                  <button
-                    disabled={sendButtonClicked}
-                    type="submit"
-                    className="btn"
-                  >
-                    {sendButtonClicked ? "Sending..." : "Send Message"}
-                  </button>
+          <div className="col-md-6">
+            <div className="row">
+              <div className="col-12 mb-3 text-center">
+                <div className="phone-div">
+                  <h5>Phone</h5>
+                  <p>+123 456 789</p>
                 </div>
               </div>
-            </form>
+              <div className="col-12 mb-3 text-center">
+                <div className="email-div">
+                  <h5>Email</h5>
+                  <p>restupemail@ymail.com</p>
+                </div>
+              </div>
+              <div className="col-12 mb-3 text-center">
+                <div className="website-div">
+                  <h5>Website</h5>
+                  <p>tomiwajoseph.vercel.app</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="row">
+              <div className="col-12">
+                <form
+                  ref={formRef}
+                  onSubmit={sendEmail}
+                  className="contact-form"
+                >
+                  <div className="row">
+                    <div className="col-12">
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        className="form-control"
+                        placeholder="Your Name"
+                      />
+                    </div>
+                    <div className="col-12">
+                      <input
+                        type="text"
+                        name="email"
+                        required
+                        className="form-control"
+                        placeholder="Your Email"
+                      />
+                    </div>
+                    <div className="col-12">
+                      <textarea
+                        className="form-control"
+                        name="message"
+                        id="message"
+                        rows="7"
+                        required
+                        placeholder="Your message to the developer."
+                      ></textarea>
+                    </div>
+                    <div className="col-12">
+                      <button
+                        disabled={sendButtonClicked}
+                        type="submit"
+                        className="btn"
+                      >
+                        {sendButtonClicked ? "Sending..." : "Send Message"}
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
+        {/* <div className="row"> */}
+        {/* </div> */}
         <hr className="mt-5" />
       </div>
     </>

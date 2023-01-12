@@ -162,6 +162,11 @@
   width: 50%;
   margin-bottom: 20px;
 }
+/* @media only screen and (max-width: 768px) {
+  .contact__info .col-md-4 {
+    margin-bottom: 15px;
+  }
+} */
 
 /* =========================================
   ============ SINGLE APARTMENT ============
@@ -808,81 +813,99 @@
 /* =========================================
 ================= ERROR STYLES =================
 ========================================= */
-
-.error-div {
+.error-container {
   height: 90vh;
   display: flex;
+  position: relative;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 0 20px;
+  align-items: center;
   text-align: center;
 }
-.error-image-wrapper {
-  width: 300px;
+.error-container .error-image-wrapper {
+  display: flex;
+  justify-content: center;
+  /* width: 100%; */
   height: 300px;
-  margin-top: 10px;
+  overflow: hidden;
 }
-.error-div h1 {
+.error-container .error-image-wrapper img {
+  flex: none;
+}
+.error-container .error-text h1 {
   color: var(--main-color);
-  margin-top: 10px;
 }
-.error-div p {
+.error-container .error-text p {
   color: #5c5c5c;
   font-size: 18px;
+  margin: 0 10px 15px 0;
 }
-.link-not-found,
-.error-div .refresh-btn {
+.error-container .refresh-btn,
+.error-container .error-text .link-not-found {
   color: #1a6692;
-  padding: 7px 20px;
+  padding: 10px 20px;
   border: 1px solid #1a6692;
   border-radius: 3px;
   -webkit-transition: all 150ms ease-in;
   -o-transition: all 150ms ease-in;
   transition: all 150ms ease-in;
 }
-.link-not-found:hover,
-.error-div .refresh-btn:hover {
+.error-container .refresh-btn:hover,
+.error-container .error-text .link-not-found:hover {
   color: #fff;
   background: #1a6692;
+  text-decoration: none;
 }
-.link-not-found:focus,
-.error-div .refresh-btn:focus {
+.error-container .refresh-btn:focus,
+.error-container .error-text .link-not-found:focus {
   box-shadow: none;
   outline: none;
+}
+
+@media only screen and (max-width: 360px) {
+  .error-container .error-image-wrapper {
+    height: 250px;
+  }
+  .error-container .error-text h1 {
+    font-size: 30px;
+  }
 }
 
 /* =========================================
 =========== LOGIN/SIGNUP STYLES ============
 ========================================= */
-.signup-container,
-.login-container {
+.signup-background,
+.login-background {
   position: relative;
-  margin-top: 10vh;
-  height: 80vh;
 }
-.auth-img {
-  height: 80vh;
-  width: 100%;
-  filter: brightness(8%);
+.signup-background .img-container,
+.login-background .img-container {
+  width: 100vw;
 }
-.signup-block,
-.login-block {
+.signup-background .img-container img,
+.login-background .img-container img {
+  object-fit: cover;
+  height: 100vh;
+  width: 100vw;
+  filter: brightness(10%);
+}
+.signup-background .signup-block,
+.login-background .login-block {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #000;
   background: #fff;
-  padding: 50px 40px;
+  padding: 50px 30px;
   border-radius: 3px;
+  margin-top: 5vh;
 }
-.signup-block h2,
-.login-block h2 {
+.signup-background .signup-block h2,
+.login-background .login-block h2 {
   text-align: center;
   color: #373737;
 }
-
 .signup-block form input:focus,
 .login-block form input:focus {
   box-shadow: none;
@@ -920,13 +943,34 @@
 .login-block .sign-up-option {
   color: #454545;
   font-size: 16px;
-  margin: 0 10px;
+  /* margin: 0 10px; */
 }
 .signup-block .sign-in-option a,
 .login-block .sign-up-option a {
   color: #373737;
   text-decoration: underline;
   font-weight: 700;
+}
+
+@media only screen and (max-width: 480px) {
+  .signup-background .signup-block,
+  .login-background .login-block {
+    width: 75%;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .signup-background .signup-block,
+  .login-background .login-block {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .signup-background .signup-block,
+  .login-background .login-block {
+    width: 90%;
+  }
 }
 
 /* =========================================
@@ -966,7 +1010,7 @@
 }
 .dashboard-container .user-info-container,
 .dashboard-container .booking-info-container {
-  border: 1px solid #4c4c4c;
+  border: 1px solid #9e9e9e;
   padding: 10px 20px;
   margin-bottom: 20px;
   border-radius: 3px;
@@ -1023,4 +1067,11 @@
   button:hover {
   background: var(--main-color);
   color: #fff;
+}
+
+@media only screen and (max-width: 480px) {
+  .dashboard-container .user-info-container,
+  .dashboard-container .booking-info-container {
+    margin-top: 10px;
+  }
 }

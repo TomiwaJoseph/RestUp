@@ -45,13 +45,13 @@ const Login = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
-  useEffect(() => {
-    const getBody = document.body;
-    getBody.classList.add("dark-nav");
-    return () => {
-      getBody.classList.remove("dark-nav");
-    };
-  }, []);
+  // useEffect(() => {
+  //   const getBody = document.body;
+  //   getBody.classList.add("dark-nav");
+  //   return () => {
+  //     getBody.classList.remove("dark-nav");
+  //   };
+  // }, []);
 
   if (fetchingData) {
     return <Preloader />;
@@ -67,36 +67,52 @@ const Login = () => {
     } else {
       return (
         <div className="login-container">
-          <img src={authImg} alt="" className="img-fluid auth-img" />
-          <div className="login-block">
-            <h2>LOGIN</h2>
-            <form onSubmit={handleLoginForm}>
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                className="form-control"
-                name="email"
-                required
-                placeholder="Email"
-                type="email"
+          <div className="login-background">
+            <div className="img-container">
+              <img
+                src={authImg}
+                className="img-fluid"
+                alt="login-background-visual"
               />
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                className="form-control"
-                name="password"
-                required
-                placeholder="Password"
-                type="password"
-              />
-              <button type="submit">Login</button>
-            </form>
-            <button onClick={loginDemoUser} className="demo-btn" type="submit">
-              Demo User
-            </button>
-            <div className="sign-up-option">
-              Don't have an account? {""}
-              <NavLink to="/sign-up" className="sign-up">
-                sign-up
-              </NavLink>
+            </div>
+            <div className="login-block">
+              <h2>LOGIN</h2>
+              <form onSubmit={handleLoginForm}>
+                <input
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="form-control"
+                  name="email"
+                  required
+                  placeholder="Email"
+                  type="email"
+                />
+                <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="form-control"
+                  name="password"
+                  required
+                  placeholder="Password"
+                  type="password"
+                />
+                <button type="submit">Login</button>
+              </form>
+              <button
+                onClick={loginDemoUser}
+                className="demo-btn"
+                type="submit"
+              >
+                Demo User
+              </button>
+              <div className="sign-up-option">
+                Don't have an account? {""}
+                <NavLink to="/sign-up" className="sign-up">
+                  sign-up
+                </NavLink>
+              </div>
+              {/* </div> */}
+              {/* <h1>Login</h1>
+              <hr className="accent" />
+              <button className="btn book-now">Reserve Now</button> */}
             </div>
           </div>
         </div>

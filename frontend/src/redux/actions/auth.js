@@ -12,7 +12,7 @@ export const fetchUser = async (getUserUrl, cb) => {
       },
     })
     .then((result) => {
-      let userInfo = result;
+      let userInfo = result.data;
       delete userInfo.ok;
       store.dispatch(setUserInfo(userInfo));
       cb(true);

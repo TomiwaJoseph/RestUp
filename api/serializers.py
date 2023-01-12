@@ -71,10 +71,13 @@ class BookingSerializer(serializers.ModelSerializer):
 
     def get_show_cancel(self, obj):
         if not obj.room.refundable:
+            # print('room is not refundable')
             return False
         elif obj.end_date < timezone.now():
+            # print('room is expired')
             return False
-        elif timezone.now().time() >= time(23, 59):
+        elif timezone.now().time() >= time(23, 59) or timezone.now().date() != obj.start_date.date():
+            # print('it is past 12 or booking date is not today')
             return False
         return True
 

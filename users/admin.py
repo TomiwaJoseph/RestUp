@@ -32,9 +32,5 @@ class BookingAdmin(admin.ModelAdmin):
     def expired(self, obj):
         return obj.end_date < timezone.now()
 
-    # list_editable = ['start_date', 'end_date']
-    # list_filter = ['category']
-    # search_fields = ['name', 'price']
-
 
 admin.site.register(Booking, BookingAdmin)

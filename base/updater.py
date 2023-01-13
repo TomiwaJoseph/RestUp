@@ -7,7 +7,7 @@ def start():
     scheduler = BackgroundScheduler()
     scheduler.add_job(
         check_and_update_rooms,
-        trigger='cron',
-        hour=12
+        'interval',
+        minutes=30
     )
     scheduler.start()

@@ -12,8 +12,6 @@ class RoomAdmin(admin.ModelAdmin):
                     'refundable', 'availability']
     prepopulated_fields = {'slug': ('name',)}
     list_editable = ['availability']
-    # list_filter = ['category']
-    # search_fields = ['name', 'price']
 
 
 admin.site.register(Apartment, ApartmentAdmin)

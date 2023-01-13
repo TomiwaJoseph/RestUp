@@ -44,8 +44,6 @@ class Room(models.Model):
         "RoomInfo", blank=True, related_name="info_list")
     room_extras = models.ManyToManyField(
         "RoomExtra", blank=True, related_name="extras_list")
-    # booked_start_date = models.DateField("Start Date", default=timezone.now)
-    # booked_end_date = models.DateField("End Date", default=timezone.now)
     availability = models.BooleanField(default=True)
 
     def __str__(self):

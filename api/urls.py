@@ -2,7 +2,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    # path('test-page/', views.test_page),
     path('apartments/', views.get_apartments),
     path('filtered-apartments/', views.filtered_apartments),
     path('featured-apartments/', views.get_featured_apartments),

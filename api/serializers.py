@@ -60,8 +60,6 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class BookingSerializer(serializers.ModelSerializer):
-    # room_refundable = serializers.SerializerMethodField()
-    # room_price = serializers.SerializerMethodField()
     room_name = serializers.SerializerMethodField()
     room_apartment = serializers.SerializerMethodField()
     start_date = serializers.SerializerMethodField()
@@ -71,18 +69,12 @@ class BookingSerializer(serializers.ModelSerializer):
 
     def get_show_cancel(self, obj):
         if not obj.room.refundable:
-            # print('room is not refundable')
             return False
         elif obj.end_date < timezone.now():
-            # print('room is expired')
             return False
-        elif timezone.now().time() >= time(23, 59) or timezone.now().date() != obj.start_date.date():
-            # print('it is past 12 or booking date is not today')
+        elif timezone.now().time() >= time(11, 59) or timezone.now().date() != obj.start_date.date():
             return False
         return True
-
-    # def get_room_refundable(self, obj):
-    #     return timezone.now().time() <= time(23, 59)
 
     def get_spent(self, obj):
         return obj.end_date < timezone.now()

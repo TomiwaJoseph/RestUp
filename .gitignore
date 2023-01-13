@@ -29,3 +29,4 @@ migrations
 .env
 statics
 media
+setup.py

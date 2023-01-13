@@ -11,43 +11,38 @@ const LandingCarousel = () => {
     <>
       <Fade arrows={false} duration={6000} pauseOnHover={false}>
         <div className="each-fade-effect">
-          <div className="image__container">
+          <div className="image-container">
             <img src={img1} alt="landing-page-visual-1" />
           </div>
-          <div className="carousel__captions">
+          <div className="carousel-captions">
             <p>"If you get tired, learn to rest, not to quit."</p>
             <NavLink to="/apartments" className="btn">
               View Apartments
             </NavLink>
           </div>
         </div>
-        {/* <div className="each-fade-effect">
-          <div className="image__container">
+        <div className="each-fade-effect">
+          <div className="image-container">
             <img src={img2} alt="landing-page-visual-2" />
           </div>
-          <div className="carousel__captions">
-            <p className="animate__animated animate__slideInUp">
-              "Rest is the sweet sauce of labor."
-            </p>
-            <NavLink
-              to="/apartments"
-              className="btn animate__animated animate__flipInY"
-            >
+          <div className="carousel-captions">
+            <p>"Rest is the sweet sauce of labor."</p>
+            <NavLink to="/apartments" className="btn">
               View our Apartments
             </NavLink>
           </div>
         </div>
         <div className="each-fade-effect">
-          <div className="image__container">
+          <div className="image-container">
             <img src={img3} alt="landing-page-visual-3" />
           </div>
-          <div className="carousel__captions">
+          <div className="carousel-captions">
             <p>"Wisdom is knowing when to have rest."</p>
             <NavLink to="/apartments" className="btn">
               View Apartments
             </NavLink>
           </div>
-        </div> */}
+        </div>
       </Fade>
     </>
   );

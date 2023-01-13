@@ -44,8 +44,6 @@ const ReserveRoom = () => {
   const [checkOutDate, setCheckOutDate] = useState("");
 
   const handleGoBack = (section) => {
-    // console.log(section);
-    // console.log(" ");
     if (section === 1) {
       setActiveCrumb(0);
       setDoneSections([]);
@@ -348,7 +346,6 @@ const ReserveRoom = () => {
                         />
                       </div>
                     </div>
-                    {/* <div className="details-cta"> */}
                     <button
                       type="button"
                       onClick={() => handleGoBack(1)}
@@ -362,7 +359,6 @@ const ReserveRoom = () => {
                     >
                       Continue
                     </button>
-                    {/* </div> */}
                   </form>
                 </div>
               )}

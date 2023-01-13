@@ -10,7 +10,8 @@ import { fetchUser } from "../redux/actions/auth";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [doneLoading, setDoneLoading] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
   const storeContext = useSelector((state) => state.store);
@@ -21,29 +22,80 @@ const Login = () => {
     signInUser([email, password]);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    let getUserUrl = "http://localhost:8000/api/auth/user/";
-    let previousUrl = state?.previousPath || "/user/dashboard";
+  const loginPage = () => {
+    return (
+      <div className="login-container">
+        <div className="login-background">
+          <div className="img-container">
+            <img
+              src={authImg}
+              className="img-fluid"
+              alt="login-background-visual"
+            />
+          </div>
+          <div className="login-block">
+            <h2>LOGIN</h2>
+            <form onSubmit={handleLoginForm}>
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                className="form-control"
+                name="email"
+                required
+                placeholder="Email"
+                type="email"
+              />
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                className="form-control"
+                name="password"
+                required
+                placeholder="Password"
+                type="password"
+              />
+              <button type="submit">Login</button>
+            </form>
+            <button onClick={loginDemoUser} className="demo-btn" type="submit">
+              Demo User
+            </button>
+            <div className="sign-up-option">
+              Don't have an account? {""}
+              <NavLink to="/sign-up" className="sign-up">
+                sign-up
+              </NavLink>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
-    fetchUser(getUserUrl, (status) => {
-      if (!status) {
-        setIsLoading(false);
-      } else {
-        navigate(previousUrl);
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  //   let getUserUrl = "http://localhost:8000/api/auth/user/";
+  //   let previousUrl = state?.previousPath || "/user/dashboard";
 
-  useEffect(() => {
-    let previousUrl = state?.previousPath || "/user/dashboard";
+  //   fetchUser(getUserUrl, (status) => {
+  //     if (!status) {
+  //       setIsLoading(false);
+  //     } else {
+  //       navigate(previousUrl);
+  //     }
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-    if (isAuthenticated) {
-      navigate(previousUrl);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  //   let previousUrl = state?.previousPath || "/user/dashboard";
+
+  //   if (isAuthenticated) {
+  //     navigate(previousUrl);
+  //   } else {
+  //     console.log("not logged in...");
+  //     console.log(" ");
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isAuthenticated]);
 
   // useEffect(() => {
   //   const getBody = document.body;
@@ -53,6 +105,23 @@ const Login = () => {
   //   };
   // }, []);
 
+  const renderLoginPage = () => {
+    if (!isAuthenticated && !doneLoading) {
+      console.log("is not logged in and still loading");
+      return <Preloader />;
+    } else if (!isAuthenticated && doneLoading) {
+      return loginPage();
+    } else {
+      return loginPage();
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated !== false) {
+      setDoneLoading(true);
+    }
+  }, [isAuthenticated]);
+
   if (fetchingData) {
     return <Preloader />;
   }
@@ -61,11 +130,11 @@ const Login = () => {
     return <NoInternet />;
   }
 
-  const renderLogin = () => {
-    if (isLoading) {
-      return <Preloader />;
-    } else {
-      return (
+  return (
+    <>
+      {/* {isLoading ? (
+        <Preloader />
+      ) : (
         <div className="login-container">
           <div className="login-background">
             <div className="img-container">
@@ -109,18 +178,13 @@ const Login = () => {
                   sign-up
                 </NavLink>
               </div>
-              {/* </div> */}
-              {/* <h1>Login</h1>
-              <hr className="accent" />
-              <button className="btn book-now">Reserve Now</button> */}
             </div>
           </div>
         </div>
-      );
-    }
-  };
-
-  return <>{renderLogin()}</>;
+      )} */}
+      {renderLoginPage()}
+    </>
+  );
 };
 
 export default Login;

@@ -36,15 +36,6 @@ const SignUp = () => {
     }
   };
 
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  //   const getBody = document.body;
-  //   getBody.classList.add("dark-nav");
-  //   return () => {
-  //     getBody.classList.remove("dark-nav");
-  //   };
-  // }, []);
-
   if (isAuthenticated) {
     return navigate("/");
   }
@@ -121,7 +112,6 @@ const SignUp = () => {
             </div>
           </div>
         </div>
-        {/* <img src={authImg} alt="" className="img-fluid auth-img" /> */}
       </div>
     </>
   );

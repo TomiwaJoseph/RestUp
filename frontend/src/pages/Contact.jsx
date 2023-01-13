@@ -185,8 +185,6 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        {/* <div className="row"> */}
-        {/* </div> */}
         <hr className="mt-5" />
       </div>
     </>

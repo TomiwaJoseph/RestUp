@@ -6,13 +6,13 @@
   position: relative;
   text-align: center;
 }
-.each-fade-effect .image__container img {
+.each-fade-effect .image-container img {
   object-fit: cover;
   filter: brightness(50%);
   height: 100vh;
   width: 100vw;
 }
-.each-fade-effect .carousel__captions {
+.each-fade-effect .carousel-captions {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -23,13 +23,13 @@
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.6);
 }
-.each-fade-effect .carousel__captions p {
+.each-fade-effect .carousel-captions p {
   font-size: 50px;
   padding: 0 30px;
   margin-bottom: 0;
   line-height: 70px;
 }
-.each-fade-effect .carousel__captions a {
+.each-fade-effect .carousel-captions a {
   padding: 10px 25px;
   background: transparent;
   border: 1px solid #fff;
@@ -38,7 +38,7 @@
   font-weight: 600;
   margin-top: 10px;
 }
-.each-fade-effect .carousel__captions a:hover {
+.each-fade-effect .carousel-captions a:hover {
   background: #fff;
   color: var(--main-color);
 }
@@ -46,7 +46,7 @@
 /* DESKTOPS */
 
 @media only screen and (min-width: 800px) and (max-width: 1023px) {
-  .each-fade-effect .carousel__captions {
+  .each-fade-effect .carousel-captions {
     width: 80%;
   }
 }
@@ -54,30 +54,27 @@
 /* TABLETS */
 
 @media only screen and (max-width: 768px) {
-  .each-fade-effect .carousel__captions {
+  .each-fade-effect .carousel-captions {
     width: 85%;
   }
-  /* .each-fade-effect .carousel__captions p{
-    font-size: 20px;
-  } */
 }
 
 /* MOBILE */
 
 @media only screen and (max-width: 480px) {
-  .each-fade-effect .carousel__captions h5 {
+  .each-fade-effect .carousel-captions h5 {
     font-size: 18px;
   }
-  .each-fade-effect .carousel__captions p {
+  .each-fade-effect .carousel-captions p {
     font-size: 35px;
     line-height: 45px;
   }
-  .each-fade-effect .carousel__captions h1 {
+  .each-fade-effect .carousel-captions h1 {
     font-size: 40px;
   }
 }
 @media only screen and (max-width: 360px) {
-  .each-fade-effect .carousel__captions h1 {
+  .each-fade-effect .carousel-captions h1 {
     font-size: 30px;
   }
 }

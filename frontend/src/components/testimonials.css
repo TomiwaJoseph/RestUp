@@ -49,16 +49,13 @@
   width: 10px !important;
   background: var(--main-color) !important;
 }
-/* @media only screen and (min-width: 1000px) {
-  .testimonial-container .fade-testimonial-container {
-    width: 70% !important;
-  }
-} */
+
 @media only screen and (min-width: 768px) {
   .testimonial-container .fade-testimonial-container {
     width: 70%;
   }
 }
+
 @media only screen and (min-width: 600px) {
   .testimonial-container .each-fade-effect {
     height: 20vh;

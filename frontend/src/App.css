@@ -18,12 +18,13 @@ body.transparent nav {
 .Toastify__toast-container--top-center {
   z-index: 99999999 !important;
 }
-
 html {
   scroll-behavior: smooth;
-  /* overflow-x: hidden; */
 }
-
+a,
+a:hover {
+  text-decoration: none;
+}
 .demarcator {
   background: #1a6692;
 }

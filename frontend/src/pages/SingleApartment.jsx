@@ -22,8 +22,12 @@ const SingleApartment = () => {
     noInternet,
     singleApartmentData,
   } = storeContext;
-  const { all_apartment_images, room_details, apartment_name } =
-    singleApartmentData;
+  const {
+    other_apartment_images,
+    apartment_hero,
+    room_details,
+    apartment_name,
+  } = singleApartmentData;
 
   const roomIcons = {
     "Air conditioning": "fa-snowflake",
@@ -82,7 +86,7 @@ const SingleApartment = () => {
           <div className="apartment-header">
             <div className="img-container">
               <img
-                src={`${backendUrl}${all_apartment_images[0]}`}
+                src={`${backendUrl}${apartment_hero}`}
                 className="img-fluid"
                 alt="apartment-header-visual"
               />
@@ -103,7 +107,7 @@ const SingleApartment = () => {
           </div>
           <div className="container apartment-container">
             <div className="room-images">
-              {all_apartment_images.slice(1).map((photo, index) => (
+              {other_apartment_images.map((photo, index) => (
                 <div key={index} className="img-wrapper">
                   <img
                     src={`${backendUrl}${photo}`}

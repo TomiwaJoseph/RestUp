@@ -1,3 +1,110 @@
+// const Rooms = () => {
+
+//   return (
+//     <>
+//       <Hero
+//         section={"Apartments"}
+//         orient={"center"}
+//         img={randomApartmentImage}
+//         backendUrl={backendUrl}
+//       />
+//       {/* <div className="container" onClick={handleOutsideClick}>
+//         <div className="row">
+//           <div className="col-md-12">
+//             <div className="search-box">
+//               <form onSubmit={handleSearchFormSubmit}>
+//                 <div className="row">
+//                   <div className="my-auto col-4 room-size-range">
+//                     <div ref={sizeRef} className="search-item">
+//                       <i className="fa fa-ruler-combined"></i>
+//                       <span
+//                         onClick={() => setOpenSize(!openSize)}
+//                         className="search-item-slider"
+//                       >
+//                         room size of ${sizeMinValue}m<sup>2</sup> to $
+//                         {sizeMaxValue}m<sup>2</sup>
+//                       </span>
+//                       {openSize && (
+//                         <div className="slider-div">
+//                           <MultiRangeSlider
+//                             min={highestRoomPriceSizeAndCapacity["min_size"]}
+//                             max={highestRoomPriceSizeAndCapacity["max_size"]}
+//                             onChange={({ min, max }) =>
+//                               handleSizeChange(min, max)
+//                             }
+//                           />
+//                         </div>
+//                       )}
+//                     </div>
+//                   </div>
+//                   <div className="my-auto col-3 price-range">
+//                     <div ref={priceRef} className="search-item">
+//                       <i className="fas fa-coins"></i>
+//                       <span
+//                         onClick={() => setOpenPrice(!openPrice)}
+//                         className="search-item-slider"
+//                       >
+//                         price of ${priceMinValue} to ${priceMaxValue}
+//                       </span>
+//                       {openPrice && (
+//                         <div className="slider-div">
+//                           <MultiRangeSlider
+//                             min={1}
+//                             max={
+//                               highestRoomPriceSizeAndCapacity["highest_price"]
+//                             }
+//                             onChange={({ min, max }) =>
+//                               handlePriceChange(min, max)
+//                             }
+//                           />
+//                         </div>
+//                       )}
+//                     </div>
+//                   </div>
+//                   <div className="my-auto col-3 persons-range">
+//                     <div ref={capacityRef} className="search-item">
+//                       <i className="fa fa-user"></i>
+//                       <span
+//                         onClick={() => setOpenCapacity(!openCapacity)}
+//                         className="search-item-capacity"
+//                       >
+//                         {capacityMinValue} to {capacityMaxValue} persons
+//                       </span>
+//                       {openCapacity && (
+//                         <div className="slider-div">
+//                           <MultiRangeSlider
+//                             min={1}
+//                             max={
+//                               highestRoomPriceSizeAndCapacity[
+//                                 "highest_capacity"
+//                               ]
+//                             }
+//                             onChange={({ min, max }) =>
+//                               handleCapacityChange(min, max)
+//                             }
+//                           />
+//                         </div>
+//                       )}
+//                     </div>
+//                   </div>
+//                   <div className="col-2 apartment-search-btn">
+//                     <button type="submit" className="room-search-btn">
+//                       Search
+//                     </button>
+//                   </div>
+//                 </div>
+//               </form>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//       {renderRooms()} */}
+//     </>
+//   );
+// };
+
+// export default Rooms;
+
 import ApartmentsPlusPagination from "../components/ApartmentsPlusPagination";
 import Hero from "../components/Hero";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +119,7 @@ import {
 import NoInternet from "../components/NoInternet";
 import { removeRandomImage } from "../redux/actions/roomActions";
 
-const Rooms = () => {
+const Apartments = () => {
   const sizeRef = useRef();
   const priceRef = useRef();
   const capacityRef = useRef();
@@ -160,99 +267,8 @@ const Rooms = () => {
         img={randomApartmentImage}
         backendUrl={backendUrl}
       />
-      <div className="container" onClick={handleOutsideClick}>
-        <div className="row">
-          <div className="col-md-12">
-            <div className="search-box">
-              <form onSubmit={handleSearchFormSubmit}>
-                <div className="row">
-                  <div className="my-auto col-4 room-size-range">
-                    <div ref={sizeRef} className="search-item">
-                      <i className="fa fa-ruler-combined"></i>
-                      <span
-                        onClick={() => setOpenSize(!openSize)}
-                        className="search-item-slider"
-                      >
-                        room size of ${sizeMinValue}m<sup>2</sup> to $
-                        {sizeMaxValue}m<sup>2</sup>
-                      </span>
-                      {openSize && (
-                        <div className="slider-div">
-                          <MultiRangeSlider
-                            min={highestRoomPriceSizeAndCapacity["min_size"]}
-                            max={highestRoomPriceSizeAndCapacity["max_size"]}
-                            onChange={({ min, max }) =>
-                              handleSizeChange(min, max)
-                            }
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="my-auto col-3 price-range">
-                    <div ref={priceRef} className="search-item">
-                      <i className="fas fa-coins"></i>
-                      <span
-                        onClick={() => setOpenPrice(!openPrice)}
-                        className="search-item-slider"
-                      >
-                        price of ${priceMinValue} to ${priceMaxValue}
-                      </span>
-                      {openPrice && (
-                        <div className="slider-div">
-                          <MultiRangeSlider
-                            min={1}
-                            max={
-                              highestRoomPriceSizeAndCapacity["highest_price"]
-                            }
-                            onChange={({ min, max }) =>
-                              handlePriceChange(min, max)
-                            }
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="my-auto col-3 persons-range">
-                    <div ref={capacityRef} className="search-item">
-                      <i className="fa fa-user"></i>
-                      <span
-                        onClick={() => setOpenCapacity(!openCapacity)}
-                        className="search-item-capacity"
-                      >
-                        {capacityMinValue} to {capacityMaxValue} persons
-                      </span>
-                      {openCapacity && (
-                        <div className="slider-div">
-                          <MultiRangeSlider
-                            min={1}
-                            max={
-                              highestRoomPriceSizeAndCapacity[
-                                "highest_capacity"
-                              ]
-                            }
-                            onChange={({ min, max }) =>
-                              handleCapacityChange(min, max)
-                            }
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="col-2 apartment-search-btn">
-                    <button type="submit" className="room-search-btn">
-                      Search
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      {renderRooms()}
     </>
   );
 };
 
-export default Rooms;
+export default Apartments;

@@ -113,7 +113,8 @@ def get_single_apartment(request, slug):
 
     new_serializer = {
         "apartment_name": single_apartment.name,
-        "all_apartment_images": all_images,
+        "apartment_hero": all_images[0],
+        "other_apartment_images": all_images[1:],
         "room_details": room_serializer,
     }
     return Response(new_serializer, status=status.HTTP_200_OK)

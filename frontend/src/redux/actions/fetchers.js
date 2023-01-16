@@ -247,6 +247,24 @@ export const signInUser = async (signInData) => {
       localStorage.removeItem("token");
     });
 };
+// Know if user is authenticated
+export const authenticateUser = async (authenticateUrl, callback) => {
+  let token = localStorage.getItem("restupToken");
+  await axios
+    .get(authenticateUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      callback(response);
+    })
+    .catch((err) => {
+      if (err.message === "Network Error") {
+        store.dispatch(setInternetError(true));
+      }
+    });
+};
 // Login the demo user
 export const loginDemoUser = async () => {
   switchPreloader(true);

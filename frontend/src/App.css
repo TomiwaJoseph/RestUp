@@ -8,6 +8,7 @@ body {
   margin: 0;
   font-family: "Adobe Clean", sans-serif;
   background: #fbfbfb;
+  overflow-x: hidden;
 }
 body.dark-nav nav {
   background: #373737;

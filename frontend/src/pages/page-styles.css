@@ -318,6 +318,14 @@
   margin: 40px 0 20px 0;
 }
 
+
+@media only screen and (min-width: 1000px) {
+  .apartment-room .room-extras small,
+.apartment-room .room-info small {
+  margin-right: 20px;
+}
+}
+
 @media only screen and (max-width: 1000px) {
   .apartment-container .img-wrapper {
     width: 100%;
@@ -380,6 +388,18 @@
   .apartment-room .single-room .room-info,
   .apartment-room .single-room .room-extras {
     margin: 10px 0 0 0;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .apartment-room .single-room .bedtype-capacity {
+    flex-wrap: wrap;
+  }
+  .apartment-room .single-room .bedtype-capacity span{
+    margin-left: 0;
+  }
+  .apartment-room .single-room .bedtype-capacity span:last-child{
+    margin-bottom: 10px;
   }
 }
 

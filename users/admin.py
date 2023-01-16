@@ -4,7 +4,6 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import CustomUser, Booking
 
 
-@admin.register(CustomUser)
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -33,4 +32,5 @@ class BookingAdmin(admin.ModelAdmin):
         return obj.end_date < timezone.now()
 
 
+admin.site.register(CustomUser, UserAdmin)
 admin.site.register(Booking, BookingAdmin)

@@ -1,17 +1,13 @@
 import math
-import os
-import random
 import string
 import stripe
-from base.models import Apartment, Room, RoomInfo, RoomExtra, ApartmentImages
-from users.models import Booking, CustomUser
+from base.models import Apartment, Room
+from users.models import Booking
 from datetime import timedelta, time
-from django.db.models import Q
 from django.contrib.auth import authenticate, get_user_model
 from django.conf import settings
-from django.core.files import File
 from django.utils import timezone
-from random import shuffle, choice, choices, seed, sample
+from random import shuffle,  choices, seed, SystemRandom
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -20,18 +16,19 @@ from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from .serializers import ApartmentSerializer, RoomSerializer, RegisterSerializer, BookingSerializer
 
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 User = get_user_model()
 
 
 def create_ref_code():
-    return "".join(random.choices(string.ascii_lowercase + string.digits, k=25))
+    return "".join(choices(string.ascii_lowercase + string.digits, k=25))
 
 
 @api_view(['GET'])
 def get_apartments(request):
     data = list(Apartment.objects.all())
-    sys_random = random.SystemRandom()
+    sys_random = SystemRandom()
     random_image = sys_random.choice(data)
 
     # Get apartments with at least 1 free room
@@ -190,7 +187,7 @@ def get_user_bookings(request):
     booking_serializer = BookingSerializer(
         list(all_user_bookings), many=True).data
     data = list(Apartment.objects.all())
-    sys_random = random.SystemRandom()
+    sys_random = SystemRandom()
     random_image = sys_random.choice(data)
 
     return Response({
@@ -222,7 +219,7 @@ def cancel_booking(request):
         booking_serializer = BookingSerializer(
             list(all_user_bookings), many=True).data
         data = list(Apartment.objects.all())
-        sys_random = random.SystemRandom()
+        sys_random = SystemRandom()
         random_image = sys_random.choice(data)
         return Response({
             "booked_room_info": booking_serializer,
@@ -251,26 +248,18 @@ def logout(request):
 
 @api_view(['GET'])
 def login_demo_user(request):
-    query_user = User.objects.filter(email='demouser@gmail.com')
-    if not query_user:
-        user = User.objects.create(
-            email='demouser@gmail.com',
-            first_name='Demo',
-            last_name='User',
-            password='a'
-        )
-        token = Token.objects.get_or_create(user=user)
-    else:
-        user = query_user[0]
-
-    return Response({
-        'user_info': {
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-            "email": user.email
-        },
-        'token': user.auth_token.key
-    })
+    try:
+        user = User.objects.get(email='demouser@gmail.com')
+        return Response({
+            'user_info': {
+                "first_name": user.first_name,
+                "last_name": user.last_name,
+                "email": user.email
+            },
+            'token': user.auth_token.key
+        })
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
@@ -289,6 +278,16 @@ def fetch_user(request):
     }
 
     return Response(response)
+
+@api_view(['GET'])
+def check_authentication(request):
+    the_token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
+    try:
+        Token.objects.get(key=the_token)
+    except Token.DoesNotExist:
+        return Response({'authenticated': False})
+
+    return Response({'authenticated': True})
 
 
 @api_view(['POST'])

@@ -129,9 +129,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [
-    BASE_DIR / 'frontend/build/static'
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'frontend/build/static'
+# ]
 
 
 MEDIA_ROOT = BASE_DIR / 'media'

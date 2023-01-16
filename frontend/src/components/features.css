@@ -4,9 +4,10 @@
 .features-row {
   padding: 30px 0;
 }
-.features-container .icon i::before {
-  font-size: 40px !important;
-  color: #1a6692;
+.features-container .icon-container .icon i {
+  color: var(--main-color);
+  font-size: 35px;
+  margin-top: 20px;
 }
 .features-container .icon-container:hover .icon {
   background: var(--main-color);
@@ -18,7 +19,7 @@
 .features-container .icon:hover {
   cursor: pointer;
 }
-.features-container .icon-container:hover i::before,
+.features-container .icon-container:hover i,
 .features-container .icon-container:hover p {
   color: #fff;
 }
@@ -43,5 +44,8 @@
     width: 90%;
     margin: 0 auto;
     margin-bottom: 15px;
+  }
+  .features-container .icon-container .icon i {
+    font-size: 30px;
   }
 }

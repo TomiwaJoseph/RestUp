@@ -22,3 +22,4 @@ tomli==2.0.1
 tzdata==2022.7
 tzlocal==4.2
 urllib3==1.26.14
+whitenoise==6.3.0

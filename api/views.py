@@ -210,9 +210,13 @@ def cancel_booking(request):
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         if timezone.now().time() <= time(23, 59):
+            # Make room available
+            the_room = ref_code_query.room
+            the_room.availability = True
+            the_room.save()
+            # Delete booking
             ref_code_query.delete()
-            # Refund user and delete the booking
-            # goes here
+            # Refund user logic goes below
 
         all_user_bookings = Booking.objects.filter(
             user=token.user
@@ -279,6 +283,7 @@ def fetch_user(request):
     }
 
     return Response(response)
+
 
 @api_view(['GET'])
 def check_authentication(request):

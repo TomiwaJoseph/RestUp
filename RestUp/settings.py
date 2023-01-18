@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'rest.up.railway.app']
 AUTH_USER_MODEL = 'users.CustomUser'
 
 
@@ -63,7 +63,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # BASE_DIR / 'frontend/build'
+            BASE_DIR / 'frontend/build'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -129,9 +129,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'frontend/build/static'
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'frontend/build/static'
+]
 
 
 MEDIA_ROOT = BASE_DIR / 'media'

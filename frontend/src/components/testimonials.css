@@ -78,8 +78,20 @@
   }
 }
 
+@media only screen and (max-width: 375px) {
+  .testimonial-container .section-title h2 {
+    font-size: 27px;
+  }
+}
+
 @media only screen and (max-width: 360px) {
   .testimonial-container .each-fade-effect {
     height: 50vh;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .testimonial-container .section-title h2 {
+    font-size: 22px;
   }
 }

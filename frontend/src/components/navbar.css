@@ -1,7 +1,7 @@
 nav {
   background: rgba(147, 147, 147, 0.105);
-  height: 10vh;
-  width: 100vw;
+  height: 10%;
+  width: 100%;
   display: flex;
   position: absolute;
   align-items: center;
@@ -46,8 +46,7 @@ nav .mobile-links {
 ========================================= */
 
 nav.fix-navbar {
-  width: 100vw;
-  top: 0;
+  width: 100%;
   position: fixed;
   -webkit-transition: 0.3s all ease-out;
   -o-transition: 0.3s all ease-out;
@@ -176,10 +175,7 @@ nav.fix-navbar h2 {
 }
 
 @media only screen and (max-width: 480px) {
-  nav h2 {
-    margin-left: 15px;
-  }
   nav .mobile-icons {
-    margin-right: 15px;
+    margin-right: 25px;
   }
 }

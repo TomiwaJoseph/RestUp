@@ -17,19 +17,21 @@ import {
 } from "./roomActions";
 import { toast } from "react-toastify";
 
-const featuredApartmentsUrl = "http://localhost:8000/api/featured-apartments/";
+const featuredApartmentsUrl =
+  "https://rest.up.railway.app/api/featured-apartments/";
 const highestRoomPriceSizeAndCapacityUrl =
-  "http://localhost:8000/api/highest-price-size-and-capacity/";
-const allApartmentsUrl = "http://localhost:8000/api/apartments/";
-const singleApartmentsUrl = "http://localhost:8000/api/apartment/";
-const singleRoomDetailsUrl = "http://localhost:8000/api/get-single-room/";
-const filteredApartmentsUrl = "http://localhost:8000/api/filtered-apartments/";
-const demoUserUrl = "http://localhost:8000/api/login-demo-user/";
-const userRegisterUrl = "http://localhost:8000/api/auth/register/";
-const userLoginUrl = "http://localhost:8000/api/auth/login/";
-const userLogoutUrl = "http://localhost:8000/api/auth/logout/";
-const fetchDashboardInfoUrl = "http://localhost:8000/api/dashboard-info/";
-const cancelBookingUrl = "http://localhost:8000/api/cancel-booking/";
+  "https://rest.up.railway.app/api/highest-price-size-and-capacity/";
+const allApartmentsUrl = "https://rest.up.railway.app/api/apartments/";
+const singleApartmentsUrl = "https://rest.up.railway.app/api/apartment/";
+const singleRoomDetailsUrl = "https://rest.up.railway.app/api/get-single-room/";
+const filteredApartmentsUrl =
+  "https://rest.up.railway.app/api/filtered-apartments/";
+const demoUserUrl = "https://rest.up.railway.app/api/login-demo-user/";
+const userRegisterUrl = "https://rest.up.railway.app/api/auth/register/";
+const userLoginUrl = "https://rest.up.railway.app/api/auth/login/";
+const userLogoutUrl = "https://rest.up.railway.app/api/auth/logout/";
+const fetchDashboardInfoUrl = "https://rest.up.railway.app/api/dashboard-info/";
+const cancelBookingUrl = "https://rest.up.railway.app/api/cancel-booking/";
 
 const notify = (message, errorType) =>
   toast(message, {

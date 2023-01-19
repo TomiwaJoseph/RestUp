@@ -156,7 +156,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['rest.up.railway.app']
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS = ['https://rest.up.railway.app']
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 STRIPE_PUBLISHABLE_KEY = config("STRIPE_PUBLISHABLE_KEY")
 STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")

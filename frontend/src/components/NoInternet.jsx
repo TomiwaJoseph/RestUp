@@ -1,4 +1,4 @@
-import errorImg from "../statics/no-connection-illustration-concept-vector.jpg";
+import errorImg from "../statics/no-connection-illustration.png";
 
 const NoInternet = () => {
   return (

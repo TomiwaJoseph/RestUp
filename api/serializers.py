@@ -72,6 +72,8 @@ class BookingSerializer(serializers.ModelSerializer):
             return False
         elif obj.end_date < timezone.now():
             return False
+        elif obj.start_date.time() >= time(12, 00):
+            return True
         elif timezone.now().time() >= time(11, 59) or timezone.now().date() != obj.start_date.date():
             return False
         return True

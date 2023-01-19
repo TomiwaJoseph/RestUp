@@ -20,7 +20,7 @@ import { setLoginUser } from "./redux/actions/roomActions";
 import { useEffect } from "react";
 
 const App = () => {
-  const getUserUrl = "http://localhost:8000/api/auth/user/";
+  const getUserUrl = "https://rest.up.railway.app/api/auth/user/";
 
   useEffect(() => {
     fetchUser(getUserUrl, (status) => {

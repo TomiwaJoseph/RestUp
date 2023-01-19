@@ -27,7 +27,7 @@ const Login = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const authenticateUrl =
-      "http://localhost:8000/api/auth/check-authentication";
+      "https://rest.up.railway.app/api/auth/check-authentication";
     let previousUrl = state?.previousPath || "/user/dashboard";
 
     authenticateUser(authenticateUrl, (status) => {

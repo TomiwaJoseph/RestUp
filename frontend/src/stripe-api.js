@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_ENDPOINT = "http://localhost:8000/api";
+const API_ENDPOINT = "https://rest.up.railway.app/api";
 
 export const stripePaymentMethodHandler = async (data) => {
   const { amount, userInfo, stayDuration, roomApartmentSlug, result } = data;

@@ -15,7 +15,7 @@ const globalState = {
   noInternet: false,
   fetchingData: false,
   isAuthenticated: false,
-  backendUrl: "http://localhost:8000",
+  backendUrl: "https://rest.up.railway.app",
 };
 
 export const roomReducer = (state = globalState, { type, payload }) => {

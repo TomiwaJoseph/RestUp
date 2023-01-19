@@ -29,5 +29,4 @@ __pycache__
 migrations
 .env
 statics
-media
 setup.py

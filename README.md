@@ -33,11 +33,9 @@ Coming soon...
 
 It has the following functionalities:
 
-- User registration
 - Responsiveness
-- Easy buying experience
+- Easy booking experience
+- User registration
 - Payment gateway integration (STRIPE)
-- Order tracker
-- Search functionalities
-- Refund mechanism
+- Filter functionalities
 - ... and more

@@ -25,7 +25,8 @@ Coming soon...
 **Back-end**
 
 ```
-- Python (Django) acting as both the API and server
+- Python (Django) acting as server
+- Django Rest Framework (DRF) providing API services
 ```
 
 ## Features

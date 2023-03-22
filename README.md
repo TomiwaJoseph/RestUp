@@ -8,7 +8,7 @@ Use the [Demo Website](https://rest.up.railway.app)
 
 ## Demo Video
 
-Coming soon...
+https://user-images.githubusercontent.com/67712127/227041753-d51c65e6-d21a-4c86-9f84-8ffa6bd103cc.mp4
 
 ## Technologies used
 

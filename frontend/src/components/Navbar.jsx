@@ -128,18 +128,18 @@ const Navbar = () => {
                 <a
                   onClick={closeMobileMenu}
                   className="nav-brands-mobile"
+                  rel="noreferrer"
                   target="_blank"
-                  href="/"
-                  style={{ pointerEvents: "none" }}
+                  href="https://www.linkedin.com/in/tomiwa-joseph-a2b024203/"
                 >
-                  <i className="fab fa-instagram"></i>
+                  <i className="fab fa-linkedin"></i>
                 </a>
                 <a
                   onClick={closeMobileMenu}
                   className="nav-brands-mobile"
+                  rel="noreferrer"
                   target="_blank"
-                  href="/"
-                  style={{ pointerEvents: "none" }}
+                  href="https://twitter.com/tomiwajoseph10"
                 >
                   <i className="fab fa-twitter"></i>
                 </a>

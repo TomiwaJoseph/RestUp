@@ -29,7 +29,6 @@ DEBUG = config('DEBUG', cast=bool)
 ALLOWED_HOSTS = ['localhost', 'rest.up.railway.app']
 AUTH_USER_MODEL = 'users.CustomUser'
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -129,12 +128,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'frontend/build/static',
 ]
-
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'

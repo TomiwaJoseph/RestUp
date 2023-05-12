@@ -222,7 +222,7 @@ const ReserveRoom = () => {
               <div className="col-md-9 mx-auto mb-3">
                 <div className="d-flex justify-content-between align-items-center">
                   <button
-                    onClick={() => setActiveCrumb(0)}
+                    // onClick={() => setActiveCrumb(0)}
                     className={`${
                       activeCrumb === 0 ? "btn crumb active" : "btn crumb"
                     } ${
@@ -233,7 +233,7 @@ const ReserveRoom = () => {
                   </button>
                   <div className="crumb-demarcate"></div>
                   <button
-                    onClick={() => setActiveCrumb(1)}
+                    // onClick={() => setActiveCrumb(1)}
                     className={`${
                       activeCrumb === 1 ? "btn crumb active" : "btn crumb"
                     } ${
@@ -244,7 +244,7 @@ const ReserveRoom = () => {
                   </button>
                   <div className="crumb-demarcate"></div>
                   <button
-                    onClick={() => setActiveCrumb(2)}
+                    // onClick={() => setActiveCrumb(2)}
                     className={
                       activeCrumb === 2 ? "btn crumb active" : "btn crumb"
                     }

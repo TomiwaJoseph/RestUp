@@ -17,19 +17,21 @@ import {
 } from "./roomActions";
 import { toast } from "react-toastify";
 
-const featuredApartmentsUrl = "http://localhost:8000/api/featured-apartments/";
+const featuredApartmentsUrl =
+  "https://restup.onrender.com/api/featured-apartments/";
 const highestRoomPriceSizeAndCapacityUrl =
-  "http://localhost:8000/api/highest-price-size-and-capacity/";
-const allApartmentsUrl = "http://localhost:8000/api/apartments/";
-const singleApartmentsUrl = "http://localhost:8000/api/apartment/";
-const singleRoomDetailsUrl = "http://localhost:8000/api/get-single-room/";
-const filteredApartmentsUrl = "http://localhost:8000/api/filtered-apartments/";
-const demoUserUrl = "http://localhost:8000/api/login-demo-user/";
-const userRegisterUrl = "http://localhost:8000/api/auth/register/";
-const userLoginUrl = "http://localhost:8000/api/auth/login/";
-const userLogoutUrl = "http://localhost:8000/api/auth/logout/";
-const fetchDashboardInfoUrl = "http://localhost:8000/api/dashboard-info/";
-const cancelBookingUrl = "http://localhost:8000/api/cancel-booking/";
+  "https://restup.onrender.com/api/highest-price-size-and-capacity/";
+const allApartmentsUrl = "https://restup.onrender.com/api/apartments/";
+const singleApartmentsUrl = "https://restup.onrender.com/api/apartment/";
+const singleRoomDetailsUrl = "https://restup.onrender.com/api/get-single-room/";
+const filteredApartmentsUrl =
+  "https://restup.onrender.com/api/filtered-apartments/";
+const demoUserUrl = "https://restup.onrender.com/api/login-demo-user/";
+const userRegisterUrl = "https://restup.onrender.com/api/auth/register/";
+const userLoginUrl = "https://restup.onrender.com/api/auth/login/";
+const userLogoutUrl = "https://restup.onrender.com/api/auth/logout/";
+const fetchDashboardInfoUrl = "https://restup.onrender.com/api/dashboard-info/";
+const cancelBookingUrl = "https://restup.onrender.com/api/cancel-booking/";
 
 const notify = (message, errorType) =>
   toast(message, {

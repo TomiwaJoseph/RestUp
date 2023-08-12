@@ -57,13 +57,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ROOT_URLCONF = 'RestUp.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # BASE_DIR / 'frontend/build'
+            BASE_DIR / 'frontend/build'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -129,9 +130,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'frontend/build/static'
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'frontend/build/static'
+]
 
 
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -153,6 +154,9 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
+
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS = ['https://restup.onrender.com']
 
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 STRIPE_PUBLISHABLE_KEY = config("STRIPE_PUBLISHABLE_KEY")

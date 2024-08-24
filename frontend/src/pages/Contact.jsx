@@ -47,12 +47,17 @@ const Contact = () => {
     let validate = validateInput(name, email, message);
     if (validate) {
       setSendButtonClicked(true);
+      var templateParams = {
+        from_name: name,
+        from_email: email,
+        message: message,
+      }
       emailjs
-        .sendForm(
-          "service_zmd8dcn",
-          "template_gv6q2f6",
-          formRef.current,
-          "hun951qpYgepyST8-"
+        .send(
+          "service_6qbmxnl",
+          "template_mm00uf4",
+          templateParams,
+          "uzvsVEG93_ApRBi1X",
         )
         .then(
           (result) => {
